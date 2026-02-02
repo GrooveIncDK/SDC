@@ -130,7 +130,7 @@ html p a:hover {
 body {
 	-webkit-text-size-adjust: none;
 	-webkit-font-smoothing: subpixel-antialiased;
-	font-size: 14px;
+	font-size: 13px;
 	line-height: 1.71429;
 	font-family: "Lato", Helvetica, Arial, sans-serif;
 	font-weight: 400;
@@ -8099,7 +8099,7 @@ h5.box-minimal-title + .box-minimal-text {
 
 @media (min-width: 768px) {
 	.box-profile-name {
-		font-size: 24px;
+		font-size: 18px;
 		line-height: 1.16667;
 	}
 }
@@ -26630,4 +26630,36 @@ header img {
 footer {
     text-align: center;
     padding: 15px 0;
+}
+.section-single h3 {
+  font-size: 1.6rem;
+}
+.rd-mailform .form-button {
+  margin-bottom: 48px;
+}
+.footer-minimal {
+  background: rgba(255, 255, 255, 0.75);
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.section-single p,
+.section-single h3 {
+  color: #1f2933; /* dark slate */
+}
+.rd-form .form-input {
+  min-height: 42px;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+.rd-form textarea.form-input {
+  min-height: 120px;
+}
+.rd-form .form-button {
+  margin-bottom: 40px;
+}
+.footer-minimal .rights {
+  color: #111827;      /* much darker */
+  opacity: 1;
+  margin-top: 20px;
+  font-size: 13px;
 }

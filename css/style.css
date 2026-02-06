@@ -26663,3 +26663,18 @@ footer {
   margin-top: 20px;
   font-size: 13px;
 }
+/* About Us text in black */
+#about-us h3,
+#about-us p {
+  color: #000;
+}
+
+/* Executive statement link stays blue */
+#about-us a.executive-link {
+  color: #2f6df6;
+}
+
+#about-us a.executive-link:hover {
+  text-decoration: underline;
+}
+

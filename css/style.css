@@ -26585,8 +26585,8 @@ header img {
     max-width: 900px;
     margin: 0 auto;
     padding: 20px 15px;
-    line-height: 1.7;
-    font-size: 17px;
+    line-height: 1.5;
+    font-size: 12px;
 }
 
 /* Fix bullet list alignment */
@@ -26677,4 +26677,129 @@ footer {
 #about-us a.executive-link:hover {
   text-decoration: underline;
 }
+/* Executive Summary Styling */
+.executive-summary {
+  max-width: 800px;          /* limits line length for readability */
+  margin: 0 auto;            /* centers the container on the page */
+  font-size: 0.5rem;
+  line-height: 1.2;
+  color: #333;
+  text-align: left !important; /* force left alignment */
+}
 
+.executive-summary h2,
+.executive-summary h3,
+.executive-summary p,
+.executive-summary ul,
+.executive-summary li {
+  text-align: left !important; /* override any inherited center alignment */
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.executive-summary h2 {
+  font-size: 32px;
+  margin-bottom: 1.2rem;
+}
+
+.executive-summary h3 {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.executive-summary p {
+  margin-bottom: 1rem;
+}
+
+.executive-summary ul {
+  margin-bottom: 1rem;
+  padding-left: 1rem; /* proper indentation for bullets */
+}
+
+.executive-summary li {
+  margin-bottom: 0.5rem;
+}
+/* Ensure all Executive Summary headings are bold */
+.executive-summary h3 {
+  font-weight: 600;  /* bold, professional */
+  color: #333;
+  font-size: 1rem; /* professional size */
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+html {
+  scroll-behavior: auto; /* disable default smooth scrolling to prevent conflicts */
+}
+section {
+  scroll-margin-top: 160px;
+}
+/* Executive Statement refinements */
+#executive-statement {
+  text-align: left;
+}
+
+#executive-statement h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+#executive-statement h4 {
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+#executive-statement p {
+  max-width: 900px;
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+#executive-statement ul {
+  max-width: 900px;
+  margin-bottom: 20px;
+}
+
+#executive-statement li {
+  margin-bottom: 8px;
+}
+#executive-statement {
+  text-align: left !important;
+}
+
+#executive-statement h2,
+#executive-statement h4,
+#executive-statement p,
+#executive-statement ul {
+  text-align: left !important;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Ensure images are fully visible and responsive */
+.thumbnail-modern-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Make captions transparent by default */
+.thumbnail-modern-caption {
+  background: transparent !important; /* remove overlay */
+  pointer-events: none; /* so hover works directly on image */
+}
+
+/* Dramatic pop-out effect for gallery images */
+.thumbnail-creative {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  z-index: 1;
+}
+
+.thumbnail-creative:hover {
+  transform: scale(2) translateY(-20px); /* like a playing card pop */
+  z-index: 1000; /* make sure it appears above all other elements */
+}

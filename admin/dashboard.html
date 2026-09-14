@@ -48,7 +48,7 @@
   <header class="topbar">
     <h1>SDC Admin</h1>
     <div>
-      <a class="home-link" href="../index.html">View site</a>
+      <a class="home-link" href="/index.html">View site</a>
       <button id="logoutBtn" type="button">Log out</button>
     </div>
   </header>
@@ -179,7 +179,12 @@
     async function api(path, opts) {
       const res = await fetch(path, Object.assign({ headers: { 'Content-Type': 'application/json' } }, opts));
       if (res.status === 401) {
-        window.location.href = 'index.html';
+        // Absolute path deliberately: landing on /admin (no trailing slash)
+        // serves this page's content there without redirecting the address
+        // bar to /admin/, so a *relative* 'index.html' would resolve
+        // against the site root instead of /admin/ — sent every login
+        // redirect to /dashboard.html or /index.html at the root, 404ing.
+        window.location.href = '/admin/index.html';
         throw new Error('unauthorized');
       }
       if (!res.ok) {
@@ -193,7 +198,7 @@
 
     async function checkSession() {
       const d = await fetch('/api/admin/session').then((r) => r.json()).catch(() => ({ authenticated: false }));
-      if (!d.authenticated) { window.location.href = 'index.html'; return false; }
+      if (!d.authenticated) { window.location.href = '/admin/index.html'; return false; }
       return true;
     }
 
@@ -420,7 +425,7 @@
 
     document.getElementById('logoutBtn').addEventListener('click', async () => {
       await fetch('/api/admin/logout', { method: 'POST' }).catch(() => {});
-      window.location.href = 'index.html';
+      window.location.href = '/admin/index.html';
     });
 
     (async function init() {

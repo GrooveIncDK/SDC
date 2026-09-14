@@ -139,6 +139,47 @@
       .home-redesign .sdg-tile.placeholder img{height:auto; width:100%; object-fit:contain; display:block;}
       .home-redesign .project-tile.placeholder img{width:100%; height:100%; object-fit:contain; display:block; padding:16px; box-sizing:border-box;}
 
+      /* "More info" button + modal — for photos that have a specific project
+         and funder/collaborator behind them. Button sits over the image;
+         modal reuses the on-navy card look already established elsewhere
+         on this page. */
+      .home-redesign .img-frame{position:relative;}
+      .home-redesign .info-trigger{
+        position:absolute; bottom:12px; right:12px; width:34px; height:34px;
+        border-radius:50%; background:rgba(0,29,44,.82); border:1.5px solid rgba(255,255,255,.75);
+        color:#fff; font-family:"Lato",sans-serif; font-weight:900; font-size:.95rem;
+        display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2;
+        transition:background .15s ease, transform .15s ease; padding:0;
+      }
+      .home-redesign .info-trigger:hover,.home-redesign .info-trigger:focus-visible{background:var(--teal); border-color:var(--teal); color:var(--navy); transform:scale(1.08);}
+      .home-redesign .info-trigger:focus-visible{outline:2px solid #fff; outline-offset:2px;}
+
+      .home-redesign .info-modal-overlay{
+        position:fixed; inset:0; background:rgba(0,10,15,.78); display:flex; align-items:center;
+        justify-content:center; padding:24px; z-index:1000; opacity:0; pointer-events:none;
+        transition:opacity .2s ease; visibility:hidden;
+      }
+      .home-redesign .info-modal-overlay.open{opacity:1; pointer-events:auto; visibility:visible;}
+      .home-redesign .info-modal{
+        background:var(--navy); color:#fff; max-width:520px; width:100%; max-height:85vh;
+        overflow-y:auto; border-top:4px solid var(--teal); padding:38px 36px; position:relative;
+        transform:translateY(14px); transition:transform .2s ease;
+      }
+      .home-redesign .info-modal-overlay.open .info-modal{transform:translateY(0);}
+      .home-redesign .info-modal-close{
+        position:absolute; top:14px; right:14px; width:34px; height:34px; border-radius:50%;
+        background:transparent; border:1.5px solid rgba(255,255,255,.5); color:#fff; font-size:1.3rem;
+        line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;
+      }
+      .home-redesign .info-modal-close:hover{background:rgba(255,255,255,.12);}
+      .home-redesign .info-modal .section-label{color:var(--teal); display:block;}
+      .home-redesign .info-modal h3{font-family:"Lato",sans-serif; font-weight:900; text-transform:none; letter-spacing:0; font-size:1.35rem; margin:8px 0 22px; line-height:1.25; padding-right:28px; color:#fff;}
+      .home-redesign .info-modal dl{margin:0; font-family:"Lato",sans-serif;}
+      .home-redesign .info-modal dt{font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55); margin-top:20px;}
+      .home-redesign .info-modal dt:first-child{margin-top:0;}
+      .home-redesign .info-modal dd{margin:4px 0 0; color:rgba(255,255,255,.92); font-size:1rem; line-height:1.5;}
+      @media (max-width:560px){.home-redesign .info-modal{padding:30px 24px;}}
+
       .home-redesign .exec-section{background:#fff}
       .home-redesign .exec-section h4{font-family:"Lato",sans-serif;font-weight:900;text-transform:none;letter-spacing:0;margin:30px 0 10px}
       .home-redesign .exec-section ul{color:var(--muted); font-family:"Lato",sans-serif}
@@ -355,13 +396,22 @@
           <p class="lede">Documentation from SDC's ongoing work in Uganda — field assessments, community meetings, and agricultural programmes already under way.</p>
           <div class="essay">
             <div class="essay-col">
-              <img class="tall" src="westnile/images/uganda-6.jpg" alt="Community gathering with harvested produce">
+              <div class="img-frame">
+                <img class="tall" src="westnile/images/uganda-6.jpg" alt="Community gathering with harvested produce">
+                <button type="button" class="info-trigger" data-info="project-2" aria-label="More info: Agriculture Cluster Development Project">i</button>
+              </div>
               <span class="essay-caption">Community distribution day</span>
             </div>
             <div class="essay-col">
-              <img class="short" src="westnile/images/uganda-4.jpg" alt="Community training session">
+              <div class="img-frame">
+                <img class="short" src="westnile/images/uganda-4.jpg" alt="Community training session">
+                <button type="button" class="info-trigger" data-info="project-3" aria-label="More info: Watershed and Clean Air Management Project">i</button>
+              </div>
               <span class="essay-caption">Community training session</span>
-              <img class="short" src="westnile/images/uganda-5.jpg" alt="Drip irrigation installation" style="margin-top:6px;">
+              <div class="img-frame" style="margin-top:6px;">
+                <img class="short" src="westnile/images/uganda-5.jpg" alt="Drip irrigation installation">
+                <button type="button" class="info-trigger" data-info="project-4" aria-label="More info: Small-Scale Irrigation Scheme">i</button>
+              </div>
               <span class="essay-caption">Irrigation line installation</span>
             </div>
           </div>
@@ -424,7 +474,10 @@
               <div class="project-cap"><h3>UN's 17 SDG's</h3><a class="see-more" href="#">See more</a></div>
             </div>
             <div class="project-tile">
-              <img src="westnile/images/uganda-3.jpg" alt="">
+              <div class="img-frame">
+                <img src="westnile/images/uganda-3.jpg" alt="">
+                <button type="button" class="info-trigger" data-info="project-1" aria-label="More info: Postharvest Handling and Value Addition on Cassava">i</button>
+              </div>
               <div class="project-cap"><h3>West Nile, Uganda</h3><a class="see-more" href="westnile/">See more</a></div>
             </div>
             <!-- Placeholder filling the grid's 6th cell (5 projects don't fill a 3-column grid) — full logo lockup on white, from the Omega Document §02 -->
@@ -656,6 +709,18 @@
         </div>
       </footer>
     </div>
+
+    <!-- "More info" modal — shared by every .info-trigger button on the page.
+         Content is filled in by JS from the PROJECT_INFO data below. -->
+    <div class="info-modal-overlay" id="infoModalOverlay" aria-hidden="true">
+      <div class="info-modal" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle">
+        <button type="button" class="info-modal-close" id="infoModalClose" aria-label="Close">&times;</button>
+        <span class="section-label">Project</span>
+        <h3 id="infoModalTitle"></h3>
+        <dl id="infoModalBody"></dl>
+      </div>
+    </div>
+
     <!-- Global Mailform Output-->
     <div class="snackbars" id="form-output-global"></div>
     <!-- Javascript-->
@@ -701,6 +766,99 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     requestAnimationFrame(animate);
   });
 });
+</script>
+    <script>
+/**
+ * "More info" modal for project photos.
+ * Each .info-trigger button carries data-info="<key>" pointing into
+ * PROJECT_INFO below; the one shared modal dialog gets filled in and shown.
+ */
+(function () {
+  var PROJECT_INFO = {
+    'project-1': {
+      title: 'Postharvest Handling and Value Addition on Cassava',
+      fields: [
+        ['Location', 'Awindri Market, Arua District'],
+        ['Collaboration', 'Federation of Small and Medium Enterprises (FSMEs); VITEX AGROPILOTS Co. Ltd'],
+        ['Funded by', 'PostBank Uganda']
+      ]
+    },
+    'project-2': {
+      title: 'Agriculture Cluster Development Project (ACDP)',
+      fields: [
+        ['Location', 'Gulu District'],
+        ['Partner', 'VITEX AGROPILOTS — lead supplier of quality maize, rice and groundnut seeds'],
+        ['Funded by', 'Ministry of Agriculture, Animal Industry and Fisheries (MAAIF)']
+      ]
+    },
+    'project-3': {
+      title: 'Watershed and Clean Air Management Project',
+      fields: [
+        ['Location', 'Madi Okolo District'],
+        ['Delivered by', 'VITEX AGROPILOTS'],
+        ['Funded by', 'Office of the Prime Minister of Uganda']
+      ]
+    },
+    'project-4': {
+      title: 'Small-Scale Irrigation Scheme',
+      fields: [
+        ['Location', 'Pakwach District'],
+        ['Funded by', 'Ministry of Agriculture, Animal Industry and Fisheries (MAAIF)']
+      ]
+    }
+  };
+
+  var overlay = document.getElementById('infoModalOverlay');
+  var titleEl = document.getElementById('infoModalTitle');
+  var bodyEl = document.getElementById('infoModalBody');
+  var closeBtn = document.getElementById('infoModalClose');
+  var lastFocused = null;
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function openModal(key) {
+    var data = PROJECT_INFO[key];
+    if (!data || !overlay) return;
+    titleEl.textContent = data.title;
+    bodyEl.innerHTML = data.fields.map(function (pair) {
+      return '<dt>' + escapeHtml(pair[0]) + '</dt><dd>' + escapeHtml(pair[1]) + '</dd>';
+    }).join('');
+    lastFocused = document.activeElement;
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    if (!overlay) return;
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  }
+
+  document.querySelectorAll('.info-trigger').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      openModal(btn.getAttribute('data-info'));
+    });
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (overlay) {
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeModal();
+    });
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay && overlay.classList.contains('open')) closeModal();
+  });
+})();
 </script>
   </body>
 </html>

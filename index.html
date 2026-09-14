@@ -131,6 +131,14 @@
          rule clips them — show them uncropped here instead. */
       .home-redesign section[id="17SDGs"] .sdg-tile img{height:auto; object-fit:initial;}
 
+      /* Placeholder tiles (full logo lockup, on its own white background, from
+         the Omega Document §02) filling the empty grid cells left over where
+         the tile count doesn't divide evenly into the grid's columns. */
+      .home-redesign .sdg-tile.placeholder,
+      .home-redesign .project-tile.placeholder{display:flex; align-items:center; justify-content:center; padding:20px; box-sizing:border-box;}
+      .home-redesign .sdg-tile.placeholder img{height:auto; width:100%; object-fit:contain; display:block;}
+      .home-redesign .project-tile.placeholder img{width:100%; height:100%; object-fit:contain; display:block; padding:16px; box-sizing:border-box;}
+
       .home-redesign .exec-section{background:#fff}
       .home-redesign .exec-section h4{font-family:"Lato",sans-serif;font-weight:900;text-transform:none;letter-spacing:0;margin:30px 0 10px}
       .home-redesign .exec-section ul{color:var(--muted); font-family:"Lato",sans-serif}
@@ -315,6 +323,10 @@
               <img src="westnile/images/sdg-17.jpg" alt="SDG 17 — Partnerships for the Goals">
               <div class="sdg-cap"><p>Multi-stakeholder collaboration across NGOs, local government, academia and the private sector.</p></div>
             </div>
+            <!-- Placeholder filling the grid's 8th cell (7 SDGs don't fill a 4-column grid) — full logo lockup on white, from the Omega Document §02 -->
+            <div class="sdg-tile placeholder">
+              <img src="images/sdc-full-logo-lockup.png" alt="Sustainable Development Crescent — full logo lockup">
+            </div>
           </div>
         </div>
       </section>
@@ -415,6 +427,10 @@
               <img src="westnile/images/uganda-3.jpg" alt="">
               <div class="project-cap"><h3>West Nile, Uganda</h3><a class="see-more" href="westnile/">See more</a></div>
             </div>
+            <!-- Placeholder filling the grid's 6th cell (5 projects don't fill a 3-column grid) — full logo lockup on white, from the Omega Document §02 -->
+            <div class="project-tile placeholder">
+              <img src="images/sdc-full-logo-lockup.png" alt="Sustainable Development Crescent — full logo lockup">
+            </div>
           </div>
         </div>
       </section>
@@ -423,7 +439,7 @@
       <section class="content-section on-navy" style="text-align:center;">
         <div class="wrap">
           <h2>Reach the heights of the UN Sustainable Development Goals</h2>
-          <a class="btn btn-primary btn-square btn-effect-ujarak btn-lg" href="#contact" style="margin-top:20px; display:inline-block;">Contact Us</a>
+          <a class="btn btn-primary btn-square btn-effect-ujarak btn-lg" href="mailto:info@sustainabledevelopmentcrescent.uk" style="margin-top:20px; display:inline-block;">Contact Us</a>
         </div>
       </section>
 

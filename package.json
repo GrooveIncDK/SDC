@@ -1,0 +1,10 @@
+{
+  "name": "sdc-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Sustainable Development Crescent website — static front end + Vercel serverless functions backed by Neon Postgres.",
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.4"
+  }
+}

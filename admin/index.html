@@ -30,7 +30,7 @@
     <input type="password" id="password" name="password" required autofocus>
     <p class="error" id="error">Incorrect password.</p>
     <button type="submit" id="submitBtn">Log in</button>
-    <p class="back"><a href="../index.html">&larr; Back to site</a></p>
+    <p class="back"><a href="/index.html">&larr; Back to site</a></p>
   </form>
   <script>
     const form = document.getElementById('loginForm');
@@ -38,8 +38,11 @@
     const btn = document.getElementById('submitBtn');
 
     // Already logged in? Skip straight to the dashboard.
+    // Absolute path deliberately — see admin/dashboard.html for why relative
+    // links here are unsafe (a URL without the trailing slash on /admin/
+    // makes the browser resolve a relative link against the wrong base).
     fetch('/api/admin/session').then(r => r.json()).then(d => {
-      if (d.authenticated) window.location.href = 'dashboard.html';
+      if (d.authenticated) window.location.href = '/admin/dashboard.html';
     }).catch(() => {});
 
     form.addEventListener('submit', async (e) => {
@@ -54,7 +57,7 @@
           body: JSON.stringify({ password: document.getElementById('password').value }),
         });
         if (res.ok) {
-          window.location.href = 'dashboard.html';
+          window.location.href = '/admin/dashboard.html';
           return;
         }
         err.textContent = 'Incorrect password.';

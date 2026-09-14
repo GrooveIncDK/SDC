@@ -190,6 +190,42 @@
       .home-redesign footer.site-footer-redesign h4,.home-redesign footer.site-footer-redesign .brand-sm{color:#fff}
       .home-redesign footer.site-footer-redesign a{color:rgba(255,255,255,.85)}
       .home-redesign footer.site-footer-redesign .page-footer-default{background:rgba(255,255,255,.04); margin-top:40px}
+
+      /* Live Projects — DB-backed milestones/updates, managed via the
+         admin login (admin/dashboard.html). Sits alongside the static
+         "What We Do" tile grid above, not replacing it; renders itself
+         from /api/projects at load time, see the script near the end of
+         the page. */
+      .home-redesign .live-projects-root{margin-top:34px}
+      .home-redesign .live-projects-loading,.home-redesign .live-projects-empty{color:var(--muted); font-family:"Lato",sans-serif}
+      .home-redesign .live-project-card{border:2px solid var(--ink); margin-bottom:28px}
+      .home-redesign .live-project-head{padding:24px 28px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:2px solid var(--ink)}
+      .home-redesign .live-project-head h3{font-size:1.25rem; text-transform:none; letter-spacing:0; margin:0; font-family:"Lato",sans-serif; font-weight:900}
+      .home-redesign .status-pill{font-family:"Lato",sans-serif; font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; padding:6px 14px; white-space:nowrap}
+      .home-redesign .status-pill.defining{background:var(--clay); color:#fff}
+      .home-redesign .status-pill.active{background:var(--teal); color:var(--navy)}
+      .home-redesign .status-pill.completed{background:var(--green); color:#fff}
+      .home-redesign .live-project-body{display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--ink)}
+      .home-redesign .live-project-col{background:#fff; padding:26px 28px}
+      .home-redesign .live-project-col h4{font-family:"Lato",sans-serif; font-weight:900; font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; color:var(--clay); margin:0 0 16px}
+      @media (max-width:860px){.home-redesign .live-project-body{grid-template-columns:1fr}}
+
+      .home-redesign .milestone{display:flex; gap:14px; padding:14px 0; border-top:1px solid #e4dfd2}
+      .home-redesign .milestone:first-child{border-top:none; padding-top:0}
+      .home-redesign .milestone-dot{width:11px; height:11px; border-radius:50%; margin-top:5px; flex-shrink:0; background:#c9c2ae}
+      .home-redesign .milestone-dot.in_progress{background:var(--teal)}
+      .home-redesign .milestone-dot.done{background:var(--green)}
+      .home-redesign .milestone-title{font-weight:700; margin:0 0 2px; font-family:"Lato",sans-serif}
+      .home-redesign .milestone-meta{color:var(--muted); font-size:.82rem; margin:0; font-family:"Lato",sans-serif}
+      .home-redesign .milestone-desc{color:var(--muted); font-size:.88rem; margin:6px 0 0; font-family:"Lato",sans-serif}
+
+      .home-redesign .update-entry{padding:14px 0; border-top:1px solid #e4dfd2}
+      .home-redesign .update-entry:first-child{border-top:none; padding-top:0}
+      .home-redesign .update-meta{display:flex; gap:10px; align-items:baseline; margin-bottom:4px}
+      .home-redesign .update-kind{font-family:"Lato",sans-serif; font-weight:700; font-size:.65rem; letter-spacing:.06em; text-transform:uppercase; color:var(--teal)}
+      .home-redesign .update-date{color:var(--muted); font-size:.8rem; font-family:"Lato",sans-serif}
+      .home-redesign .update-title{font-weight:700; margin:0 0 3px; font-family:"Lato",sans-serif}
+      .home-redesign .update-content{color:var(--muted); font-size:.9rem; margin:0; line-height:1.5; font-family:"Lato",sans-serif}
     </style>
 		<!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
@@ -260,6 +296,7 @@
                     <a href="#projects">Projects</a>
                     <ul class="rd-navbar-dropdown">
                       <li><a href="#confirmed-partners">West Nile, Uganda</a></li>
+                      <li><a href="#live-projects">Live Project Updates</a></li>
                     </ul>
                   </li>
                   <li><a href="#partners">Partners</a></li>
@@ -496,6 +533,20 @@
             <div class="project-tile placeholder">
               <img src="images/sdc-full-logo-lockup.png" alt="Sustainable Development Crescent — full logo lockup">
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Live Projects — DB-backed milestones/updates, kept current via
+           the admin login (admin/index.html). New section alongside the
+           static "What We Do" tiles above, which stay as they are. -->
+      <section class="content-section" id="live-projects" data-type="anchor">
+        <div class="wrap">
+          <span class="section-label">Live Projects</span>
+          <h2>Track Our Work As It Happens</h2>
+          <p class="lede">Project milestones and progress notes, kept current by the team on the ground.</p>
+          <div id="liveProjectsRoot" class="live-projects-root">
+            <p class="live-projects-loading">Loading live project data&hellip;</p>
           </div>
         </div>
       </section>
@@ -870,6 +921,90 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && overlay && overlay.classList.contains('open')) closeModal();
   });
+})();
+</script>
+
+<script>
+// Live Projects section — fetches /api/projects, then the full detail
+// (including milestones/updates) for each, and renders cards into
+// #liveProjectsRoot. Degrades to a "coming soon" note on any failure,
+// including a fresh deploy where db/migration-001-admin-cms.sql hasn't
+// been run yet — see MIGRATION.md.
+(function () {
+  var root = document.getElementById('liveProjectsRoot');
+  if (!root) return;
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function fmtDate(d) {
+    if (!d) return '';
+    var dt = new Date(d);
+    if (isNaN(dt)) return esc(d);
+    return dt.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  function renderProject(p) {
+    var milestones = (p.milestones || []).map(function (m) {
+      var meta = esc((m.status || 'planned').replace('_', ' '));
+      if (m.target_date) meta += ' &middot; target ' + fmtDate(m.target_date);
+      if (m.completed_date) meta += ' &middot; done ' + fmtDate(m.completed_date);
+      return '<div class="milestone">' +
+        '<span class="milestone-dot ' + esc(m.status || 'planned') + '"></span>' +
+        '<div>' +
+          '<p class="milestone-title">' + esc(m.title) + '</p>' +
+          '<p class="milestone-meta">' + meta + '</p>' +
+          (m.description ? '<p class="milestone-desc">' + esc(m.description) + '</p>' : '') +
+        '</div></div>';
+    }).join('') || '<p class="live-projects-empty">No milestones yet.</p>';
+
+    var updates = (p.updates || []).map(function (u) {
+      return '<div class="update-entry">' +
+        '<div class="update-meta">' +
+          '<span class="update-kind">' + esc(u.kind) + '</span>' +
+          '<span class="update-date">' + fmtDate(u.update_date) + '</span>' +
+        '</div>' +
+        (u.title ? '<p class="update-title">' + esc(u.title) + '</p>' : '') +
+        '<p class="update-content">' + esc(u.content) + '</p>' +
+      '</div>';
+    }).join('') || '<p class="live-projects-empty">No updates yet.</p>';
+
+    return '<div class="live-project-card">' +
+      '<div class="live-project-head">' +
+        '<h3>' + esc(p.name) + (p.country ? ' &mdash; ' + esc(p.country) : '') + '</h3>' +
+        '<span class="status-pill ' + esc(p.status || '') + '">' + esc((p.status || '').replace('_', ' ')) + '</span>' +
+      '</div>' +
+      '<div class="live-project-body">' +
+        '<div class="live-project-col"><h4>Milestones</h4>' + milestones + '</div>' +
+        '<div class="live-project-col"><h4>Latest Updates</h4>' + updates + '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  fetch('/api/projects')
+    .then(function (r) { if (!r.ok) throw new Error('list failed'); return r.json(); })
+    .then(function (list) {
+      if (!Array.isArray(list) || !list.length) {
+        root.innerHTML = '<p class="live-projects-empty">Live project tracking is coming soon.</p>';
+        return Promise.reject(new Error('__handled__'));
+      }
+      return Promise.all(list.map(function (p) {
+        return fetch('/api/projects/' + encodeURIComponent(p.slug)).then(function (r) {
+          return r.ok ? r.json() : null;
+        });
+      }));
+    })
+    .then(function (details) {
+      var cards = details.filter(Boolean).map(renderProject).join('');
+      root.innerHTML = cards || '<p class="live-projects-empty">Live project tracking is coming soon.</p>';
+    })
+    .catch(function (err) {
+      if (err.message === '__handled__') return;
+      console.error('Live projects: failed to load', err);
+      root.innerHTML = '<p class="live-projects-empty">Live project tracking is coming soon.</p>';
+    });
 })();
 </script>
   </body>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin Dashboard — Sustainable Development Crescent</title>
+<style>
+  :root{--navy:#001d2c;--teal:#2ea4bb;--green:#2f755b;--clay:#8c4a20;--paper:#f2efe8;--ink:#14181a;--muted:#565f5c;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Lato',Arial,sans-serif;background:var(--paper);color:var(--ink)}
+  header.topbar{background:var(--navy);color:#fff;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  header.topbar h1{font-size:1.05rem;margin:0;font-weight:900;text-transform:uppercase;letter-spacing:.02em}
+  header.topbar a.home-link{color:rgba(255,255,255,.7);font-size:.82rem;text-decoration:none;margin-right:18px}
+  header.topbar button{background:transparent;border:1px solid rgba(255,255,255,.4);color:#fff;padding:8px 16px;border-radius:5px;cursor:pointer;font-size:.85rem}
+  header.topbar button:hover{background:rgba(255,255,255,.12)}
+  main{max-width:1040px;margin:0 auto;padding:32px 24px 80px}
+  .panel{background:#fff;border-radius:8px;box-shadow:0 2px 10px rgba(0,29,44,.08);padding:28px 30px;margin-bottom:26px}
+  .panel h2{font-size:1rem;text-transform:uppercase;letter-spacing:.04em;color:var(--navy);margin:0 0 20px}
+  .panel h3{font-size:.85rem;text-transform:uppercase;letter-spacing:.04em;color:var(--clay);margin:26px 0 16px}
+  label{display:block;font-size:.8rem;font-weight:700;margin-bottom:5px;color:var(--navy)}
+  input[type=text],input[type=date],select,textarea{width:100%;padding:9px 11px;border:1px solid #d8d3c6;border-radius:5px;font-size:.92rem;font-family:inherit;margin-bottom:14px;background:#fff}
+  textarea{min-height:80px;resize:vertical}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:640px){.row{grid-template-columns:1fr}}
+  .btn{display:inline-block;padding:9px 18px;border:0;border-radius:5px;background:var(--teal);color:#fff;font-weight:700;font-size:.85rem;cursor:pointer}
+  .btn:hover{background:var(--green)}
+  .btn.secondary{background:transparent;border:1px solid #c9c2ae;color:var(--ink)}
+  .btn.secondary:hover{background:#f2efe8}
+  .btn.danger{background:#fff;border:1px solid #b3261e;color:#b3261e}
+  .btn.danger:hover{background:#fdecea}
+  .btn.small{padding:6px 12px;font-size:.78rem}
+  .btn-row{display:flex;gap:10px;align-items:center}
+  .item{border:1px solid #e4dfd2;border-radius:6px;padding:16px 18px;margin-bottom:12px}
+  .item-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .item-title{font-weight:700;margin:0}
+  .item-meta{color:var(--muted);font-size:.82rem;margin:3px 0 0}
+  .item-desc{color:var(--muted);font-size:.88rem;margin:8px 0 0}
+  .item-actions{display:flex;gap:8px;flex-shrink:0}
+  .empty-note{color:var(--muted);font-size:.88rem;font-style:italic}
+  .status-msg{font-size:.85rem;margin:0 0 14px;padding:9px 12px;border-radius:5px}
+  .status-msg.ok{background:#e5f3ea;color:#1e5b3f}
+  .status-msg.err{background:#fdecea;color:#8c2016}
+  .loading{color:var(--muted);padding:40px 24px;text-align:center}
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <h1>SDC Admin</h1>
+    <div>
+      <a class="home-link" href="../index.html">View site</a>
+      <button id="logoutBtn" type="button">Log out</button>
+    </div>
+  </header>
+  <main>
+    <p id="loadingNote" class="loading">Loading…</p>
+    <div id="content" style="display:none">
+
+      <section class="panel">
+        <h2>Project</h2>
+        <label for="projectSelect">Editing</label>
+        <select id="projectSelect" style="margin-bottom:0"></select>
+      </section>
+
+      <section class="panel">
+        <h2>Project Details</h2>
+        <div id="projectMsg"></div>
+        <form id="projectForm">
+          <div class="row">
+            <div>
+              <label for="pName">Name</label>
+              <input type="text" id="pName" required>
+            </div>
+            <div>
+              <label for="pStatus">Status</label>
+              <select id="pStatus">
+                <option value="defining">Defining</option>
+                <option value="active">Active</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+          </div>
+          <label for="pTagline">Tagline</label>
+          <input type="text" id="pTagline">
+          <label for="pSummary">Summary</label>
+          <textarea id="pSummary"></textarea>
+          <button class="btn" type="submit">Save project details</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Milestones</h2>
+        <div id="milestonesMsg"></div>
+        <div id="milestonesList"></div>
+        <h3 id="milestoneFormHeading">Add milestone</h3>
+        <form id="milestoneForm">
+          <div class="row">
+            <div>
+              <label for="mTitle">Title</label>
+              <input type="text" id="mTitle" required>
+            </div>
+            <div>
+              <label for="mStatus">Status</label>
+              <select id="mStatus">
+                <option value="planned">Planned</option>
+                <option value="in_progress">In progress</option>
+                <option value="done">Done</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="mTargetDate">Target date</label>
+              <input type="date" id="mTargetDate">
+            </div>
+            <div>
+              <label for="mCompletedDate">Completed date</label>
+              <input type="date" id="mCompletedDate">
+            </div>
+          </div>
+          <label for="mDescription">Description</label>
+          <textarea id="mDescription"></textarea>
+          <div class="btn-row">
+            <button class="btn" type="submit">Add milestone</button>
+            <button class="btn secondary" type="button" id="mCancelBtn" style="display:none">Cancel edit</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Daily / Monthly Updates</h2>
+        <div id="updatesMsg"></div>
+        <div id="updatesList"></div>
+        <h3 id="updateFormHeading">Add update</h3>
+        <form id="updateForm">
+          <div class="row">
+            <div>
+              <label for="uKind">Type</label>
+              <select id="uKind">
+                <option value="daily">Daily</option>
+                <option value="monthly">Monthly</option>
+              </select>
+            </div>
+            <div>
+              <label for="uDate">Date</label>
+              <input type="date" id="uDate">
+            </div>
+          </div>
+          <label for="uTitle">Title (optional)</label>
+          <input type="text" id="uTitle">
+          <label for="uContent">Content</label>
+          <textarea id="uContent" required></textarea>
+          <div class="btn-row">
+            <button class="btn" type="submit">Add update</button>
+            <button class="btn secondary" type="button" id="uCancelBtn" style="display:none">Cancel edit</button>
+          </div>
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+  (function () {
+    let currentProject = null; // full detail incl. milestones/updates
+
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+      }[c]));
+    }
+    function todayStr() { return new Date().toISOString().slice(0, 10); }
+
+    function showMsg(el, text, ok) {
+      el.innerHTML = `<p class="status-msg ${ok ? 'ok' : 'err'}">${esc(text)}</p>`;
+      setTimeout(() => { el.innerHTML = ''; }, 4000);
+    }
+
+    async function api(path, opts) {
+      const res = await fetch(path, Object.assign({ headers: { 'Content-Type': 'application/json' } }, opts));
+      if (res.status === 401) {
+        window.location.href = 'index.html';
+        throw new Error('unauthorized');
+      }
+      if (!res.ok) {
+        let msg = 'Request failed';
+        try { const j = await res.json(); msg = j.error || msg; } catch {}
+        throw new Error(msg);
+      }
+      if (res.status === 204) return null;
+      return res.json();
+    }
+
+    async function checkSession() {
+      const d = await fetch('/api/admin/session').then((r) => r.json()).catch(() => ({ authenticated: false }));
+      if (!d.authenticated) { window.location.href = 'index.html'; return false; }
+      return true;
+    }
+
+    async function loadProjectList() {
+      const list = await api('/api/projects');
+      const sel = document.getElementById('projectSelect');
+      sel.innerHTML = list.map((p) => `<option value="${esc(p.slug)}">${esc(p.name)}</option>`).join('');
+      return list;
+    }
+
+    async function loadProject(slug) {
+      currentProject = await api('/api/projects/' + encodeURIComponent(slug));
+      document.getElementById('pName').value = currentProject.name || '';
+      document.getElementById('pStatus').value = currentProject.status || 'defining';
+      document.getElementById('pTagline').value = currentProject.tagline || '';
+      document.getElementById('pSummary').value = currentProject.summary || '';
+      resetMilestoneForm();
+      resetUpdateForm();
+      renderMilestones();
+      renderUpdates();
+    }
+
+    function renderMilestones() {
+      const wrap = document.getElementById('milestonesList');
+      const ms = currentProject.milestones || [];
+      if (!ms.length) { wrap.innerHTML = '<p class="empty-note">No milestones yet.</p>'; return; }
+      wrap.innerHTML = ms.map((m) => `
+        <div class="item">
+          <div class="item-head">
+            <div>
+              <p class="item-title">${esc(m.title)}</p>
+              <p class="item-meta">${esc((m.status || 'planned').replace('_', ' '))}${m.target_date ? ' &middot; target ' + esc(m.target_date) : ''}${m.completed_date ? ' &middot; done ' + esc(m.completed_date) : ''}</p>
+              ${m.description ? `<p class="item-desc">${esc(m.description)}</p>` : ''}
+            </div>
+            <div class="item-actions">
+              <button type="button" class="btn small secondary" data-edit-milestone="${m.id}">Edit</button>
+              <button type="button" class="btn small danger" data-del-milestone="${m.id}">Delete</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderUpdates() {
+      const wrap = document.getElementById('updatesList');
+      const us = currentProject.updates || [];
+      if (!us.length) { wrap.innerHTML = '<p class="empty-note">No updates yet.</p>'; return; }
+      wrap.innerHTML = us.map((u) => `
+        <div class="item">
+          <div class="item-head">
+            <div>
+              <p class="item-title">${esc(u.title || (u.kind === 'monthly' ? 'Monthly update' : 'Daily update'))}</p>
+              <p class="item-meta">${esc(u.kind)} &middot; ${esc(u.update_date)}</p>
+              <p class="item-desc">${esc(u.content)}</p>
+            </div>
+            <div class="item-actions">
+              <button type="button" class="btn small secondary" data-edit-update="${u.id}">Edit</button>
+              <button type="button" class="btn small danger" data-del-update="${u.id}">Delete</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function promptEditMilestone(id) {
+      const m = (currentProject.milestones || []).find((x) => String(x.id) === String(id));
+      if (!m) return;
+      document.getElementById('mTitle').value = m.title || '';
+      document.getElementById('mStatus').value = m.status || 'planned';
+      document.getElementById('mTargetDate').value = m.target_date || '';
+      document.getElementById('mCompletedDate').value = m.completed_date || '';
+      document.getElementById('mDescription').value = m.description || '';
+      const form = document.getElementById('milestoneForm');
+      form.dataset.editingId = id;
+      form.querySelector('button[type=submit]').textContent = 'Save milestone';
+      document.getElementById('milestoneFormHeading').textContent = 'Edit milestone';
+      document.getElementById('mCancelBtn').style.display = 'inline-block';
+      form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function promptEditUpdate(id) {
+      const u = (currentProject.updates || []).find((x) => String(x.id) === String(id));
+      if (!u) return;
+      document.getElementById('uKind').value = u.kind || 'daily';
+      document.getElementById('uDate').value = u.update_date || '';
+      document.getElementById('uTitle').value = u.title || '';
+      document.getElementById('uContent').value = u.content || '';
+      const form = document.getElementById('updateForm');
+      form.dataset.editingId = id;
+      form.querySelector('button[type=submit]').textContent = 'Save update';
+      document.getElementById('updateFormHeading').textContent = 'Edit update';
+      document.getElementById('uCancelBtn').style.display = 'inline-block';
+      form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function resetMilestoneForm() {
+      const form = document.getElementById('milestoneForm');
+      form.reset();
+      delete form.dataset.editingId;
+      form.querySelector('button[type=submit]').textContent = 'Add milestone';
+      document.getElementById('milestoneFormHeading').textContent = 'Add milestone';
+      document.getElementById('mCancelBtn').style.display = 'none';
+    }
+    function resetUpdateForm() {
+      const form = document.getElementById('updateForm');
+      form.reset();
+      delete form.dataset.editingId;
+      document.getElementById('uDate').value = todayStr();
+      form.querySelector('button[type=submit]').textContent = 'Add update';
+      document.getElementById('updateFormHeading').textContent = 'Add update';
+      document.getElementById('uCancelBtn').style.display = 'none';
+    }
+
+    document.getElementById('projectSelect').addEventListener('change', (e) => {
+      loadProject(e.target.value).catch((err) => console.error(err));
+    });
+
+    document.getElementById('projectForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msgEl = document.getElementById('projectMsg');
+      try {
+        const body = {
+          name: document.getElementById('pName').value.trim(),
+          status: document.getElementById('pStatus').value,
+          tagline: document.getElementById('pTagline').value.trim(),
+          summary: document.getElementById('pSummary').value.trim(),
+        };
+        const updated = await api('/api/admin/projects/' + encodeURIComponent(currentProject.slug), {
+          method: 'PUT', body: JSON.stringify(body),
+        });
+        currentProject = Object.assign({}, currentProject, updated);
+        showMsg(msgEl, 'Saved.', true);
+        const list = await loadProjectList();
+        document.getElementById('projectSelect').value = currentProject.slug;
+      } catch (err) {
+        showMsg(msgEl, err.message, false);
+      }
+    });
+
+    document.getElementById('milestoneForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msgEl = document.getElementById('milestonesMsg');
+      const form = e.target;
+      const editingId = form.dataset.editingId;
+      const body = {
+        title: document.getElementById('mTitle').value.trim(),
+        status: document.getElementById('mStatus').value,
+        target_date: document.getElementById('mTargetDate').value || null,
+        completed_date: document.getElementById('mCompletedDate').value || null,
+        description: document.getElementById('mDescription').value.trim(),
+      };
+      try {
+        if (editingId) {
+          await api('/api/admin/milestones/' + editingId, { method: 'PUT', body: JSON.stringify(body) });
+        } else {
+          body.project_id = currentProject.id;
+          await api('/api/admin/milestones', { method: 'POST', body: JSON.stringify(body) });
+        }
+        await loadProject(currentProject.slug);
+        showMsg(msgEl, 'Saved.', true);
+      } catch (err) {
+        showMsg(msgEl, err.message, false);
+      }
+    });
+
+    document.getElementById('mCancelBtn').addEventListener('click', resetMilestoneForm);
+
+    document.getElementById('updateForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msgEl = document.getElementById('updatesMsg');
+      const form = e.target;
+      const editingId = form.dataset.editingId;
+      const body = {
+        kind: document.getElementById('uKind').value,
+        update_date: document.getElementById('uDate').value || todayStr(),
+        title: document.getElementById('uTitle').value.trim(),
+        content: document.getElementById('uContent').value.trim(),
+      };
+      try {
+        if (editingId) {
+          await api('/api/admin/updates/' + editingId, { method: 'PUT', body: JSON.stringify(body) });
+        } else {
+          body.project_id = currentProject.id;
+          await api('/api/admin/updates', { method: 'POST', body: JSON.stringify(body) });
+        }
+        await loadProject(currentProject.slug);
+        showMsg(msgEl, 'Saved.', true);
+      } catch (err) {
+        showMsg(msgEl, err.message, false);
+      }
+    });
+
+    document.getElementById('uCancelBtn').addEventListener('click', resetUpdateForm);
+
+    document.getElementById('milestonesList').addEventListener('click', async (e) => {
+      const editId = e.target.getAttribute('data-edit-milestone');
+      const delId = e.target.getAttribute('data-del-milestone');
+      if (editId) { promptEditMilestone(editId); return; }
+      if (delId) {
+        if (!confirm('Delete this milestone?')) return;
+        try {
+          await api('/api/admin/milestones/' + delId, { method: 'DELETE' });
+          await loadProject(currentProject.slug);
+        } catch (err) {
+          showMsg(document.getElementById('milestonesMsg'), err.message, false);
+        }
+      }
+    });
+
+    document.getElementById('updatesList').addEventListener('click', async (e) => {
+      const editId = e.target.getAttribute('data-edit-update');
+      const delId = e.target.getAttribute('data-del-update');
+      if (editId) { promptEditUpdate(editId); return; }
+      if (delId) {
+        if (!confirm('Delete this update?')) return;
+        try {
+          await api('/api/admin/updates/' + delId, { method: 'DELETE' });
+          await loadProject(currentProject.slug);
+        } catch (err) {
+          showMsg(document.getElementById('updatesMsg'), err.message, false);
+        }
+      }
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      await fetch('/api/admin/logout', { method: 'POST' }).catch(() => {});
+      window.location.href = 'index.html';
+    });
+
+    (async function init() {
+      const ok = await checkSession();
+      if (!ok) return;
+      try {
+        const list = await loadProjectList();
+        document.getElementById('uDate').value = todayStr();
+        if (list.length) {
+          document.getElementById('projectSelect').value = list[0].slug;
+          await loadProject(list[0].slug);
+        }
+        document.getElementById('loadingNote').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+      } catch (err) {
+        document.getElementById('loadingNote').textContent = 'Failed to load: ' + err.message;
+      }
+    })();
+  })();
+  </script>
+</body>
+</html>

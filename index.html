@@ -12,22 +12,106 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
+    <!--
+      Design system below is carried over from westnile/index.html (same
+      component patterns: hero, fact-strip, section-label/lede, tile grids,
+      on-navy sections) with one deliberate change: font-family swapped from
+      Archivo/PT Sans back to Lato, to match the site's existing typography
+      and the Omega Document (SDC-Omega-Essentials-v4, §08) rather than
+      silently introducing a second brand typeface. Colors are West Nile's
+      own values unchanged. See MIGRATION.md / WebDev.md for context.
+    -->
+    <style>
+      :root{
+        --navy:#001d2c;
+        --teal:#2ea4bb;
+        --green:#2f755b;
+        --clay:#8c4a20;
+        --paper:#f2efe8;
+        --ink:#14181a;
+        --muted:#565f5c;
+        --max:1180px;
+      }
+      .wrap{max-width:var(--max);margin:auto;padding:0 32px}
+      .home-redesign h1,.home-redesign h2,.home-redesign h3{font-family:"Lato",Arial,sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-.01em}
+
+      .home-redesign .hero{
+        position:relative;
+        min-height:70vh;
+        display:flex; align-items:flex-end;
+        background: linear-gradient(0deg, rgba(0,10,15,.92) 0%, rgba(0,10,15,.35) 45%, rgba(0,10,15,.05) 70%), url('images/slide-1.jpg');
+        background-size:cover;
+        background-position:center 35%;
+        color:#fff;
+      }
+      .home-redesign .hero-inner{padding:220px 0 56px}
+      .home-redesign .tag-strip{display:flex; gap:10px; margin-bottom:22px; flex-wrap:wrap}
+      .home-redesign .hero-divider{width:70px; height:3px; background:var(--teal); border:none; margin:0 0 24px; opacity:.9;}
+      .home-redesign .tag{font-family:"Lato",sans-serif; font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; background:var(--teal); color:var(--navy); padding:6px 14px}
+      .home-redesign .tag.alt{background:var(--clay); color:#fff}
+      .home-redesign .hero h1{font-size:clamp(30px,5.5vw,64px); line-height:1.02; max-width:16ch; color:#fff; margin:0}
+      .home-redesign .hero .dek{font-family:"Lato",sans-serif; font-weight:400; font-size:1.15rem; max-width:56ch; margin-top:22px; color:rgba(255,255,255,.92)}
+
+      .home-redesign .fact-strip{background:var(--ink); color:#fff; display:grid; grid-template-columns:repeat(3,1fr)}
+      .home-redesign .fact-strip>div{padding:26px 32px; border-left:1px solid rgba(255,255,255,.15)}
+      .home-redesign .fact-strip>div:first-child{border-left:none}
+      .home-redesign .fact-strip .fact-label{font-family:"Lato",sans-serif; font-weight:700; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); display:block; margin-bottom:8px}
+      .home-redesign .fact-strip .fact-value{font-family:"Lato",sans-serif; font-weight:900; font-size:1.15rem; text-transform:none; letter-spacing:0}
+      @media (max-width:780px){.home-redesign .fact-strip{grid-template-columns:1fr}.home-redesign .fact-strip>div{border-left:none; border-top:1px solid rgba(255,255,255,.15)}.home-redesign .fact-strip>div:first-child{border-top:none}}
+
+      .home-redesign .content-section{padding:70px 0}
+      .home-redesign .section-label{font-family:"Lato",sans-serif; font-weight:700; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--clay); margin-bottom:14px; display:block}
+      .home-redesign .content-section h2{font-size:clamp(26px,3.2vw,40px); margin-bottom:14px}
+      .home-redesign .content-section .lede{color:var(--muted); font-size:1.05rem; max-width:64ch; font-family:"Lato",sans-serif}
+
+      .home-redesign .sdg-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--ink); border:2px solid var(--ink); margin-top:34px}
+      .home-redesign .sdg-tile{background:#fff}
+      .home-redesign .sdg-tile img{width:100%; display:block; height:130px; object-fit:cover}
+      .home-redesign .sdg-tile .sdg-cap{padding:16px 18px 20px}
+      .home-redesign .sdg-tile .sdg-cap h5{font-family:"Lato",sans-serif; font-weight:900; font-size:.85rem; text-transform:none; letter-spacing:0; margin:0 0 6px}
+      .home-redesign .sdg-tile .sdg-cap p{color:var(--muted); font-size:.85rem; margin:0; font-family:"Lato",sans-serif}
+      @media (max-width:900px){.home-redesign .sdg-grid{grid-template-columns:1fr 1fr}}
+      @media (max-width:560px){.home-redesign .sdg-grid{grid-template-columns:1fr}}
+
+      .home-redesign .project-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--ink); border:2px solid var(--ink); margin-top:34px}
+      .home-redesign .project-tile{background:#fff; display:flex; flex-direction:column}
+      .home-redesign .project-tile img{width:100%; height:200px; object-fit:cover; display:block}
+      .home-redesign .project-tile .project-cap{padding:20px 22px; display:flex; align-items:center; justify-content:space-between; gap:12px}
+      .home-redesign .project-tile h3{font-size:1rem; text-transform:none; letter-spacing:0; margin:0}
+      .home-redesign .project-tile a.see-more{font-family:"Lato",sans-serif; font-weight:700; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--teal); text-decoration:none; white-space:nowrap}
+      @media (max-width:900px){.home-redesign .project-grid{grid-template-columns:1fr 1fr}}
+      @media (max-width:560px){.home-redesign .project-grid{grid-template-columns:1fr}}
+
+      .home-redesign .partners-logo-row{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--ink); border:2px solid var(--ink); margin-top:30px}
+      .home-redesign .partners-logo-row a{background:#fff; display:flex; align-items:center; justify-content:center; padding:36px 30px; min-height:140px}
+      .home-redesign .partners-logo-row img{max-height:70px; max-width:100%; width:auto}
+      @media (max-width:780px){.home-redesign .partners-logo-row{grid-template-columns:1fr}}
+
+      .home-redesign .on-navy{background:var(--navy); color:#fff}
+      .home-redesign .on-navy .lede,.home-redesign .on-navy p{color:rgba(255,255,255,.85)}
+      .home-redesign .on-navy h2{color:#fff}
+      .home-redesign .on-navy .section-label{color:var(--teal)}
+
+      .home-redesign .exec-section{background:#fff}
+      .home-redesign .exec-section h4{font-family:"Lato",sans-serif;font-weight:900;text-transform:none;letter-spacing:0;margin:30px 0 10px}
+      .home-redesign .exec-section ul{color:var(--muted); font-family:"Lato",sans-serif}
+
+      .home-redesign .contact-wrap .rd-form{max-width:640px; margin:36px auto 0}
+
+      .home-redesign footer.site-footer-redesign{background:var(--ink); color:rgba(255,255,255,.75); padding-top:50px}
+      .home-redesign footer.site-footer-redesign h4,.home-redesign footer.site-footer-redesign .brand-sm{color:#fff}
+      .home-redesign footer.site-footer-redesign a{color:rgba(255,255,255,.85)}
+      .home-redesign footer.site-footer-redesign .page-footer-default{background:rgba(255,255,255,.04); margin-top:40px}
+    </style>
 		<!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <script src="js/html5shiv.min.js"></script>
 		<![endif]-->
   </head>
-  <body>
-    <!--<div class="page-loader">
-      <div class="brand-name"><img src="images/SDC logo long.png" alt="" width="200" height="70"/>
-      </div>
-      <div class="page-loader-body">
-        <div class="cssload-jumping"><span></span><span></span><span></span><span></span><span></span></div>
-      </div>
-    </div>-->
+  <body class="home-redesign">
     <!-- Page-->
     <div class="page">
-      <!-- Page Header-->
+      <!-- Page Header (unchanged from original — West Nile's page reuses this exact navbar, just a different logo crop) -->
       <header class="section page-header">
         <!-- RD Navbar-->
         <div class="rd-navbar-wrap">
@@ -61,10 +145,7 @@
                 </div>
                 <div class="rd-navbar-nav-wrap-inner">
                   <ul class="rd-navbar-items-list rd-navbar-search_collapsable">
-                    <li>
-                      <!--<button class="rd-navbar-search__toggle rd-navbar-fixed--hidden" data-rd-navbar-toggle=".rd-navbar-search_toggled"></button>-->
-                    </li>
-                  
+                    <li></li>
                   </ul>
                   <!-- RD Search-->
                   <div class="rd-navbar-search rd-navbar-search_toggled rd-navbar-search_not-collapsable">
@@ -77,7 +158,7 @@
                       <button class="rd-search__submit" type="submit"></button>
                     </form>
                   </div>
-                </div> 
+                </div>
                 <ul class="rd-navbar-nav">
                   <li><a href="#about-us">About Us</a></li>
                   <li><a href="#projects">Projects</a></li>
@@ -85,476 +166,281 @@
                   <li><a href="#who-we-are">Who We Are</a></li>
                   <li><a href="#contact">Contact</a></li>
                   <li><a href="#executive-statement">Executive Statement</a></li>
-                  <!--<li><a href="#news">News</a></li>-->
                 </ul>
               </div>
             </div>
           </nav>
         </div>
       </header>
-      <!-- Swiper-->
-      <section class="section">
-        <div class="swiper-bg-wrap swiper-style-1">
-          <div class="swiper-container swiper-slider swiper-bg swiper-height-1" data-autoplay="6500" data-slide-effect="fade">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide" data-slide-bg="images/slide-6.jpg">
-                <div class="swiper-slide-caption" data-speed="0.5" data-fade="true">
-                  <div class="jumbotron-custom jumbotron-custom-variant-1 context-dark">
-                    <hr class="divider-sm divider-success" data-caption-animate="fxRotateInLeft" data-caption-delay="50">
-                    <h1 data-caption-animate="fxRotateInRight" data-caption-delay="150">Discover More About Our Projects</h1>
-                    <p class="subtitle-variant-3" data-caption-animate="fxRotateInLeft" data-caption-delay="350">Working in Uganda</p>
-                  </div>
-                </div>
-              </div>
-              <!--<div class="swiper-slide" data-slide-bg="images/slide-9.jpg">
-                <div class="swiper-slide-caption" data-speed="0.5" data-fade="true">
-                  <div class="jumbotron-custom jumbotron-custom-variant-1 context-dark">
-                    <hr class="divider-sm divider-success" data-caption-animate="fxRotateInLeft" data-caption-delay="50">
-                    <h1 data-caption-animate="fxRotateInRight" data-caption-delay="150">Discover More About Our Projects</h1>
-                    <p class="subtitle-variant-3" data-caption-animate="fxRotateInLeft" data-caption-delay="350">Working in Kashmir</p>
-                  </div>
-                </div>
-              </div>-->
-              <div class="swiper-slide" data-slide-bg="images/slide-3.jpg">
-                <div class="swiper-slide-caption" data-speed="0.5" data-fade="true">
-                  <div class="jumbotron-custom jumbotron-custom-variant-1 context-dark">
-                    <hr class="divider-sm divider-success" data-caption-animate="fxRotateInLeft" data-caption-delay="50">
-                    <h1 data-caption-animate="fxRotateInRight" data-caption-delay="150">Discover More About Our Projects</h1>
-                    <p class="subtitle-variant-3" data-caption-animate="fxRotateInLeft" data-caption-delay="350">Working in Kenya</p>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide" data-slide-bg="images/slide-1.jpg">
-                <div class="swiper-slide-caption" data-speed="0.5" data-fade="true">
-                  <div class="jumbotron-custom jumbotron-custom-variant-1 context-dark">
-                    <hr class="divider-sm divider-success" data-caption-animate="fxRotateInLeft" data-caption-delay="50">
-                    <h1 data-caption-animate="fxRotateInRight" data-caption-delay="150">Discover More About Our Projects</h1>
-                    <p class="subtitle-variant-3" data-caption-animate="fxRotateInLeft" data-caption-delay="350">Working in Pakistan</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Swiper Navigation-->
-            <div class="swiper-button-prev"><span>Prev</span></div>
-            <div class="swiper-button-next"><span>Next</span></div>
-            <!-- Swiper pagination-->
-            <div class="swiper-pagination"></div>
+
+      <!-- Hero (replaces the swiper carousel; same three regions/message, West Nile's hero pattern) -->
+      <section class="hero">
+        <div class="wrap hero-inner">
+          <div class="tag-strip">
+            <span class="tag">Uganda</span>
+            <span class="tag alt">Kenya</span>
+            <span class="tag alt">Pakistan</span>
           </div>
+          <hr class="hero-divider">
+          <h1>Discover More About Our Projects</h1>
+          <p class="dek">A dedicated non-profit organization advancing the United Nations 17 Sustainable Development Goals across the Global South. — A calming influence.</p>
         </div>
       </section>
+
+      <div class="fact-strip">
+        <div><span class="fact-label">Regions</span><span class="fact-value">Uganda · Kenya · Pakistan</span></div>
+        <div><span class="fact-label">Approach</span><span class="fact-value">Agroforestry &amp; Regenerative Agriculture</span></div>
+        <div><span class="fact-label">Framework</span><span class="fact-value">UN Sustainable Development Goals</span></div>
+      </div>
 
       <!-- About us-->
-      <section
-  class="section novi-background bg-cover bg-image section-md bg-secondary-3 text-center"
-  id="about-us"
-  data-type="anchor">
+      <section class="content-section" id="about-us" data-type="anchor">
+        <div class="wrap">
+          <span class="section-label">About Us</span>
+          <h2>Sustainable Development Crescent</h2>
+          <p class="lede">A dedicated non-profit organization committed to advancing the United Nations 17 Sustainable Development Goals (SDGs) in The Global South.
+            We work with local communities, government agencies, and international partners to implement impactful programs that drive positive change.
+            <br>— A calming influence.</p>
+          <img class="img-responsive" src="images/SDG SDC.jpg" alt="" style="margin-top:34px; max-width:732px;"/>
 
-  <div class="container-fluid container-custom-width">
-    <section class="section novi-background bg-cover bg-image section-lg bg-default">
-        <div class="container container-sm">
-          <div class="row row-55">
-            <div class="col-md-6">
-              <h3>Sustainable Development Crescent</h3>
-              <p> A dedicated non-profit organization committed to advancing the United Nations 17 Sustainable Development Goals (SDGs) in The Global South.
-                We work with local communities, government agencies, and international partners to implement impactful programs that drive positive change.
-                <br> - A calming influence.</p> <!--<a href="#executive-statement" style="color:#2a6df4; font-weight:600;">
-  Executive Statement</a>-->
+          <h3 style="margin-top:56px;">Our Focus Areas</h3>
+          <div class="sdg-grid">
+            <div class="sdg-tile">
+              <img src="images/2.jpg" alt="Zero Hunger — SDG 2">
+              <div class="sdg-cap"><h5>Zero Hunger (SDG 2)</h5><p>Supporting sustainable agriculture, food security, and improved nutrition.</p></div>
             </div>
-            <div class="col-md-6"><img class="img-responsive" src="images/SDG SDC.jpg" alt="" width="732" height="362"/>
+            <div class="sdg-tile">
+              <img src="images/3.jpg" alt="Good Health & Well-Being — SDG 3">
+              <div class="sdg-cap"><h5>Good Health &amp; Well-Being (SDG 3)</h5><p>Promoting maternal health, child nutrition, and medical programs.</p></div>
             </div>
-          </div>
-        </div>
-      </section>
-
-    <h3>Our Focus Areas</h3>
-
-    <div class="row row-55 box-bordered-variant-3-wrap">
-
-      <!-- SDG 2 -->
-      <div class="col-md-6 col-xl-3">
-        <article class="box-minimal box-bordered-variant-3">
-          <div align="center">
-            <img class="img-responsive" src="images/2.jpg" alt="" width="50" height="50"/>
-          </div>
-          <h5 class="box-minimal-title">
-            Zero Hunger<br>(SDG 2)
-          </h5>
-          <div class="box-minimal-text">
-            Supporting sustainable agriculture, food security, and improved nutrition.
-          </div>
-        </article>
-      </div>
-
-      <!-- SDG 3 -->
-      <div class="col-md-6 col-xl-3">
-        <article class="box-minimal box-bordered-variant-3">
-          <div align="center">
-            <img class="img-responsive" src="images/3.jpg" alt="" width="50" height="50"/>
-          </div>
-          <h5 class="box-minimal-title">
-            Good Health & Well-Being<br>(SDG 3)
-          </h5>
-          <div class="box-minimal-text">
-            Promoting maternal health, child nutrition, and medical programs.
-          </div>
-        </article>
-      </div>
-
-      <!-- SDG 4 -->
-      <div class="col-md-6 col-xl-3">
-        <article class="box-minimal box-bordered-variant-3">
-          <div align="center">
-            <img class="img-responsive" src="images/4.jpg" alt="" width="50" height="50"/>
-          </div>
-          <h5 class="box-minimal-title">
-            Quality Education<br>(SDG 4)
-          </h5>
-          <div class="box-minimal-text">
-            Supporting access to education, vocational training, and digital literacy.
-          </div>
-        </article>
-      </div>
-
-      <!-- SDG 5 -->
-<div class="col-md-6 col-xl-3">
-  <article class="box-minimal box-bordered-variant-3">
-    <div align="center">
-      <img class="img-responsive" src="images/5.png" alt="Gender Equality" width="50" height="50"/>
-    </div>
-    <h5 class="box-minimal-title">
-      Gender Equality<br>(SDG 5)
-    </h5>
-    <div class="box-minimal-text">
-      Promoting equal opportunities, empowering women and girls, and advancing gender equality in communities.
-    </div>
-  </article>
-</div>
-
-      <!-- SDG 8 -->
-      <div class="col-md-6 col-xl-3">
-        <article class="box-minimal box-bordered-variant-3">
-          <div align="center">
-            <img class="img-responsive" src="images/8.jpg" alt="" width="50" height="50"/>
-          </div>
-          <h5 class="box-minimal-title">
-            Economic Growth<br>(SDG 8)
-          </h5>
-          <div class="box-minimal-text">
-            Empowering local entrepreneurs and job creation initiatives.
-          </div>
-        </article>
-      </div>
-
-      <!-- SDG 13 -->
-      <div class="col-md-6 col-xl-3">
-        <article class="box-minimal box-bordered-variant-3">
-          <div align="center">
-            <img class="img-responsive" src="images/13.jpg" alt="" width="50" height="50"/>
-          </div>
-          <h5 class="box-minimal-title">
-            Climate Action<br>(SDG 13)
-          </h5>
-          <div class="box-minimal-text">
-            Through scalable carbon sequestration in land use and agroforestry design.
-          </div>
-        </article>
-      </div>
-
-      <!-- SDG 15 -->
-      <div class="col-md-6 col-xl-3">
-        <article class="box-minimal box-bordered-variant-3">
-          <div align="center">
-            <img class="img-responsive" src="images/15.jpg" alt="" width="50" height="50"/>
-          </div>
-          <h5 class="box-minimal-title">
-            Life on Land<br>(SDG 15)
-          </h5>
-          <div class="box-minimal-text">
-            Restoring degraded lands and protecting terrestrial biodiversity.
-          </div>
-        </article>
-      </div>
-
-      <!-- SDG 17 -->
-      <div class="col-md-6 col-xl-3">
-        <article class="box-minimal box-bordered-variant-3">
-          <div align="center">
-            <img class="img-responsive" src="images/17.jpg" alt="" width="50" height="50"/>
-          </div>
-          <h5 class="box-minimal-title">
-            Partnerships for the Goals<br>(SDG 17)
-          </h5>
-          <div class="box-minimal-text">
-            Multi-stakeholder collaboration across sectors and regions.
-          </div>
-        </article>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-      <section class="section novi-background bg-cover bg-image section-lg bg-default text-center" id="projects" data-type="anchor">
-        <h2>Projects</h2>
-        <p class="subtitle-variant-2">What We Do</p>
-        <!-- Owl Carousel-->
-        <div class="owl-carousel owl-carousel-style-2" data-items="1" data-md-items="2" data-stage-padding="30" data-xl-stage-padding="100" data-xxl-stage-padding="300" data-loop="true" data-margin="30" data-mouse-drag="true" data-autoplay="true">
-          <div class="thumbnail-modern"><img class="thumbnail-modern-image" src="images/crops uganda.jpg" alt="" width="567" height="381"/>
-            <div class="thumbnail-modern-caption">
-              <div class="thumbnail-modern-caption-body">
-                <div class="thumbnail-modern-title-left">Supporting Farmers</div>
-              </div>
-              <div class="thumbnail-modern-caption-aside"><a class="thumbnail-modern-control" href="#">see more</a></div>
+            <div class="sdg-tile">
+              <img src="images/4.jpg" alt="Quality Education — SDG 4">
+              <div class="sdg-cap"><h5>Quality Education (SDG 4)</h5><p>Supporting access to education, vocational training, and digital literacy.</p></div>
             </div>
-          </div>
-          <!--<div class="thumbnail-modern"><img class="thumbnail-modern-image" src="images/communities.jpg" alt="" width="567" height="381"/>
-            <div class="thumbnail-modern-caption">
-              <div class="thumbnail-modern-caption-body">
-                <div class="thumbnail-modern-title-left">Local Communities</div>
-              </div>
-              <div class="thumbnail-modern-caption-aside"><a class="thumbnail-modern-control" href="#">see more</a></div>
+            <div class="sdg-tile">
+              <img src="images/5.png" alt="Gender Equality — SDG 5">
+              <div class="sdg-cap"><h5>Gender Equality (SDG 5)</h5><p>Promoting equal opportunities, empowering women and girls, and advancing gender equality in communities.</p></div>
             </div>
-          </div>
-          <div class="thumbnail-modern"><img class="thumbnail-modern-image" src="images/water.jpg" alt="" width="567" height="381"/>
-            <div class="thumbnail-modern-caption">
-              <div class="thumbnail-modern-caption-body">
-                <div class="thumbnail-modern-title-left">Providing Water</div>
-              </div>
-              <div class="thumbnail-modern-caption-aside"><a class="thumbnail-modern-control" href="#">see more</a></div>
+            <div class="sdg-tile">
+              <img src="images/8.jpg" alt="Economic Growth — SDG 8">
+              <div class="sdg-cap"><h5>Economic Growth (SDG 8)</h5><p>Empowering local entrepreneurs and job creation initiatives.</p></div>
             </div>
-          </div>-->
-          <div class="thumbnail-modern"><img class="thumbnail-modern-image" src="images/landowner.jpg" alt="" width="567" height="381"/>
-            <div class="thumbnail-modern-caption">
-              <div class="thumbnail-modern-caption-body">
-                <div class="thumbnail-modern-title-left">Guiding Landowners</div>
-              </div>
-              <div class="thumbnail-modern-caption-aside"><a class="thumbnail-modern-control" href="#">see more</a></div>
+            <div class="sdg-tile">
+              <img src="images/13.jpg" alt="Climate Action — SDG 13">
+              <div class="sdg-cap"><h5>Climate Action (SDG 13)</h5><p>Through scalable carbon sequestration in land use and agroforestry design.</p></div>
             </div>
-          </div>
-          <div class="thumbnail-modern"><img class="thumbnail-modern-image" src="images/understanding.jpg" alt="" width="567" height="381"/>
-            <div class="thumbnail-modern-caption">
-              <div class="thumbnail-modern-caption-body">
-                <div class="thumbnail-modern-title-left">Building Understanding</div>
-              </div>
-              <div class="thumbnail-modern-caption-aside"><a class="thumbnail-modern-control" href="#">see more</a></div>
+            <div class="sdg-tile">
+              <img src="images/15.jpg" alt="Life on Land — SDG 15">
+              <div class="sdg-cap"><h5>Life on Land (SDG 15)</h5><p>Restoring degraded lands and protecting terrestrial biodiversity.</p></div>
             </div>
-          </div>
-          <div class="thumbnail-modern"><img class="thumbnail-modern-image" src="images/sdg.jpg" alt="" width="567" height="381"/>
-            <div class="thumbnail-modern-caption">
-              <div class="thumbnail-modern-caption-body">
-                <div class="thumbnail-modern-title-left">UN's 17 SDG's</div>
-              </div>
-              <div class="thumbnail-modern-caption-aside"><a class="thumbnail-modern-control" href="#">see more</a></div>
+            <div class="sdg-tile">
+              <img src="images/17.jpg" alt="Partnerships for the Goals — SDG 17">
+              <div class="sdg-cap"><h5>Partnerships for the Goals (SDG 17)</h5><p>Multi-stakeholder collaboration across sectors and regions.</p></div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SDG-->
-      <section class="section novi-background bg-cover section-lg bg-image context-dark text-center" style="background-image: url(images/bg-image-10.jpg)">
-        <div class="container">
-          <div class="row justify-content-sm-center">
-            <div class="col-md-10 col-lg-8 col-xl-7">
-              <h1>Reach the heights of the UN Sustainable Development Goals</h1><a class="btn btn-primary btn-square btn-effect-ujarak btn-lg" href="mailto:info@sustainabledevelopmentcrescent.uk">contact us</a>
+      <!-- Projects (was an owl-carousel; same 4 items + 1 new card linking to the live West Nile project page, same "see more" links kept as-is) -->
+      <section class="content-section" id="projects" data-type="anchor">
+        <div class="wrap">
+          <span class="section-label">Projects</span>
+          <h2>What We Do</h2>
+          <div class="project-grid">
+            <div class="project-tile">
+              <img src="images/crops uganda.jpg" alt="">
+              <div class="project-cap"><h3>Supporting Farmers</h3><a class="see-more" href="#">See more</a></div>
+            </div>
+            <div class="project-tile">
+              <img src="images/landowner.jpg" alt="">
+              <div class="project-cap"><h3>Guiding Landowners</h3><a class="see-more" href="#">See more</a></div>
+            </div>
+            <div class="project-tile">
+              <img src="images/understanding.jpg" alt="">
+              <div class="project-cap"><h3>Building Understanding</h3><a class="see-more" href="#">See more</a></div>
+            </div>
+            <div class="project-tile">
+              <img src="images/sdg.jpg" alt="">
+              <div class="project-cap"><h3>UN's 17 SDG's</h3><a class="see-more" href="#">See more</a></div>
+            </div>
+            <div class="project-tile">
+              <img src="westnile/images/uganda-3.jpg" alt="">
+              <div class="project-cap"><h3>West Nile, Uganda</h3><a class="see-more" href="westnile/">See more</a></div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="content-section on-navy" style="text-align:center;">
+        <div class="wrap">
+          <h2>Reach the heights of the UN Sustainable Development Goals</h2>
+          <a class="btn btn-primary btn-square btn-effect-ujarak btn-lg" href="mailto:info@sustainabledevelopmentcrescent.uk" style="margin-top:20px; display:inline-block;">Contact Us</a>
         </div>
       </section>
 
       <!-- Our partners-->
-      <section class="section novi-background bg-cover bg-image section-md text-center bg-default" id="partners" data-type="anchor">
-        <div class="container">
+      <section class="content-section" id="partners" data-type="anchor">
+        <div class="wrap">
+          <span class="section-label">Partners</span>
           <h2>Our Partners</h2>
-          <div class="row justify-content-sm-center grid-system-bordered custom-bordered">
-            <div class="col-md-6 col-lg-4 grid-element">
-              <figure class="box-icon-image"><a href="https://www.yourfootprint.uk"><img src="images/yfp.png" alt="" width="126" height="102"/></a></figure>
-            </div>
-            <div class="col-md-6 col-lg-4 grid-element">
-              <figure class="box-icon-image"><a href="https://www.staalbaek.dk"><img src="images/staalbaek.png" alt="" width="134" height="102"/></a></figure>
-            </div>
-            <div class="col-md-6 col-lg-4 grid-element">
-              <figure class="box-icon-image"><a href="https://theglobalacademy.ac/"><img src="images/ga.png" alt="" width="132" height="102"/></a></figure>
-            </div>
-            
-          </div>
-        </div>
-      </section>
-    
-
-      <!-- Subscribe to Our Newsletter-->
-
-      <section
-  class="section novi-background bg-cover section-md bg-gray-dark bg-image text-center"
-  id="who-we-are"
-  style="background-image: url(images/bg-image-3.jpg);">
-        <div class="container">
-          <div class="row justify-content-md-center">
-            <div class="col-md-10 col-lg-8 col-xl-7">
-              <h2>Who We Are</h2>
-
-<p class="big text-width-smaller">
-  Sustainable Development Crescent (SDC) is a mission-driven organisation
-  committed to advancing sustainable development across the Global South.
-</p>
-
-<p class="big text-width-smaller">
-  We collaborate with local communities, governments, and international
-  partners to design and deliver initiatives that create lasting social,
-  environmental, and economic impact.
-</p>
-
-<p class="big text-width-smaller">
-  Our work is guided by the United Nations Sustainable Development Goals
-  and grounded in transparency, partnership, and long-term resilience.
-</p>
-            </div>
+          <div class="partners-logo-row">
+            <a href="https://www.yourfootprint.uk"><img src="images/yfp.png" alt=""></a>
+            <a href="https://www.staalbaek.dk"><img src="images/staalbaek.png" alt=""></a>
+            <a href="https://theglobalacademy.ac/"><img src="images/ga.png" alt=""></a>
           </div>
         </div>
       </section>
 
-       <!-- Subscribe to Our Newsletter-->
-      <section
-  class="section novi-background bg-cover section-md bg-gray-dark bg-image text-center"
-  id="contact"
-  style="background-image: url(images/bg-image-10.jpg);">
+      <!-- Who We Are-->
+      <section class="content-section on-navy" id="who-we-are" data-type="anchor">
+        <div class="wrap">
+          <span class="section-label">Who We Are</span>
+          <h2>Who We Are</h2>
+          <p class="lede">Sustainable Development Crescent (SDC) is a mission-driven organisation
+            committed to advancing sustainable development across the Global South.</p>
+          <p class="lede">We collaborate with local communities, governments, and international
+            partners to design and deliver initiatives that create lasting social,
+            environmental, and economic impact.</p>
+          <p class="lede">Our work is guided by the United Nations Sustainable Development Goals
+            and grounded in transparency, partnership, and long-term resilience.</p>
+        </div>
+      </section>
 
-  <div class="container">
-    <div class="row justify-content-md-center">
-      <div class="col-md-10 col-lg-8 col-xl-7">
+      <!-- Contact (unchanged: same form classes/attributes/action the JS + /api/contact rely on) -->
+      <section class="content-section contact-wrap" id="contact" data-type="anchor" style="text-align:center;">
+        <div class="wrap">
+          <span class="section-label">Contact</span>
+          <h2>Contact Us</h2>
+          <p class="lede" style="margin:0 auto;">The Sustainable Development Crescent supports funding initiatives focused on sustainable development. We are currently refining our website content as part of ongoing improvements.</p>
 
-        <h3>Contact Us</h3>
-        <p class="big text-width-smaller">
-          The Sustainable Development Crescent supports funding initiatives focused on sustainable development. We are currently refining our website content as part of ongoing improvements.
-        </p>
+          <form class="rd-form rd-mailform"
+                data-form-output="form-output-global"
+                data-form-type="contact"
+                method="post"
+                action="/api/contact">
 
-        <form class="rd-form rd-mailform"
-              data-form-output="form-output-global"
-              data-form-type="contact"
-              method="post"
-              action="/api/contact">
+            <!-- Your Name -->
+            <div class="form-wrap">
+              <input class="form-input"
+                     id="contact-name"
+                     type="text"
+                     name="name"
+                     data-constraints="@Required">
+              <label class="form-label" for="contact-name">Your Name</label>
+            </div>
 
-          <!-- Your Name -->
-          <div class="form-wrap">
-            <input class="form-input"
-                   id="contact-name"
-                   type="text"
-                   name="name"
-                   data-constraints="@Required">
-            <label class="form-label" for="contact-name">Your Name</label>
-          </div>
+            <!-- Your Email -->
+            <div class="form-wrap">
+              <input class="form-input"
+                     id="contact-email"
+                     type="email"
+                     name="email"
+                     data-constraints="@Email @Required">
+              <label class="form-label" for="contact-email">Your Email</label>
+            </div>
 
-          <!-- Your Email -->
-          <div class="form-wrap">
-            <input class="form-input"
-                   id="contact-email"
-                   type="email"
-                   name="email"
-                   data-constraints="@Email @Required">
-            <label class="form-label" for="contact-email">Your Email</label>
-          </div>
+            <!-- Your Message -->
+            <div class="form-wrap">
+              <textarea class="form-input"
+                        id="contact-message"
+                        name="message"
+                        rows="4"
+                        data-constraints="@Required"></textarea>
+              <label class="form-label" for="contact-message">Your Message</label>
+            </div>
 
-          <!-- Your Message -->
-          <div class="form-wrap">
-            <textarea class="form-input"
-                      id="contact-message"
-                      name="message"
-                      rows="4"
-                      data-constraints="@Required"></textarea>
-            <label class="form-label" for="contact-message">Your Message</label>
-          </div>
+            <!-- Button -->
+            <div class="form-button">
+              <button class="button button-primary button-winona" type="submit">
+                Send Message
+              </button>
+            </div>
 
-          <!-- Button -->
-          <div class="form-button">
-            <button class="button button-primary button-winona" type="submit">
-              Send Message
-            </button>
-          </div>
+          </form>
+        </div>
+      </section>
 
-        </form>
+      <!-- Executive Statement -->
+      <section id="executive-statement" class="content-section exec-section" style="text-align:center;">
+        <div class="wrap">
+          <span class="section-label" style="display:block; text-align:center;">Executive Statement</span>
+          <h2>Executive Summary – Sustainable Development Crescent</h2>
 
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Executive Statement -->
-<section id="executive-statement" class="section section-lg bg-default text-center">
-  <div class="container">
-    <h2>Executive Summary – Sustainable Development Crescent</h2>
+          <p style="max-width:760px; margin:20px auto;">
+            The Sustainable Development Crescent (SDC) is a purpose-driven NGO committed to enabling resilient,
+            regenerative agriculture systems in developing and climate-vulnerable regions. Our core mission is to
+            support the transformation of conventional cash crop farming into diversified agroforestry systems by
+            providing targeted feasibility bridge funding. This investment enables smallholder and community-based
+            farmers to transition to sustainable land-use practices that enhance biodiversity, food security,
+            carbon sequestration, and long-term economic resilience.
+          </p>
 
-<p>
-  The Sustainable Development Crescent (SDC) is a purpose-driven NGO committed to enabling resilient,
-  regenerative agriculture systems in developing and climate-vulnerable regions. Our core mission is to
-  support the transformation of conventional cash crop farming into diversified agroforestry systems by
-  providing targeted feasibility bridge funding. This investment enables smallholder and community-based
-  farmers to transition to sustainable land-use practices that enhance biodiversity, food security,
-  carbon sequestration, and long-term economic resilience.
-</p>
+          <h4>Strategic Objective: Agroforestry as a Climate Solution</h4>
 
-<h4>Strategic Objective: Agroforestry as a Climate Solution</h4>
+          <p style="max-width:760px; margin:20px auto;">
+            SDC's primary objective is to support the conversion of monoculture cash crop farms into biodiverse
+            agroforestry systems. By introducing native species, farmers can regenerate soil health, foster
+            pollinator populations, and establish multi-tiered crop systems that supply food, timber, fibre, and
+            natural carbon sinks. Our model enhances both livelihoods and ecosystem services, breaking cycles of
+            environmental degradation and economic dependency.
+          </p>
 
-<p>
-  SDC’s primary objective is to support the conversion of monoculture cash crop farms into biodiverse
-  agroforestry systems. By introducing native species, farmers can regenerate soil health, foster
-  pollinator populations, and establish multi-tiered crop systems that supply food, timber, fibre, and
-  natural carbon sinks. Our model enhances both livelihoods and ecosystem services, breaking cycles of
-  environmental degradation and economic dependency.
-</p>
+          <h4>Contribution to UN Sustainable Development Goals (SDGs)</h4>
 
-<h4>Contribution to UN Sustainable Development Goals (SDGs)</h4>
+          <ul class="list-marked text-left d-inline-block">
+            <li><strong>SDG 2 – Zero Hunger:</strong> Improving agricultural productivity and crop diversity.</li>
+            <li><strong>SDG 3 – Good Health & Well-Being:</strong> Maternal health, nutrition, and medical support.</li>
+            <li><strong>SDG 4 – Quality Education:</strong> Skills training, vocational education, and digital literacy.</li>
+            <li><strong>SDG 5 – Gender Equality:</strong> Empowering women and girls, promoting equal opportunities, and reducing gender-based inequalities.</li>
+            <li><strong>SDG 8 – Economic Growth:</strong> Entrepreneurship, job creation, and farmer empowerment.</li>
+            <li><strong>SDG 13 – Climate Action:</strong> Scalable carbon sequestration and agroforestry design.</li>
+            <li><strong>SDG 15 – Life on Land:</strong> Land restoration and biodiversity protection.</li>
+            <li><strong>SDG 17 – Partnerships:</strong> Collaboration with governments, NGOs, and private sector partners.</li>
+          </ul>
 
-<ul class="list-marked text-left d-inline-block">
-  <li><strong>SDG 2 – Zero Hunger:</strong> Improving agricultural productivity and crop diversity.</li>
-  <li><strong>SDG 3 – Good Health & Well-Being:</strong> Maternal health, nutrition, and medical support.</li>
-  <li><strong>SDG 4 – Quality Education:</strong> Skills training, vocational education, and digital literacy.</li>
-  <li><strong>SDG 5 – Gender Equality:</strong> Empowering women and girls, promoting equal opportunities, and reducing gender-based inequalities.</li>
-  <li><strong>SDG 8 – Economic Growth:</strong> Entrepreneurship, job creation, and farmer empowerment.</li>
-  <li><strong>SDG 13 – Climate Action:</strong> Scalable carbon sequestration and agroforestry design.</li>
-  <li><strong>SDG 15 – Life on Land:</strong> Land restoration and biodiversity protection.</li>
-  <li><strong>SDG 17 – Partnerships:</strong> Collaboration with governments, NGOs, and private sector partners.</li>
-</ul>
+          <h4>Capacity Building & Community Engagement</h4>
 
-<h4>Capacity Building & Community Engagement</h4>
+          <ul class="list-marked text-left d-inline-block">
+            <li>Training on agroforestry, ecosystem services, and regenerative agriculture.</li>
+            <li>Leadership development for long-term community project management.</li>
+            <li>Inclusive engagement frameworks prioritising women and youth.</li>
+            <li>Data systems for carbon tracking and transparent reporting.</li>
+          </ul>
 
-<ul class="list-marked text-left d-inline-block">
-  <li>Training on agroforestry, ecosystem services, and regenerative agriculture.</li>
-  <li>Leadership development for long-term community project management.</li>
-  <li>Inclusive engagement frameworks prioritising women and youth.</li>
-  <li>Data systems for carbon tracking and transparent reporting.</li>
-</ul>
+          <h4>Trust, Transparency & Accountability</h4>
 
-<h4>Trust, Transparency & Accountability</h4>
+          <ul class="list-marked text-left d-inline-block">
+            <li>Annual third-party audits and open financial reporting.</li>
+            <li>Conflict of Interest policy for all Trustees and Directors.</li>
+            <li>Dedicated remuneration committee for financial governance.</li>
+            <li>Impact metrics including biodiversity and carbon assessments.</li>
+            <li>Independent annual evaluations based on defined KPIs.</li>
+            <li>Research partnerships validating ecological outcomes.</li>
+            <li>Strong track record with governments, NGOs, and local communities.</li>
+          </ul>
 
-<ul class="list-marked text-left d-inline-block">
-  <li>Annual third-party audits and open financial reporting.</li>
-  <li>Conflict of Interest policy for all Trustees and Directors.</li>
-  <li>Dedicated remuneration committee for financial governance.</li>
-  <li>Impact metrics including biodiversity and carbon assessments.</li>
-  <li>Independent annual evaluations based on defined KPIs.</li>
-  <li>Research partnerships validating ecological outcomes.</li>
-  <li>Strong track record with governments, NGOs, and local communities.</li>
-</ul>
+          <p><em>A calming influence.</em></p>
+        </div>
+      </section>
 
-<p><em>A calming influence.</em></p>
-</section>
-
-      <!-- Page Footer-->
-      <footer class="section novi-background bg-cover bg-default">
+      <!-- Page Footer (restyled to West Nile's dark footer treatment; all content preserved) -->
+      <footer class="site-footer-redesign">
         <div class="pre-footer-default text-center text-md-left">
-          <div class="container">
+          <div class="wrap">
             <div class="row justify-content-md-center row-55">
               <div class="col-md-6 col-lg-4">
                 <div class="brand-sm"><a href="index.html"><img src="images/SDC logo long.png" alt="" width="133" height="39"/></a></div>
-                <p><span class="bold-16p"><br> 
+                <p><span class="bold-16p"><br>
                   - c/o Your Footprint Ltd<br>
-                
                   The Landmark,<br>
-1 School Lane, <br>
-                 Burnley, <br>
-                 B11 1UF, <br>
-                United Kingdom.
-                <br>
-                Tel:- <a href="tel:004531155327">+45 3115 5327</a> <br>
-                Email:- <a href="mailto:info@sustainabledevelopmentcrescent.uk">info@sustainabledevelopmentcrescent.uk</a>
+                  1 School Lane, <br>
+                  Burnley, <br>
+                  B11 1UF, <br>
+                  United Kingdom.
+                  <br>
+                  Tel:- <a href="tel:004531155327">+45 3115 5327</a> <br>
+                  Email:- <a href="mailto:info@sustainabledevelopmentcrescent.uk">info@sustainabledevelopmentcrescent.uk</a>
                 </p>
                 <div class="group-sm group-middle"><span class="big text-primary">Social media</span>
                   <div>
@@ -592,15 +478,12 @@
                             </figure></a>
                   </div>
                 </div>
-                
-                </div>
               </div>
-              
             </div>
           </div>
         </div>
         <div class="page-footer-default novi-background text-center">
-          <div class="container">
+          <div class="wrap">
             <div class="row row-30">
               <div class="col-lg-8 col-xl-9 text-lg-left">
                 <ul class="list-nav">
@@ -610,8 +493,7 @@
                   <li><a href="#partners">Partners</a></li>
                   <li><a href="#who-we-are">Who We Are</a></li>
                   <li><a href="#contact">Contact</a></li>
-                  <li><a href="#executive-statement">Executive Statement</a></li> 
-                  <!--<li><a href="#news">News</a></li>-->
+                  <li><a href="#executive-statement">Executive Statement</a></li>
                 </ul>
               </div>
               <div class="col-lg-4 col-xl-3 text-lg-right">

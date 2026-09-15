@@ -226,6 +226,16 @@
       .home-redesign .update-date{color:var(--muted); font-size:.8rem; font-family:"Lato",sans-serif}
       .home-redesign .update-title{font-weight:700; margin:0 0 3px; font-family:"Lato",sans-serif}
       .home-redesign .update-content{color:var(--muted); font-size:.9rem; margin:0; line-height:1.5; font-family:"Lato",sans-serif}
+
+      /* Mobile/tablet nav panel (the RD Navbar plugin's "fixed" layout,
+         active up to ~1024px — see js/script.js's rd-navbar init) — narrowed
+         ~30% from the theme's default 270px. The theme also reserves 56px
+         of right padding on every dropdown row for a submenu-toggle chevron
+         that only top-level items actually have; that wasted space is
+         trimmed to match the row's own left padding so sub-item labels
+         still have room to breathe at the narrower width. */
+      .home-redesign .rd-navbar-fixed .rd-navbar-nav-wrap{width:189px}
+      .home-redesign .rd-navbar-fixed .rd-navbar-submenu .rd-navbar-dropdown > li > a{padding-right:16px}
     </style>
 		<!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
@@ -296,7 +306,7 @@
                     <a href="#projects">Projects</a>
                     <ul class="rd-navbar-dropdown">
                       <li><a href="#confirmed-partners">West Nile, Uganda</a></li>
-                      <li><a href="#live-projects">Live Project Updates</a></li>
+                      <li><a href="#live-projects">Live Updates</a></li>
                     </ul>
                   </li>
                   <li><a href="#partners">Partners</a></li>

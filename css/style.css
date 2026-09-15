@@ -20230,6 +20230,8 @@ html.boxed .rd-navbar--is-clone {
 	right: 0;
 	text-align: center;
 	z-index: 1080;
+	background-color: rgba(0, 0, 0, 0.85);
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 .lg-sub-html h4 {
@@ -21300,6 +21302,8 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 	right: 0;
 	text-align: center;
 	z-index: 1080;
+	background-color: rgba(0, 0, 0, 0.85);
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 .lg-sub-html h4 {

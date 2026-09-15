@@ -5,27 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Admin Login — Sustainable Development Crescent</title>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:300,400,700,900,400italic">
 <style>
-  :root{--navy:#001d2c;--teal:#2ea4bb;--green:#2f755b;--paper:#f2efe8;--ink:#14181a;--muted:#565f5c;}
+  :root{--navy:#001d2c;--teal:#2ea4bb;--green:#2f755b;--clay:#8c4a20;--paper:#f2efe8;--ink:#14181a;--muted:#565f5c;}
   *{box-sizing:border-box}
   body{margin:0;font-family:'Lato',Arial,sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
-  .card{background:#fff;border-radius:8px;box-shadow:0 8px 30px rgba(0,29,44,.12);padding:40px 36px;width:100%;max-width:380px}
-  h1{font-size:1.25rem;margin:0 0 4px;color:var(--navy)}
-  p.sub{margin:0 0 24px;color:var(--muted);font-size:.9rem}
-  label{display:block;font-size:.85rem;font-weight:700;margin-bottom:6px;color:var(--navy)}
-  input[type=password]{width:100%;padding:11px 12px;border:1px solid #d8d3c6;border-radius:6px;font-size:1rem;margin-bottom:16px}
-  button{width:100%;padding:12px;border:0;border-radius:6px;background:var(--teal);color:#fff;font-weight:700;font-size:1rem;cursor:pointer}
-  button:hover{background:var(--green)}
+  .card{background:#fff;border-top:4px solid var(--teal);box-shadow:0 8px 30px rgba(0,29,44,.10);padding:44px 36px 40px;width:100%;max-width:380px}
+  .card img.icon{display:block;height:48px;width:auto;margin:0 0 20px}
+  .kicker{font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--clay);display:block;margin-bottom:10px}
+  h1{font-size:1.4rem;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;margin:0 0 4px;color:var(--navy)}
+  p.sub{margin:0 0 26px;color:var(--muted);font-size:.9rem}
+  label{display:block;font-weight:700;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;color:var(--navy)}
+  input[type=password]{width:100%;padding:11px 12px;border:1px solid #d8d3c6;font-size:1rem;margin-bottom:18px}
+  button{width:100%;padding:13px;border:0;background:var(--teal);color:var(--navy);font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+  button:hover{background:var(--green);color:#fff}
   button:disabled{opacity:.6;cursor:default}
-  .error{color:#b3261e;font-size:.85rem;margin:-8px 0 16px;display:none}
-  .back{display:block;text-align:center;margin-top:18px;font-size:.85rem}
+  .error{color:#b3261e;font-size:.85rem;margin:-10px 0 16px;display:none}
+  .back{display:block;text-align:center;margin-top:20px;font-size:.85rem}
   .back a{color:var(--muted)}
 </style>
 </head>
 <body>
   <form class="card" id="loginForm" autocomplete="off">
+    <img class="icon" src="../images/sdc-icon.png" alt="">
+    <span class="kicker">Sustainable Development Crescent</span>
     <h1>Admin Login</h1>
-    <p class="sub">Sustainable Development Crescent — project updates</p>
+    <p class="sub">Project updates &amp; content</p>
     <label for="password">Password</label>
     <input type="password" id="password" name="password" required autofocus>
     <p class="error" id="error">Incorrect password.</p>

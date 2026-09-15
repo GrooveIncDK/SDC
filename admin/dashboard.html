@@ -58,6 +58,28 @@
 
       <section class="panel">
         <h2>Project</h2>
+        <div id="newProjectMsg"></div>
+        <div class="btn-row" style="margin-bottom:16px">
+          <button type="button" class="btn secondary" id="newProjectBtn">+ New project</button>
+        </div>
+        <form id="newProjectForm" style="display:none;margin-bottom:20px;padding:16px;border:1px dashed #c9c2ae;border-radius:6px">
+          <div class="row">
+            <div>
+              <label for="npName">Name</label>
+              <input type="text" id="npName" required>
+            </div>
+            <div>
+              <label for="npCountry">Country</label>
+              <input type="text" id="npCountry">
+            </div>
+          </div>
+          <label for="npSlug">URL slug</label>
+          <input type="text" id="npSlug" placeholder="auto-generated from name">
+          <div class="btn-row">
+            <button class="btn" type="submit">Create project</button>
+            <button class="btn secondary" type="button" id="npCancelBtn">Cancel</button>
+          </div>
+        </form>
         <label for="projectSelect">Editing</label>
         <select id="projectSelect" style="margin-bottom:0"></select>
       </section>
@@ -170,6 +192,9 @@
       }[c]));
     }
     function todayStr() { return new Date().toISOString().slice(0, 10); }
+    function slugify(s) {
+      return String(s || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    }
 
     function showMsg(el, text, ok) {
       el.innerHTML = `<p class="status-msg ${ok ? 'ok' : 'err'}">${esc(text)}</p>`;
@@ -314,6 +339,55 @@
 
     document.getElementById('projectSelect').addEventListener('change', (e) => {
       loadProject(e.target.value).catch((err) => console.error(err));
+    });
+
+    const newProjectForm = document.getElementById('newProjectForm');
+    const npName = document.getElementById('npName');
+    const npSlug = document.getElementById('npSlug');
+    let npSlugTouched = false;
+
+    function openNewProjectForm() {
+      document.getElementById('newProjectBtn').style.display = 'none';
+      newProjectForm.style.display = 'block';
+      npName.focus();
+    }
+    function closeNewProjectForm() {
+      newProjectForm.reset();
+      npSlugTouched = false;
+      newProjectForm.style.display = 'none';
+      document.getElementById('newProjectBtn').style.display = 'inline-block';
+    }
+
+    document.getElementById('newProjectBtn').addEventListener('click', openNewProjectForm);
+    document.getElementById('npCancelBtn').addEventListener('click', closeNewProjectForm);
+
+    npName.addEventListener('input', () => {
+      if (!npSlugTouched) npSlug.value = slugify(npName.value);
+    });
+    npSlug.addEventListener('input', () => { npSlugTouched = true; });
+
+    newProjectForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msgEl = document.getElementById('newProjectMsg');
+      const submitBtn = newProjectForm.querySelector('button[type=submit]');
+      const body = {
+        name: npName.value.trim(),
+        slug: npSlug.value.trim() || slugify(npName.value),
+        country: document.getElementById('npCountry').value.trim(),
+      };
+      submitBtn.disabled = true;
+      try {
+        const created = await api('/api/admin/projects', { method: 'POST', body: JSON.stringify(body) });
+        closeNewProjectForm();
+        const list = await loadProjectList();
+        document.getElementById('projectSelect').value = created.slug;
+        await loadProject(created.slug);
+        showMsg(msgEl, `Created "${created.name}". Fill in the details below.`, true);
+      } catch (err) {
+        showMsg(msgEl, err.message, false);
+      } finally {
+        submitBtn.disabled = false;
+      }
     });
 
     document.getElementById('projectForm').addEventListener('submit', async (e) => {

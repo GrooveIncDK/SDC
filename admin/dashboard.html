@@ -5,48 +5,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Admin Dashboard — Sustainable Development Crescent</title>
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:300,400,700,900,400italic">
 <style>
   :root{--navy:#001d2c;--teal:#2ea4bb;--green:#2f755b;--clay:#8c4a20;--paper:#f2efe8;--ink:#14181a;--muted:#565f5c;}
   *{box-sizing:border-box}
   body{margin:0;font-family:'Lato',Arial,sans-serif;background:var(--paper);color:var(--ink)}
-  header.topbar{background:var(--navy);color:#fff;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-  header.topbar h1{font-size:1.05rem;margin:0;font-weight:900;text-transform:uppercase;letter-spacing:.02em}
-  header.topbar a.home-link{color:rgba(255,255,255,.7);font-size:.82rem;text-decoration:none;margin-right:18px}
-  header.topbar button{background:transparent;border:1px solid rgba(255,255,255,.4);color:#fff;padding:8px 16px;border-radius:5px;cursor:pointer;font-size:.85rem}
+  header.topbar{background:var(--navy);color:#fff;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-bottom:3px solid var(--teal)}
+  header.topbar .brand{display:flex;align-items:center;gap:12px}
+  header.topbar .brand img{height:30px;width:auto;display:block}
+  header.topbar h1{font-size:.95rem;margin:0;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
+  header.topbar a.home-link{color:rgba(255,255,255,.7);font-size:.78rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;margin-right:18px}
+  header.topbar a.home-link:hover{color:#fff}
+  header.topbar button{background:transparent;border:1px solid rgba(255,255,255,.4);color:#fff;padding:8px 16px;cursor:pointer;font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
   header.topbar button:hover{background:rgba(255,255,255,.12)}
   main{max-width:1040px;margin:0 auto;padding:32px 24px 80px}
-  .panel{background:#fff;border-radius:8px;box-shadow:0 2px 10px rgba(0,29,44,.08);padding:28px 30px;margin-bottom:26px}
-  .panel h2{font-size:1rem;text-transform:uppercase;letter-spacing:.04em;color:var(--navy);margin:0 0 20px}
+  .panel{background:#fff;border-top:3px solid var(--teal);box-shadow:0 2px 10px rgba(0,29,44,.06);padding:28px 30px;margin-bottom:26px}
+  .panel.accent-navy{border-top-color:var(--navy)}
+  .panel.accent-clay{border-top-color:var(--clay)}
+  .panel.accent-green{border-top-color:var(--green)}
+  .panel h2{font-size:1rem;text-transform:uppercase;letter-spacing:.04em;color:var(--navy);margin:0 0 20px;display:flex;align-items:center;gap:12px}
   .panel h3{font-size:.85rem;text-transform:uppercase;letter-spacing:.04em;color:var(--clay);margin:26px 0 16px}
-  label{display:block;font-size:.8rem;font-weight:700;margin-bottom:5px;color:var(--navy)}
-  input[type=text],input[type=date],select,textarea{width:100%;padding:9px 11px;border:1px solid #d8d3c6;border-radius:5px;font-size:.92rem;font-family:inherit;margin-bottom:14px;background:#fff}
+  label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;color:var(--navy)}
+  input[type=text],input[type=date],select,textarea{width:100%;padding:9px 11px;border:1px solid #d8d3c6;border-radius:2px;font-size:.92rem;font-family:inherit;margin-bottom:14px;background:#fff;color:var(--ink)}
+  input[type=text]:focus,input[type=date]:focus,select:focus,textarea:focus{outline:2px solid var(--teal);outline-offset:1px}
   textarea{min-height:80px;resize:vertical}
   .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   @media (max-width:640px){.row{grid-template-columns:1fr}}
-  .btn{display:inline-block;padding:9px 18px;border:0;border-radius:5px;background:var(--teal);color:#fff;font-weight:700;font-size:.85rem;cursor:pointer}
-  .btn:hover{background:var(--green)}
+  .btn{display:inline-block;padding:10px 18px;border:0;border-radius:2px;background:var(--teal);color:var(--navy);font-weight:700;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+  .btn:hover{background:var(--green);color:#fff}
   .btn.secondary{background:transparent;border:1px solid #c9c2ae;color:var(--ink)}
   .btn.secondary:hover{background:#f2efe8}
   .btn.danger{background:#fff;border:1px solid #b3261e;color:#b3261e}
   .btn.danger:hover{background:#fdecea}
-  .btn.small{padding:6px 12px;font-size:.78rem}
+  .btn.small{padding:6px 12px;font-size:.7rem}
   .btn-row{display:flex;gap:10px;align-items:center}
-  .item{border:1px solid #e4dfd2;border-radius:6px;padding:16px 18px;margin-bottom:12px}
+  .item{border:1px solid #e4dfd2;border-radius:2px;padding:16px 18px;margin-bottom:12px}
   .item-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .item-title-wrap{display:flex;align-items:flex-start;gap:10px}
+  .item-dot{width:10px;height:10px;border-radius:50%;margin-top:5px;flex-shrink:0;background:#c9c2ae}
+  .item-dot.in_progress{background:var(--teal)}
+  .item-dot.done{background:var(--green)}
   .item-title{font-weight:700;margin:0}
+  .item-kind{font-weight:700;font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);margin-right:8px}
   .item-meta{color:var(--muted);font-size:.82rem;margin:3px 0 0}
   .item-desc{color:var(--muted);font-size:.88rem;margin:8px 0 0}
   .item-actions{display:flex;gap:8px;flex-shrink:0}
   .empty-note{color:var(--muted);font-size:.88rem;font-style:italic}
-  .status-msg{font-size:.85rem;margin:0 0 14px;padding:9px 12px;border-radius:5px}
+  .status-msg{font-size:.85rem;margin:0 0 14px;padding:9px 12px;border-radius:2px}
   .status-msg.ok{background:#e5f3ea;color:#1e5b3f}
   .status-msg.err{background:#fdecea;color:#8c2016}
   .loading{color:var(--muted);padding:40px 24px;text-align:center}
+  .status-pill{font-weight:700;font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;white-space:nowrap;display:inline-block}
+  .status-pill.defining{background:var(--clay);color:#fff}
+  .status-pill.active{background:var(--teal);color:var(--navy)}
+  .status-pill.completed{background:var(--green);color:#fff}
 </style>
 </head>
 <body>
   <header class="topbar">
-    <h1>SDC Admin</h1>
+    <div class="brand">
+      <img src="../images/sdc-icon.png" alt="">
+      <h1>SDC Admin</h1>
+    </div>
     <div>
       <a class="home-link" href="/index.html">View site</a>
       <button id="logoutBtn" type="button">Log out</button>
@@ -84,8 +104,8 @@
         <select id="projectSelect" style="margin-bottom:0"></select>
       </section>
 
-      <section class="panel">
-        <h2>Project Details</h2>
+      <section class="panel accent-navy">
+        <h2>Project Details <span id="pStatusPill" class="status-pill defining">Defining</span></h2>
         <div id="projectMsg"></div>
         <form id="projectForm">
           <div class="row">
@@ -110,7 +130,7 @@
         </form>
       </section>
 
-      <section class="panel">
+      <section class="panel accent-clay">
         <h2>Milestones</h2>
         <div id="milestonesMsg"></div>
         <div id="milestonesList"></div>
@@ -149,7 +169,7 @@
         </form>
       </section>
 
-      <section class="panel">
+      <section class="panel accent-green">
         <h2>Daily / Monthly Updates</h2>
         <div id="updatesMsg"></div>
         <div id="updatesList"></div>
@@ -240,10 +260,18 @@
       document.getElementById('pStatus').value = currentProject.status || 'defining';
       document.getElementById('pTagline').value = currentProject.tagline || '';
       document.getElementById('pSummary').value = currentProject.summary || '';
+      updateStatusPill(currentProject.status || 'defining');
       resetMilestoneForm();
       resetUpdateForm();
       renderMilestones();
       renderUpdates();
+    }
+
+    function updateStatusPill(status) {
+      const pill = document.getElementById('pStatusPill');
+      const s = status || 'defining';
+      pill.className = 'status-pill ' + s;
+      pill.textContent = s.charAt(0).toUpperCase() + s.slice(1);
     }
 
     function renderMilestones() {
@@ -253,10 +281,13 @@
       wrap.innerHTML = ms.map((m) => `
         <div class="item">
           <div class="item-head">
-            <div>
-              <p class="item-title">${esc(m.title)}</p>
-              <p class="item-meta">${esc((m.status || 'planned').replace('_', ' '))}${m.target_date ? ' &middot; target ' + esc(m.target_date) : ''}${m.completed_date ? ' &middot; done ' + esc(m.completed_date) : ''}</p>
-              ${m.description ? `<p class="item-desc">${esc(m.description)}</p>` : ''}
+            <div class="item-title-wrap">
+              <span class="item-dot ${esc(m.status || 'planned')}"></span>
+              <div>
+                <p class="item-title">${esc(m.title)}</p>
+                <p class="item-meta">${esc((m.status || 'planned').replace('_', ' '))}${m.target_date ? ' &middot; target ' + esc(m.target_date) : ''}${m.completed_date ? ' &middot; done ' + esc(m.completed_date) : ''}</p>
+                ${m.description ? `<p class="item-desc">${esc(m.description)}</p>` : ''}
+              </div>
             </div>
             <div class="item-actions">
               <button type="button" class="btn small secondary" data-edit-milestone="${m.id}">Edit</button>
@@ -276,7 +307,7 @@
           <div class="item-head">
             <div>
               <p class="item-title">${esc(u.title || (u.kind === 'monthly' ? 'Monthly update' : 'Daily update'))}</p>
-              <p class="item-meta">${esc(u.kind)} &middot; ${esc(u.update_date)}</p>
+              <p class="item-meta"><span class="item-kind">${esc(u.kind)}</span>${esc(u.update_date)}</p>
               <p class="item-desc">${esc(u.content)}</p>
             </div>
             <div class="item-actions">
@@ -389,6 +420,8 @@
         submitBtn.disabled = false;
       }
     });
+
+    document.getElementById('pStatus').addEventListener('change', (e) => updateStatusPill(e.target.value));
 
     document.getElementById('projectForm').addEventListener('submit', async (e) => {
       e.preventDefault();

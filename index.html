@@ -12,240 +12,22 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
-    <!--
-      Design system below is carried over from westnile/index.html (same
-      component patterns: hero, fact-strip, section-label/lede, tile grids,
-      on-navy sections) with one deliberate change: font-family swapped from
-      Archivo/PT Sans back to Lato, to match the site's existing typography
-      and the Omega Document (SDC-Omega-Essentials-v4, §08) rather than
-      silently introducing a second brand typeface. Colors are West Nile's
-      own values unchanged. See MIGRATION.md / WebDev.md for context.
-    -->
-    <style>
-      :root{
-        --navy:#001d2c;
-        --teal:#2ea4bb;
-        --green:#2f755b;
-        --clay:#8c4a20;
-        --paper:#f2efe8;
-        --ink:#14181a;
-        --muted:#565f5c;
-        --max:1180px;
-      }
-      .wrap{max-width:var(--max);margin:auto;padding:0 32px}
-      .home-redesign h1,.home-redesign h2,.home-redesign h3{font-family:"Lato",Arial,sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-.01em}
-
-      .home-redesign .hero{
-        position:relative;
-        min-height:70vh;
-        display:flex; align-items:flex-end;
-        background: linear-gradient(0deg, rgba(0,10,15,.92) 0%, rgba(0,10,15,.35) 45%, rgba(0,10,15,.05) 70%), url('images/slide-1.jpg');
-        background-size:cover;
-        background-position:center 35%;
-        color:#fff;
-      }
-      .home-redesign .hero-inner{padding:220px 0 56px}
-      .home-redesign .tag-strip{display:flex; gap:10px; margin-bottom:22px; flex-wrap:wrap}
-      .home-redesign .hero-divider{width:70px; height:3px; background:var(--teal); border:none; margin:0 0 24px; opacity:.9;}
-      .home-redesign .tag{font-family:"Lato",sans-serif; font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; background:var(--teal); color:var(--navy); padding:6px 14px}
-      .home-redesign .tag.alt{background:var(--clay); color:#fff}
-      .home-redesign .hero h1{font-size:clamp(30px,5.5vw,64px); line-height:1.02; max-width:16ch; color:#fff; margin:0}
-      .home-redesign .hero .dek{font-family:"Lato",sans-serif; font-weight:400; font-size:1.15rem; max-width:56ch; margin-top:22px; color:rgba(255,255,255,.92)}
-
-      .home-redesign .fact-strip{background:var(--ink); color:#fff; display:grid; grid-template-columns:repeat(3,1fr)}
-      .home-redesign .fact-strip>div{padding:26px 32px; border-left:1px solid rgba(255,255,255,.15)}
-      .home-redesign .fact-strip>div:first-child{border-left:none}
-      .home-redesign .fact-strip .fact-label{font-family:"Lato",sans-serif; font-weight:700; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); display:block; margin-bottom:8px}
-      .home-redesign .fact-strip .fact-value{font-family:"Lato",sans-serif; font-weight:900; font-size:1.15rem; text-transform:none; letter-spacing:0}
-      @media (max-width:780px){.home-redesign .fact-strip{grid-template-columns:1fr}.home-redesign .fact-strip>div{border-left:none; border-top:1px solid rgba(255,255,255,.15)}.home-redesign .fact-strip>div:first-child{border-top:none}}
-
-      .home-redesign .content-section{padding:70px 0}
-      .home-redesign .section-label{font-family:"Lato",sans-serif; font-weight:700; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--clay); margin-bottom:14px; display:block}
-      .home-redesign .content-section h2{font-size:clamp(26px,3.2vw,40px); margin-bottom:14px}
-      .home-redesign .content-section .lede{color:var(--muted); font-size:1.05rem; max-width:64ch; font-family:"Lato",sans-serif}
-
-      .home-redesign .sdg-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--ink); border:2px solid var(--ink); margin-top:34px}
-      .home-redesign .sdg-tile{background:#fff}
-      .home-redesign .sdg-tile img{width:100%; display:block; height:130px; object-fit:cover}
-      .home-redesign .sdg-tile .sdg-cap{padding:16px 18px 20px}
-      .home-redesign .sdg-tile .sdg-cap h5{font-family:"Lato",sans-serif; font-weight:900; font-size:.85rem; text-transform:none; letter-spacing:0; margin:0 0 6px}
-      .home-redesign .sdg-tile .sdg-cap p{color:var(--muted); font-size:.85rem; margin:0; font-family:"Lato",sans-serif}
-      @media (max-width:900px){.home-redesign .sdg-grid{grid-template-columns:1fr 1fr}}
-      @media (max-width:560px){.home-redesign .sdg-grid{grid-template-columns:1fr}}
-
-      .home-redesign .project-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--ink); border:2px solid var(--ink); margin-top:34px}
-      .home-redesign .project-tile{background:#fff; display:flex; flex-direction:column}
-      .home-redesign .project-tile img{width:100%; height:200px; object-fit:cover; display:block}
-      .home-redesign .project-tile .project-cap{padding:20px 22px; display:flex; align-items:center; justify-content:space-between; gap:12px}
-      .home-redesign .project-tile h3{font-size:1rem; text-transform:none; letter-spacing:0; margin:0}
-      .home-redesign .project-tile a.see-more{font-family:"Lato",sans-serif; font-weight:700; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--navy); text-decoration:none; white-space:nowrap}
-      @media (max-width:900px){.home-redesign .project-grid{grid-template-columns:1fr 1fr}}
-      @media (max-width:560px){.home-redesign .project-grid{grid-template-columns:1fr}}
-
-      .home-redesign .partners-logo-row{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--ink); border:2px solid var(--ink); margin-top:30px}
-      .home-redesign .partners-logo-row a{background:#fff; display:flex; align-items:center; justify-content:center; padding:36px 30px; min-height:140px}
-      .home-redesign .partners-logo-row img{max-height:70px; max-width:100%; width:auto}
-      @media (max-width:780px){.home-redesign .partners-logo-row{grid-template-columns:1fr}}
-
-      .home-redesign .on-navy{background:var(--navy); color:#fff}
-      .home-redesign .on-navy .lede,.home-redesign .on-navy p{color:rgba(255,255,255,.85)}
-      .home-redesign .on-navy h2{color:#fff}
-      .home-redesign .on-navy .section-label{color:var(--teal)}
-
-      /* West Nile content block (ported from westnile/index.html) — hero
-         background override, plus the component classes that page used but
-         the main-page style block above didn't yet have. Same Lato swap as
-         the rest of this page. */
-      .home-redesign .hero.wn{background-image: linear-gradient(0deg, rgba(0,10,15,.92) 0%, rgba(0,10,15,.35) 45%, rgba(0,10,15,.05) 70%), url('images/uganda-3.jpg'); background-position:center 30%;}
-
-      .home-redesign .partner-row{display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; margin-top:40px; border-top:3px solid var(--ink)}
-      .home-redesign .partner{padding:30px 34px 34px; border-right:3px solid var(--ink); border-bottom:3px solid var(--ink)}
-      .home-redesign .partner:last-child{border-right:none}
-      .home-redesign .partner .plogoM{height:84px; width:auto; max-width:180px; margin-bottom:18px; background:#fff}
-      .home-redesign .partner .plogoN{height:70px; width:auto; max-width:180px; margin-bottom:18px; background:#fff}
-      .home-redesign .partner .plogoU{height:80px; width:auto; max-width:180px; margin-bottom:18px; background:#fff}
-      .home-redesign .partner .kicker{font-family:"Lato",sans-serif; font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--green); margin-bottom:10px; display:block}
-      .home-redesign .partner h3{font-size:1.3rem; text-transform:none; letter-spacing:0; margin-bottom:12px; line-height:1.2}
-      .home-redesign .partner p{color:var(--muted); margin:0; font-family:"Lato",sans-serif}
-      @media (max-width:780px){.home-redesign .partner-row{grid-template-columns:1fr}.home-redesign .partner{border-right:none}}
-
-      .home-redesign .qlist{margin-top:36px; max-width:760px}
-      .home-redesign .qitem{display:flex; gap:24px; padding:22px 0; border-bottom:1px solid rgba(255,255,255,.18)}
-      .home-redesign .qitem:first-child{border-top:1px solid rgba(255,255,255,.18)}
-      .home-redesign .qnum{font-family:"Lato",sans-serif; font-weight:900; font-size:1.6rem; color:var(--teal); flex-shrink:0; width:52px}
-      .home-redesign .qtext{padding-top:4px; color:rgba(255,255,255,.9); font-family:"Lato",sans-serif}
-      .home-redesign .updated-note{margin-top:30px; font-size:.9rem; color:rgba(255,255,255,.5); font-style:italic; font-family:"Lato",sans-serif}
-
-      .home-redesign .essay{display:grid; grid-template-columns: 1.4fr 1fr; gap:14px; margin-top:36px}
-      .home-redesign .essay-col{display:flex; flex-direction:column; gap:14px}
-      .home-redesign .essay img{width:100%; object-fit:cover; display:block}
-      .home-redesign .essay .tall{height:520px}
-      .home-redesign .essay .short{height:250px}
-      .home-redesign .essay-caption{font-family:"Lato",sans-serif; font-weight:700; font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; background:var(--ink); color:#fff; padding:8px 12px; display:inline-block}
-      @media (max-width:820px){.home-redesign .essay{grid-template-columns:1fr}.home-redesign .essay .tall{height:340px}}
-      .home-redesign .caveat{margin-top:20px; color:var(--muted); font-size:.92rem; max-width:64ch; font-family:"Lato",sans-serif}
-
-      /* The official UN SDG tile images used in the 17-SDGs block below have
-         their number/title baked into the artwork (unlike the main page's
-         own square icon images above), so the shared .sdg-tile crop-to-130px
-         rule clips them — show them uncropped here instead. */
-      .home-redesign section[id="17SDGs"] .sdg-tile img{height:auto; object-fit:initial;}
-
-      /* Placeholder tiles (full logo lockup, on its own white background, from
-         the Omega Document §02) filling the empty grid cells left over where
-         the tile count doesn't divide evenly into the grid's columns. */
-      .home-redesign .sdg-tile.placeholder,
-      .home-redesign .project-tile.placeholder{display:flex; align-items:center; justify-content:center; padding:20px; box-sizing:border-box;}
-      .home-redesign .sdg-tile.placeholder img{height:auto; width:100%; object-fit:contain; display:block;}
-      .home-redesign .project-tile.placeholder img{width:100%; height:100%; object-fit:contain; display:block; padding:16px; box-sizing:border-box;}
-
-      /* "More info" button + modal — for photos that have a specific project
-         and funder/collaborator behind them. Button sits over the image;
-         modal reuses the on-navy card look already established elsewhere
-         on this page. */
-      .home-redesign .img-frame{position:relative;}
-      .home-redesign .info-trigger{
-        position:absolute; bottom:12px; right:12px; width:34px; height:34px;
-        border-radius:50%; background:rgba(0,29,44,.82); border:1.5px solid rgba(255,255,255,.75);
-        color:#fff; font-family:"Lato",sans-serif; font-weight:900; font-size:.95rem;
-        display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2;
-        transition:background .15s ease, transform .15s ease; padding:0;
-      }
-      .home-redesign .info-trigger:hover,.home-redesign .info-trigger:focus-visible{background:var(--teal); border-color:var(--teal); color:var(--navy); transform:scale(1.08);}
-      .home-redesign .info-trigger:focus-visible{outline:2px solid #fff; outline-offset:2px;}
-
-      .home-redesign .info-modal-overlay{
-        position:fixed; inset:0; background:rgba(0,10,15,.78); display:flex; align-items:center;
-        justify-content:center; padding:24px; z-index:1000; opacity:0; pointer-events:none;
-        transition:opacity .2s ease; visibility:hidden;
-      }
-      .home-redesign .info-modal-overlay.open{opacity:1; pointer-events:auto; visibility:visible;}
-      .home-redesign .info-modal{
-        background:var(--navy); color:#fff; max-width:520px; width:100%; max-height:85vh;
-        overflow-y:auto; border-top:4px solid var(--teal); padding:38px 36px; position:relative;
-        transform:translateY(14px); transition:transform .2s ease;
-      }
-      .home-redesign .info-modal-overlay.open .info-modal{transform:translateY(0);}
-      .home-redesign .info-modal-close{
-        position:absolute; top:14px; right:14px; width:34px; height:34px; border-radius:50%;
-        background:transparent; border:1.5px solid rgba(255,255,255,.5); color:#fff; font-size:1.3rem;
-        line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;
-      }
-      .home-redesign .info-modal-close:hover{background:rgba(255,255,255,.12);}
-      .home-redesign .info-modal .section-label{color:var(--teal); display:block;}
-      .home-redesign .info-modal h3{font-family:"Lato",sans-serif; font-weight:900; text-transform:none; letter-spacing:0; font-size:1.35rem; margin:8px 0 22px; line-height:1.25; padding-right:28px; color:#fff;}
-      .home-redesign .info-modal dl{margin:0; font-family:"Lato",sans-serif;}
-      .home-redesign .info-modal dt{font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55); margin-top:20px;}
-      .home-redesign .info-modal dt:first-child{margin-top:0;}
-      .home-redesign .info-modal dd{margin:4px 0 0; color:rgba(255,255,255,.92); font-size:1rem; line-height:1.5;}
-      @media (max-width:560px){.home-redesign .info-modal{padding:30px 24px;}}
-
-      .home-redesign .exec-section{background:#fff}
-      .home-redesign .exec-section h4{font-family:"Lato",sans-serif;font-weight:900;text-transform:none;letter-spacing:0;margin:30px 0 10px}
-      .home-redesign .exec-section ul{color:var(--muted); font-family:"Lato",sans-serif}
-
-      .home-redesign .contact-wrap .rd-form{max-width:640px; margin:36px auto 0}
-
-      .home-redesign footer.site-footer-redesign{background:var(--ink); color:rgba(255,255,255,.75); padding-top:50px}
-      .home-redesign footer.site-footer-redesign h4,.home-redesign footer.site-footer-redesign .brand-sm{color:#fff}
-      .home-redesign footer.site-footer-redesign a{color:rgba(255,255,255,.85)}
-      .home-redesign footer.site-footer-redesign .page-footer-default{background:rgba(255,255,255,.04); margin-top:40px}
-
-      /* Live Projects — DB-backed milestones/updates, managed via the
-         admin login (admin/dashboard.html). Sits alongside the static
-         "What We Do" tile grid above, not replacing it; renders itself
-         from /api/projects at load time, see the script near the end of
-         the page. */
-      .home-redesign .live-projects-root{margin-top:34px}
-      .home-redesign .live-projects-loading,.home-redesign .live-projects-empty{color:var(--muted); font-family:"Lato",sans-serif}
-      .home-redesign .live-project-card{border:2px solid var(--ink); margin-bottom:28px}
-      .home-redesign .live-project-head{padding:24px 28px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border-bottom:2px solid var(--ink)}
-      .home-redesign .live-project-head h3{font-size:1.25rem; text-transform:none; letter-spacing:0; margin:0; font-family:"Lato",sans-serif; font-weight:900}
-      .home-redesign .status-pill{font-family:"Lato",sans-serif; font-weight:700; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; padding:6px 14px; white-space:nowrap}
-      .home-redesign .status-pill.defining{background:var(--clay); color:#fff}
-      .home-redesign .status-pill.active{background:var(--teal); color:var(--navy)}
-      .home-redesign .status-pill.completed{background:var(--green); color:#fff}
-      .home-redesign .live-project-body{display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--ink)}
-      .home-redesign .live-project-col{background:#fff; padding:26px 28px}
-      .home-redesign .live-project-col h4{font-family:"Lato",sans-serif; font-weight:900; font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; color:var(--clay); margin:0 0 16px}
-      @media (max-width:860px){.home-redesign .live-project-body{grid-template-columns:1fr}}
-
-      .home-redesign .milestone{display:flex; gap:14px; padding:14px 0; border-top:1px solid #e4dfd2}
-      .home-redesign .milestone:first-child{border-top:none; padding-top:0}
-      .home-redesign .milestone-dot{width:11px; height:11px; border-radius:50%; margin-top:5px; flex-shrink:0; background:#c9c2ae}
-      .home-redesign .milestone-dot.in_progress{background:var(--teal)}
-      .home-redesign .milestone-dot.done{background:var(--green)}
-      .home-redesign .milestone-title{font-weight:700; margin:0 0 2px; font-family:"Lato",sans-serif}
-      .home-redesign .milestone-meta{color:var(--muted); font-size:.82rem; margin:0; font-family:"Lato",sans-serif}
-      .home-redesign .milestone-desc{color:var(--muted); font-size:.88rem; margin:6px 0 0; font-family:"Lato",sans-serif}
-
-      .home-redesign .update-entry{padding:14px 0; border-top:1px solid #e4dfd2}
-      .home-redesign .update-entry:first-child{border-top:none; padding-top:0}
-      .home-redesign .update-meta{display:flex; gap:10px; align-items:baseline; margin-bottom:4px}
-      .home-redesign .update-kind{font-family:"Lato",sans-serif; font-weight:700; font-size:.65rem; letter-spacing:.06em; text-transform:uppercase; color:var(--navy)}
-      .home-redesign .update-date{color:var(--muted); font-size:.8rem; font-family:"Lato",sans-serif}
-      .home-redesign .update-title{font-weight:700; margin:0 0 3px; font-family:"Lato",sans-serif}
-      .home-redesign .update-content{color:var(--muted); font-size:.9rem; margin:0; line-height:1.5; font-family:"Lato",sans-serif}
-
-      /* Mobile/tablet nav panel (the RD Navbar plugin's "fixed" layout,
-         active up to ~1024px — see js/script.js's rd-navbar init) — narrowed
-         ~30% from the theme's default 270px. The theme also reserves 56px
-         of right padding on every dropdown row for a submenu-toggle chevron
-         that only top-level items actually have; that wasted space is
-         trimmed to match the row's own left padding so sub-item labels
-         still have room to breathe at the narrower width. */
-      .home-redesign .rd-navbar-fixed .rd-navbar-nav-wrap{width:189px}
-      .home-redesign .rd-navbar-fixed .rd-navbar-submenu .rd-navbar-dropdown > li > a{padding-right:16px}
-    </style>
 		<!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <script src="js/html5shiv.min.js"></script>
 		<![endif]-->
   </head>
-  <body class="home-redesign">
+  <body>
+    <!--<div class="page-loader">
+      <div class="brand-name"><img src="images/SDC logo long.png" alt="" width="200" height="70"/>
+      </div>
+      <div class="page-loader-body">
+        <div class="cssload-jumping"><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+    </div>-->
     <!-- Page-->
     <div class="page">
-      <!-- Page Header (unchanged from original — West Nile's page reuses this exact navbar, just a different logo crop) -->
+      <!-- Page Header-->
       <header class="section page-header">
         <!-- RD Navbar-->
         <div class="rd-navbar-wrap">
@@ -256,8 +38,9 @@
                 <div class="rd-navbar-top-panel-content-inner">
                   <ul class="inline-list-xs">
                       <li><a class="icon novi-icon icon-xs icon-white fa fa-linkedin" href="https://www.linkedin.com/company/sustainable-development-crescent/"></a></li>
+                      <li><a class="link link-sm link-white" href="trustees.html">Trustees</a></li>
                   </ul>
-                  <address class="contact-info"> SDC C/O Your Footprint Ltd. </address>
+                  <address class="contact-info">GM DiSH - Barclays Eagle Labs - c/o Your Footprint Ltd, 47 Lloyd St, Manchester M2 5LE, United Kingdom</address>
                 </div>
                 <div class="object-inline"><span class="icon novi-icon icon-sm icon-gray material-icons-phone"></span><a class="link link-sm link-white" href="tel:004531155325">+45 3115 5327</a></div>
               </div>
@@ -270,7 +53,7 @@
                 </div>
                 <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                 <!-- RD Navbar Brand-->
-                <div class="rd-navbar-brand"><a class="brand-name" href="index.html"><img src="images/sdc-logo.png" alt="" width="200" height="67"/></a></div>
+                <div class="rd-navbar-brand"><a class="brand-name" href="index.html"><img src="images/SDC logo long.png" alt="" width="200" height="100"/></a></div>
               </div>
               <!-- RD Navbar Nav-->
               <div class="rd-navbar-nav-wrap">
@@ -279,7 +62,10 @@
                 </div>
                 <div class="rd-navbar-nav-wrap-inner">
                   <ul class="rd-navbar-items-list rd-navbar-search_collapsable">
-                    <li></li>
+                    <li>
+                      <button class="rd-navbar-search__toggle rd-navbar-fixed--hidden" data-rd-navbar-toggle=".rd-navbar-search_toggled"></button>
+                    </li>
+                  
                   </ul>
                   <!-- RD Search-->
                   <div class="rd-navbar-search rd-navbar-search_toggled rd-navbar-search_not-collapsable">
@@ -294,437 +80,303 @@
                   </div>
                 </div>
                 <ul class="rd-navbar-nav">
-                  <li>
-                    <a href="#about-us">About Us</a>
-                    <ul class="rd-navbar-dropdown">
-                      <li><a href="#about-us">Overview</a></li>
-                      <li><a href="#who-we-are">Who We Are</a></li>
-                      <li><a href="#executive-statement">Executive Statement</a></li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="#projects">Projects</a>
-                    <ul class="rd-navbar-dropdown">
-                      <li><a href="#confirmed-partners">West Nile, Uganda</a></li>
-                      <li><a href="#live-projects">Live Updates</a></li>
-                    </ul>
-                  </li>
+                  <li><a href="#about-us">About Us</a></li>
+                  <li><a href="#projects">Projects</a></li>
                   <li><a href="#partners">Partners</a></li>
-                  <li><a href="#contact">Contact</a></li>
+                  <li><a href="https://www.sustainabledevelopmentcrescent.uk/who%20we%20are.html">Who We Are</a></li>
+                  <!--<li><a href="#news">News</a></li>-->
                 </ul>
               </div>
             </div>
           </nav>
         </div>
       </header>
-
-      <!-- ================================================================
-           West Nile project content, ported from westnile/index.html and
-           placed above all the main page's own sections, per request.
-           Included: West Nile's own hero + fact-strip (kept, stacked above
-           the main hero below), Confirmed Partners, the 17 SDGs grid, Open
-           Questions, Field Documentation, and the wider-group "Our
-           Partners" logo row (the same 3 logos as the main Partners
-           section further down — kept anyway, duplication accepted as
-           requested). Image paths prefixed westnile/; fonts normalized to
-           Lato to match the rest of this page.
-
-           Two things deliberately left out/unchanged, flagged rather than
-           silently decided: (1) West Nile's own small credit footer
-           ("Powered by Groove Inc") is NOT repeated here — this page keeps
-           its one footer at the true bottom; (2) the header nav above is
-           unchanged — no links were added for #confirmed-partners/#17SDGs/
-           #group, since that wasn't asked for and would crowd an already
-           6-item menu. Say the word if you'd like either changed.
-           ================================================================ -->
-
-      <!-- West Nile hero -->
-      <section class="hero wn">
-        <div class="wrap hero-inner">
-          <div class="tag-strip">
-            <span class="tag">Uganda</span>
-            <span class="tag alt">West Nile Region</span>
-          </div>
-          <hr class="hero-divider">
-          <h1>A New Chapter in West Nile.</h1>
-          <p class="dek">SDC is beginning a new project in the West Nile region of Uganda. The programme itself is still being defined — what's already confirmed is who we're building it with.</p>
-        </div>
-      </section>
-
-      <div class="fact-strip">
-        <div><span class="fact-label">Country</span><span class="fact-value">Uganda</span></div>
-        <div><span class="fact-label">Region</span><span class="fact-value">West Nile</span></div>
-        <div><span class="fact-label">Status</span><span class="fact-value">Partnerships confirmed</span></div>
-      </div>
-
-      <!-- Confirmed Partners -->
-      <section class="content-section" id="confirmed-partners" data-type="anchor">
-        <div class="wrap">
-          <span class="section-label">Confirmed Partners</span>
-          <h2>Who we're building this with.</h2>
-          <p class="lede">Three relationships are in place before the project's scope is finalised — the Ugandan government, a local NGO already working on the ground, and an academic partner.</p>
-          <div class="partner-row">
-            <div class="partner">
-              <img class="plogoM" src="images/Coat_of_arms_of_Uganda.svg" alt="Coat of Arms of Uganda">
-              <span class="kicker">Government</span>
-              <h3>Ministry of Agriculture, Animal Industry and Fisheries</h3>
-              <p>The Ugandan government ministry responsible for agricultural policy and rural development nationally, partnering with SDC on this project's agricultural component.</p>
-            </div>
-            <div class="partner">
-              <img class="plogoN" src="images/partner-navoda.png" alt="Navoda — Navigators of Development Association">
-              <span class="kicker">Local NGO</span>
-              <h3>Navoda</h3>
-              <p>A Ugandan non-governmental organisation, confirmed to have presence and staff in the West Nile region for this project. Navoda is our local implementing partner on the ground.</p>
-            </div>
-            <div class="partner">
-              <img class="plogoU" src="images/partner-makerere.png" alt="Makerere University">
-              <span class="kicker">Academic Partner</span>
-              <h3>Makerere University</h3>
-              <p>Uganda's oldest and largest public university, confirmed as an academic partner on this project. The specific nature of that involvement is still being defined.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 17 SDGs -->
-      <section class="content-section" id="17SDGs" data-type="anchor">
-        <div class="wrap">
-          <span class="section-label">UN Sustainable Development Goals</span>
-          <h2>Where SDC's work sits within the 17 SDGs.</h2>
-          <p class="lede">SDC is organised around the United Nations' 17 Sustainable Development Goals. These eight are the ones the organisation states as its focus areas — not a claim that all eight are already active in West Nile specifically.</p>
-          <div class="sdg-grid">
-            <div class="sdg-tile">
-              <img src="images/sdg-2.jpg" alt="SDG 2 — Zero Hunger">
-              <div class="sdg-cap"><p>Improving agricultural productivity and crop diversity.</p></div>
-            </div>
-            <div class="sdg-tile">
-              <img src="images/sdg-3.jpg" alt="SDG 3 — Good Health and Well-Being">
-              <div class="sdg-cap"><p>Promoting maternal health, child nutrition, and medical programmes.</p></div>
-            </div>
-            <div class="sdg-tile">
-              <img src="images/sdg-4.jpg" alt="SDG 4 — Quality Education">
-              <div class="sdg-cap"><p>Supporting access to education, vocational training, and digital literacy.</p></div>
-            </div>
-            <div class="sdg-tile">
-              <img src="images/sdg-5.jpg" alt="SDG 5 — Gender Equality">
-              <div class="sdg-cap"><p>Empowering women and girls, promoting equal opportunities, and reducing gender-based inequalities.</p></div>
-            </div>
-            <div class="sdg-tile">
-              <img src="images/sdg-8.jpg" alt="SDG 8 — Decent Work and Economic Growth">
-              <div class="sdg-cap"><p>Empowering local entrepreneurs and job-creation initiatives.</p></div>
-            </div>
-            <div class="sdg-tile">
-              <img src="images/sdg-13.jpg" alt="SDG 13 — Climate Action">
-              <div class="sdg-cap"><p>Scalable carbon sequestration through land use and agroforestry design.</p></div>
-            </div>
-            <div class="sdg-tile">
-              <img src="images/sdg-15.jpg" alt="SDG 15 — Life on Land">
-              <div class="sdg-cap"><p>Restoring degraded lands and protecting terrestrial biodiversity.</p></div>
-            </div>
-            <div class="sdg-tile">
-              <img src="images/sdg-17.jpg" alt="SDG 17 — Partnerships for the Goals">
-              <div class="sdg-cap"><p>Multi-stakeholder collaboration across NGOs, local government, academia and the private sector.</p></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Open Questions -->
-      <section class="content-section on-navy">
-        <div class="wrap">
-          <span class="section-label">Open Questions</span>
-          <h2>What's still being defined.</h2>
-          <p class="lede">Rather than guess at scope, timeline or funding before they're settled, here's what's honestly still open.</p>
-          <div class="qlist">
-            <div class="qitem"><span class="qnum">01</span><span class="qtext">The specific communities and districts within West Nile the project will serve</span></div>
-            <div class="qitem"><span class="qnum">02</span><span class="qtext">Programme scope and activities — the exact interventions have not yet been finalised</span></div>
-            <div class="qitem"><span class="qnum">03</span><span class="qtext">Timeline and phasing</span></div>
-            <div class="qitem"><span class="qnum">04</span><span class="qtext">Funding structure and budget</span></div>
-          </div>
-          <p class="updated-note">This page will be updated as these details are confirmed.</p>
-        </div>
-      </section>
-
-      <!-- Field Documentation -->
-      <section class="content-section">
-        <div class="wrap">
-          <span class="section-label">Field Documentation</span>
-          <h2>Our work in Uganda.</h2>
-          <p class="lede">Documentation from SDC's ongoing work in Uganda — field assessments, community meetings, and agricultural programmes already under way.</p>
-          <div class="essay">
-            <div class="essay-col">
-              <div class="img-frame">
-                <img class="tall" src="images/uganda-6.jpg" alt="Community gathering with harvested produce">
-                <button type="button" class="info-trigger" data-info="project-2" aria-label="More info: Agriculture Cluster Development Project">i</button>
+      <!-- Swiper-->
+      <section class="section">
+        <div class="swiper-bg-wrap swiper-style-1">
+          <div class="swiper-container swiper-slider swiper-bg swiper-height-1" data-autoplay="6500" data-slide-effect="fade">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" data-slide-bg="images/slide-6.jpg">
+                <div class="swiper-slide-caption" data-speed="0.5" data-fade="true">
+                  <div class="jumbotron-custom jumbotron-custom-variant-1 context-dark">
+                    <hr class="divider-sm divider-success" data-caption-animate="fxRotateInLeft" data-caption-delay="50">
+                    <h1 data-caption-animate="fxRotateInRight" data-caption-delay="150">Discover More About Our Projects</h1>
+                    <p class="subtitle-variant-3" data-caption-animate="fxRotateInLeft" data-caption-delay="350">Working in Uganda</p>
+                  </div>
+                </div>
               </div>
-              <span class="essay-caption">Community distribution day</span>
-            </div>
-            <div class="essay-col">
-              <div class="img-frame">
-                <img class="short" src="images/uganda-4.jpg" alt="Community training session">
-                <button type="button" class="info-trigger" data-info="project-3" aria-label="More info: Watershed and Clean Air Management Project">i</button>
+              <!--<div class="swiper-slide" data-slide-bg="images/slide-9.jpg">
+                <div class="swiper-slide-caption" data-speed="0.5" data-fade="true">
+                  <div class="jumbotron-custom jumbotron-custom-variant-1 context-dark">
+                    <hr class="divider-sm divider-success" data-caption-animate="fxRotateInLeft" data-caption-delay="50">
+                    <h1 data-caption-animate="fxRotateInRight" data-caption-delay="150">Discover More About Our Projects</h1>
+                    <p class="subtitle-variant-3" data-caption-animate="fxRotateInLeft" data-caption-delay="350">Working in Kashmir</p>
+                  </div>
+                </div>
+              </div>-->
+              <div class="swiper-slide" data-slide-bg="images/slide-3.jpg">
+                <div class="swiper-slide-caption" data-speed="0.5" data-fade="true">
+                  <div class="jumbotron-custom jumbotron-custom-variant-1 context-dark">
+                    <hr class="divider-sm divider-success" data-caption-animate="fxRotateInLeft" data-caption-delay="50">
+                    <h1 data-caption-animate="fxRotateInRight" data-caption-delay="150">Discover More About Our Projects</h1>
+                    <p class="subtitle-variant-3" data-caption-animate="fxRotateInLeft" data-caption-delay="350">Working in Kenya</p>
+                  </div>
+                </div>
               </div>
-              <span class="essay-caption">Community training session</span>
-              <div class="img-frame" style="margin-top:6px;">
-                <img class="short" src="images/uganda-5.jpg" alt="Drip irrigation installation">
-                <button type="button" class="info-trigger" data-info="project-4" aria-label="More info: Small-Scale Irrigation Scheme">i</button>
+              <div class="swiper-slide" data-slide-bg="images/slide-1.jpg">
+                <div class="swiper-slide-caption" data-speed="0.5" data-fade="true">
+                  <div class="jumbotron-custom jumbotron-custom-variant-1 context-dark">
+                    <hr class="divider-sm divider-success" data-caption-animate="fxRotateInLeft" data-caption-delay="50">
+                    <h1 data-caption-animate="fxRotateInRight" data-caption-delay="150">Discover More About Our Projects</h1>
+                    <p class="subtitle-variant-3" data-caption-animate="fxRotateInLeft" data-caption-delay="350">Working in Pakistan</p>
+                  </div>
+                </div>
               </div>
-              <span class="essay-caption">Irrigation line installation</span>
             </div>
+            <!-- Swiper Navigation-->
+            <div class="swiper-button-prev"><span>Prev</span></div>
+            <div class="swiper-button-next"><span>Next</span></div>
+            <!-- Swiper pagination-->
+            <div class="swiper-pagination"></div>
           </div>
-          <p class="caveat">Photographs from SDC's broader work in Uganda. Not all images shown are necessarily from the West Nile project specifically.</p>
         </div>
       </section>
 
-      <!-- Wider-group Partners (West Nile's own; this is now also the page's ONE Partners
-           section, so it carries id="partners" — the header and footer nav's "Partners"
-           link both point here. The original homepage's separate, duplicate Our Partners
-           section (same 3 logos) has been removed. -->
-      <section class="content-section on-navy" id="partners" data-type="anchor">
-        <div class="wrap">
-          <span class="section-label">Our Partners</span>
-          <h2>The wider group behind SDC.</h2>
-          <p class="lede">Separate from the West Nile project's local partners above — these are the organisations SDC sits alongside more broadly.</p>
-          <div class="partners-logo-row">
-            <a href="https://www.yourfootprint.uk" target="_blank" rel="noopener"><img src="images/partner-yfp.png" alt="Your Footprint — The CO2e Farming Tool, International"></a>
-            <a href="https://www.staalbaek.dk" target="_blank" rel="noopener"><img src="images/partner-staalbaek.png" alt="Stålbækgård"></a>
-            <a href="https://theglobalacademy.ac/" target="_blank" rel="noopener"><img src="images/partner-global-academy.png" alt="The Global Academy — Working on Global Goals"></a>
-          </div>
-        </div>
-      </section>
-      <!-- ============================== end West Nile block ============================== -->
-
-      <!-- About us (the page's own second hero+fact-strip, and the "Our Focus Areas" SDG
-           grid that used to sit here, have been removed as redundant now that the West
-           Nile block above already supplies a hero and a 17-SDGs grid). -->
-      <section class="content-section" id="about-us" data-type="anchor">
-        <div class="wrap">
-          <span class="section-label">About Us</span>
-          <h2>Sustainable Development Crescent</h2>
-          <p class="lede">A dedicated non-profit organization committed to advancing the United Nations 17 Sustainable Development Goals (SDGs) in The Global South.
-            We work with local communities, government agencies, and international partners to implement impactful programs that drive positive change.
-            <br>— A calming influence.</p>
-          <img class="img-responsive" src="images/SDG SDC.jpg" alt="" style="margin-top:34px; max-width:732px;"/>
-        </div>
-      </section>
-
-      <!-- Projects (was an owl-carousel; same 4 items + 1 new card linking to the live West Nile project page, same "see more" links kept as-is) -->
-      <section class="content-section" id="projects" data-type="anchor">
-        <div class="wrap">
-          <span class="section-label">Projects</span>
-          <h2>What We Do</h2>
-          <div class="project-grid">
-            <div class="project-tile">
-              <div class="img-frame">
-                <img src="images/crops uganda.jpg" alt="">
-                <button type="button" class="info-trigger" data-info="project-6" aria-label="More info: LONG 5 Maize Variety Performance Trial">i</button>
-              </div>
-              <div class="project-cap"><h3>Supporting Farmers</h3></div>
+      <!-- About us-->
+      <section class="section novi-background bg-cover bg-image section-lg bg-default" id="about-us" data-type="anchor">
+        <div class="container">
+          <div class="row row-55">
+            <div class="col-md-6">
+              <h3>Sustainable Development Crescent</h3>
+              <p> A dedicated non-profit organization committed to advancing the United Nations 17 Sustainable Development Goals (SDGs) in The Global South.
+                We work with local communities, government agencies, and international partners to implement impactful programs that drive positive change.
+                <br> - A calming influence.</p> <a href="es.html">Executive statement</a>
             </div>
-            <div class="project-tile">
-              <div class="img-frame">
-                <img src="images/landowner.jpg" alt="">
-                <button type="button" class="info-trigger" data-info="project-7" aria-label="More info: Landowners Meeting">i</button>
-              </div>
-              <div class="project-cap"><h3>Guiding Landowners</h3></div>
-            </div>
-            <div class="project-tile">
-              <div class="img-frame">
-                <img src="images/understanding.jpg" alt="">
-                <button type="button" class="info-trigger" data-info="project-5" aria-label="More info: Pakistan Carbon Market Evolution">i</button>
-              </div>
-              <div class="project-cap"><h3>Building Understanding</h3></div>
-            </div>
-            <div class="project-tile">
-              <img src="images/sdg.jpg" alt="">
-              <div class="project-cap"><h3>UN's 17 SDG's</h3></div>
-            </div>
-            <div class="project-tile">
-              <div class="img-frame">
-                <img src="images/uganda-3.jpg" alt="">
-                <button type="button" class="info-trigger" data-info="project-1" aria-label="More info: Postharvest Handling and Value Addition on Cassava">i</button>
-              </div>
-              <div class="project-cap"><h3>West Nile, Uganda</h3></div>
-            </div>
-            <!-- Placeholder filling the grid's 6th cell (5 projects don't fill a 3-column grid) — full logo lockup on white, from the Omega Document §02 -->
-            <div class="project-tile placeholder">
-              <img src="images/sdc-full-logo-lockup.png" alt="Sustainable Development Crescent — full logo lockup">
+            <div class="col-md-6"><img class="img-responsive" src="images/SDG SDC.jpg" alt="" width="732" height="362"/>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Live Projects — DB-backed milestones/updates, kept current via
-           the admin login (admin/index.html). New section alongside the
-           static "What We Do" tiles above, which stay as they are. -->
-      <section class="content-section" id="live-projects" data-type="anchor">
-        <div class="wrap">
-          <span class="section-label">Live Projects</span>
-          <h2>Track Our Work As It Happens</h2>
-          <p class="lede">Project milestones and progress notes, kept current by the team on the ground.</p>
-          <div id="liveProjectsRoot" class="live-projects-root">
-            <p class="live-projects-loading">Loading live project data&hellip;</p>
+      <section class="section novi-background bg-cover bg-image section-md bg-secondary-3 text-center">
+        <div class="container-fluid container-custom-width">
+          <h3>Our Focus Areas</h3>
+          <div class="row row-55 box-bordered-variant-3-wrap">
+            <div class="col-md-6 col-xl-3">
+              <article class="box-minimal box-bordered-variant-3">
+                <div align="center"><img class="img-responsive" src="images/2.jpg" alt="" width="50" height="50"/></div>
+                <h5 class="box-minimal-title">Good Health & Well-Being<br> (SDG 3)</h5>
+                <div class="box-minimal-text">Promoting maternal health, child nutrition, and medical programs.</div>
+                
+              </article>
+            </div>
+            <div class="col-md-6 col-xl-3">
+              <article class="box-minimal box-bordered-variant-3">
+                <div align="center"><img class="img-responsive" src="images/3.jpg" alt="" width="50" height="50"/></div>
+                <h5 class="box-minimal-title">Clean Water & Sanitation <br>(SDG 3</h5>
+                <div class="box-minimal-text">Expanding access to clean drinking water and sanitation facilities.</div>
+              </article>
+            </div>
+            <div class="col-md-6 col-xl-3">
+              <article class="box-minimal box-bordered-variant-3">
+                <div align="center"><img class="img-responsive" src="images/4.jpg" alt="" width="50" height="50"/></div>
+                <h5 class="box-minimal-title">Quality Education<br> (SDG 4)</h5>
+                <div class="box-minimal-text">Supporting access to education, vocational training, and digital literacy.</div>
+              </article>
+            </div>
+            <div class="col-md-6 col-xl-3">
+              <article class="box-minimal box-bordered-variant-3">
+                <div align="center"><img class="img-responsive" src="images/6.jpg" alt="" width="50" height="50"/></div>
+                <h5 class="box-minimal-title">Clean Water & Sanitation<br> (SDG 6)</h5>
+                <div class="box-minimal-text">Expanding access to clean drinking water and sanitation facilities.</div>
+              </article>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+      <section class="section novi-background bg-cover bg-image section-md bg-secondary-3 text-center">
+        <div class="container-fluid container-custom-width">
+           <div class="row row-55 box-bordered-variant-3-wrap">
+            <div class="col-md-6 col-xl-3">
+              <article class="box-minimal box-bordered-variant-3">
+                <div align="center"><img class="img-responsive" src="images/8.jpg" alt="" width="50" height="50"/></div>
+                <h5 class="box-minimal-title">Economic Growth <br>(SDG 8)</h5>
+                <div class="box-minimal-text">Empowering local entrepreneurs and job creation initiatives.</div>
+                
+              </article>
+            </div>
+            <div class="col-md-6 col-xl-3">
+              <article class="box-minimal box-bordered-variant-3">
+                <div align="center"><img class="img-responsive" src="images/13.jpg" alt="" width="50" height="50"/></div>
+                <h5 class="box-minimal-title">Climate Action <br> (SDG 13)</h5>
+                <div class="box-minimal-text">Through scalable carbon sequestration in land use and agroforestry design.</div>
+              </article>
+            </div>
+            <div class="col-md-6 col-xl-3">
+              <article class="box-minimal box-bordered-variant-3">
+                <div align="center"><img class="img-responsive" src="images/15.jpg" alt="" width="50" height="50"/></div>
+                <h5 class="box-minimal-title">Life on Land <br> (SDG 15)</h5>
+                <div class="box-minimal-text">Restoring degraded lands and protecting terrestrial biodiversity.</div>
+              </article>
+            </div>
+            <div class="col-md-6 col-xl-3">
+              <article class="box-minimal box-bordered-variant-3">
+                <div align="center"><img class="img-responsive" src="images/17.jpg" alt="" width="50" height="50"/></div>
+                <h5 class="box-minimal-title">Partnerships for the Goals <br>(SDG 17)</h5>
+                <div class="box-minimal-text">Multi-stakeholder collaboration including NGOs, local governments, academia, and private sector alliances.</div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section novi-background bg-cover bg-image section-lg bg-default text-center" id="projects" data-type="anchor">
+        <h2>Projects</h2>
+        <p class="subtitle-variant-2">What We Do</p>
+        <!-- Owl Carousel-->
+        <div class="owl-carousel owl-carousel-style-2" data-items="1" data-md-items="2" data-stage-padding="30" data-xl-stage-padding="100" data-xxl-stage-padding="300" data-loop="true" data-margin="30" data-mouse-drag="true" data-autoplay="true">
+          <div class="thumbnail-modern"><img class="thumbnail-modern-image" src="images/crops uganda.jpg" alt="" width="567" height="381"/>
+            <div class="thumbnail-modern-caption">
+              <div class="thumbnail-modern-caption-body">
+                <div class="thumbnail-modern-title-left">Supporting Farmers</div>
+              </div>
+              <div class="thumbnail-modern-caption-aside"><a class="thumbnail-modern-control" href="#">see more</a></div>
+            </div>
+          </div>
+          <!--<div class="thumbnail-modern"><img class="thumbnail-modern-image" src="images/communities.jpg" alt="" width="567" height="381"/>
+            <div class="thumbnail-modern-caption">
+              <div class="thumbnail-modern-caption-body">
+                <div class="thumbnail-modern-title-left">Local Communities</div>
+              </div>
+              <div class="thumbnail-modern-caption-aside"><a class="thumbnail-modern-control" href="#">see more</a></div>
+            </div>
+          </div>
+          <div class="thumbnail-modern"><img class="thumbnail-modern-image" src="images/water.jpg" alt="" width="567" height="381"/>
+            <div class="thumbnail-modern-caption">
+              <div class="thumbnail-modern-caption-body">
+                <div class="thumbnail-modern-title-left">Providing Water</div>
+              </div>
+              <div class="thumbnail-modern-caption-aside"><a class="thumbnail-modern-control" href="#">see more</a></div>
+            </div>
+          </div>-->
+          <div class="thumbnail-modern"><img class="thumbnail-modern-image" src="images/landowner.jpg" alt="" width="567" height="381"/>
+            <div class="thumbnail-modern-caption">
+              <div class="thumbnail-modern-caption-body">
+                <div class="thumbnail-modern-title-left">Guiding Landowners</div>
+              </div>
+              <div class="thumbnail-modern-caption-aside"><a class="thumbnail-modern-control" href="#">see more</a></div>
+            </div>
+          </div>
+          <div class="thumbnail-modern"><img class="thumbnail-modern-image" src="images/understanding.jpg" alt="" width="567" height="381"/>
+            <div class="thumbnail-modern-caption">
+              <div class="thumbnail-modern-caption-body">
+                <div class="thumbnail-modern-title-left">Building Understanding</div>
+              </div>
+              <div class="thumbnail-modern-caption-aside"><a class="thumbnail-modern-control" href="#">see more</a></div>
+            </div>
+          </div>
+          <div class="thumbnail-modern"><img class="thumbnail-modern-image" src="images/sdg.jpg" alt="" width="567" height="381"/>
+            <div class="thumbnail-modern-caption">
+              <div class="thumbnail-modern-caption-body">
+                <div class="thumbnail-modern-title-left">UN 17 SDG's</div>
+              </div>
+              <div class="thumbnail-modern-caption-aside"><a class="thumbnail-modern-control" href="#">see more</a></div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- CTA -->
-      <section class="content-section on-navy" style="text-align:center;">
-        <div class="wrap">
-          <h2>Reach the heights of the UN Sustainable Development Goals</h2>
-          <a class="btn btn-primary btn-square btn-effect-ujarak btn-lg" href="#contact" style="margin-top:20px; display:inline-block;">Contact Us</a>
+      <!-- SDG-->
+      <section class="section novi-background bg-cover section-lg bg-image context-dark text-center" style="background-image: url(images/bg-image-10.jpg)">
+        <div class="container">
+          <div class="row justify-content-sm-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+              <h1>Reach the height's of the UN's Sustainable Development Goals</h1><a class="btn btn-primary btn-square btn-effect-ujarak btn-lg" href="mailto:info@sustainabledevelopmentcrescent.uk">contact us</a>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Who We Are-->
-      <section class="content-section on-navy" id="who-we-are" data-type="anchor">
-        <div class="wrap">
-          <span class="section-label">Who We Are</span>
-          <h2>Who We Are</h2>
-          <p class="lede">Sustainable Development Crescent (SDC) is a mission-driven organisation
-            committed to advancing sustainable development across the Global South.</p>
-          <p class="lede">We collaborate with local communities, governments, and international
-            partners to design and deliver initiatives that create lasting social,
-            environmental, and economic impact.</p>
-          <p class="lede">Our work is guided by the United Nations Sustainable Development Goals
-            and grounded in transparency, partnership, and long-term resilience.</p>
+      <!-- Our partners-->
+      <section class="section novi-background bg-cover bg-image section-md text-center bg-default" id="partners" data-type="anchor">
+        <div class="container">
+          <h2>Our Partners</h2>
+          <div class="row justify-content-sm-center grid-system-bordered custom-bordered">
+            <div class="col-md-6 col-lg-4 grid-element">
+              <figure class="box-icon-image"><a href="https://www.yourfootprint.uk"><img src="images/yfp.png" alt="" width="126" height="102"/></a></figure>
+            </div>
+            <div class="col-md-6 col-lg-4 grid-element">
+              <figure class="box-icon-image"><a href="https://www.staalbaek.dk"><img src="images/staalbaek.png" alt="" width="134" height="102"/></a></figure>
+            </div>
+            <div class="col-md-6 col-lg-4 grid-element">
+              <figure class="box-icon-image"><a href="https://theglobalacademy.ac/"><img src="images/ga.png" alt="" width="132" height="102"/></a></figure>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+    
+
+      <!-- Subscribe to Our Newsletter-->
+      <section class="section novi-background bg-cover section-md bg-gray-dark bg-image text-center" style="background-image: url(images/bg-image-3.jpg);">
+        <div class="container">
+          <div class="row justify-content-md-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+              <h3>Subscribe to Our Newsletter</h3>
+              <p class="big text-width-smaller">Sign up to our newsletter and be the first to know about our latest news, special offers, and events.</p>
+              <!-- Campaign Monitor-->
+              <form class="campaign-mailform form-inline form-center" data-form-output="form-output-global" action="http://templatemonster1.createsend.com/t/d/s/xlyhhk/" method="post">
+                <div class="form-wrap">
+                  <input class="form-input" id="subscribe-email" type="email" name="cm-xlyhhk-xlyhhk" data-constraints="@Email @Required">
+                  <label class="form-label" for="subscribe-email">Enter your e-mail</label>
+                </div>
+                <button class="btn btn-primary btn-effect-ujarak btn-square" type="submit">Subscribe</button>
+              </form>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Contact (unchanged: same form classes/attributes/action the JS + /api/contact rely on) -->
-      <section class="content-section contact-wrap" id="contact" data-type="anchor" style="text-align:center;">
-        <div class="wrap">
-          <span class="section-label">Contact</span>
-          <h2>Contact Us</h2>
-          <p class="lede" style="margin:0 auto;">The Sustainable Development Crescent supports funding initiatives focused on sustainable development. We are currently refining our website content as part of ongoing improvements.</p>
-
-          <form class="rd-form rd-mailform"
-                data-form-output="form-output-global"
-                data-form-type="contact"
-                method="post"
-                action="/api/contact">
-
-            <!-- Your Name -->
-            <div class="form-wrap">
-              <input class="form-input"
-                     id="contact-name"
-                     type="text"
-                     name="name"
-                     data-constraints="@Required">
-              <label class="form-label" for="contact-name">Your Name</label>
+      <!-- Subscribe to Our Newsletter
+      <section class="section novi-background bg-cover section-md bg-gray-dark bg-image text-center" style="background-image: url(images/bg-image-3.jpg);">
+        <div class="container">
+          <div class="row justify-content-md-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+              <h3>Subscribe to Our Newsletter</h3>
+              <p class="big text-width-smaller">Sign up to our newsletter and be the first to know about our latest news, special offers, and events.</p>
+              Campaign Monitor
+              <form class="campaign-mailform form-inline form-center" data-form-output="form-output-global" action="http://templatemonster1.createsend.com/t/d/s/xlyhhk/" method="post">
+                <div class="form-wrap">
+                  <input class="form-input" id="subscribe-email" type="email" name="cm-xlyhhk-xlyhhk" data-constraints="@Email @Required">
+                  <label class="form-label" for="subscribe-email">Enter your e-mail</label>
+                </div>
+                <button class="btn btn-primary btn-effect-ujarak btn-square" type="submit">Subscribe</button>
+              </form>
             </div>
-
-            <!-- Your Email -->
-            <div class="form-wrap">
-              <input class="form-input"
-                     id="contact-email"
-                     type="email"
-                     name="email"
-                     data-constraints="@Email @Required">
-              <label class="form-label" for="contact-email">Your Email</label>
-            </div>
-
-            <!-- Your Message -->
-            <div class="form-wrap">
-              <textarea class="form-input"
-                        id="contact-message"
-                        name="message"
-                        rows="4"
-                        data-constraints="@Required"></textarea>
-              <label class="form-label" for="contact-message">Your Message</label>
-            </div>
-
-            <!-- Button -->
-            <div class="form-button">
-              <button class="button button-primary button-winona" type="submit">
-                Send Message
-              </button>
-            </div>
-
-          </form>
+          </div>
         </div>
-      </section>
+      </section> -->
 
-      <!-- Executive Statement -->
-      <section id="executive-statement" class="content-section exec-section" style="text-align:center;">
-        <div class="wrap">
-          <span class="section-label" style="display:block; text-align:center;">Executive Statement</span>
-          <h2>Executive Summary – Sustainable Development Crescent</h2>
 
-          <p style="max-width:760px; margin:20px auto;">
-            The Sustainable Development Crescent (SDC) is a purpose-driven NGO committed to enabling resilient,
-            regenerative agriculture systems in developing and climate-vulnerable regions. Our core mission is to
-            support the transformation of conventional cash crop farming into diversified agroforestry systems by
-            providing targeted feasibility bridge funding. This investment enables smallholder and community-based
-            farmers to transition to sustainable land-use practices that enhance biodiversity, food security,
-            carbon sequestration, and long-term economic resilience.
-          </p>
+      
 
-          <h4>Strategic Objective: Agroforestry as a Climate Solution</h4>
-
-          <p style="max-width:760px; margin:20px auto;">
-            SDC's primary objective is to support the conversion of monoculture cash crop farms into biodiverse
-            agroforestry systems. By introducing native species, farmers can regenerate soil health, foster
-            pollinator populations, and establish multi-tiered crop systems that supply food, timber, fibre, and
-            natural carbon sinks. Our model enhances both livelihoods and ecosystem services, breaking cycles of
-            environmental degradation and economic dependency.
-          </p>
-
-          <h4>Contribution to UN Sustainable Development Goals (SDGs)</h4>
-
-          <ul class="list-marked text-left d-inline-block">
-            <li><strong>SDG 2 – Zero Hunger:</strong> Improving agricultural productivity and crop diversity.</li>
-            <li><strong>SDG 3 – Good Health & Well-Being:</strong> Maternal health, nutrition, and medical support.</li>
-            <li><strong>SDG 4 – Quality Education:</strong> Skills training, vocational education, and digital literacy.</li>
-            <li><strong>SDG 5 – Gender Equality:</strong> Empowering women and girls, promoting equal opportunities, and reducing gender-based inequalities.</li>
-            <li><strong>SDG 8 – Economic Growth:</strong> Entrepreneurship, job creation, and farmer empowerment.</li>
-            <li><strong>SDG 13 – Climate Action:</strong> Scalable carbon sequestration and agroforestry design.</li>
-            <li><strong>SDG 15 – Life on Land:</strong> Land restoration and biodiversity protection.</li>
-            <li><strong>SDG 17 – Partnerships:</strong> Collaboration with governments, NGOs, and private sector partners.</li>
-          </ul>
-
-          <h4>Capacity Building & Community Engagement</h4>
-
-          <ul class="list-marked text-left d-inline-block">
-            <li>Training on agroforestry, ecosystem services, and regenerative agriculture.</li>
-            <li>Leadership development for long-term community project management.</li>
-            <li>Inclusive engagement frameworks prioritising women and youth.</li>
-            <li>Data systems for carbon tracking and transparent reporting.</li>
-          </ul>
-
-          <h4>Trust, Transparency & Accountability</h4>
-
-          <ul class="list-marked text-left d-inline-block">
-            <li>Annual third-party audits and open financial reporting.</li>
-            <li>Conflict of Interest policy for all Trustees and Directors.</li>
-            <li>Dedicated remuneration committee for financial governance.</li>
-            <li>Impact metrics including biodiversity and carbon assessments.</li>
-            <li>Independent annual evaluations based on defined KPIs.</li>
-            <li>Research partnerships validating ecological outcomes.</li>
-            <li>Strong track record with governments, NGOs, and local communities.</li>
-          </ul>
-
-          <p><em>A calming influence.</em></p>
-        </div>
-      </section>
-
-      <!-- Page Footer (restyled to West Nile's dark footer treatment; all content preserved) -->
-      <footer class="site-footer-redesign">
+      <!-- Page Footer-->
+      <footer class="section novi-background bg-cover bg-default">
         <div class="pre-footer-default text-center text-md-left">
-          <div class="wrap">
+          <div class="container">
             <div class="row justify-content-md-center row-55">
               <div class="col-md-6 col-lg-4">
-                <div class="brand-sm"><a href="index.html"><img src="images/sdc-logo.png" alt="" width="133" height="44"/></a></div>
-                <p><span class="bold-16p"><br>
+                <div class="brand-sm"><a href="index.html"><img src="images/SDC logo long.png" alt="" width="133" height="39"/></a></div>
+                <p><span class="bold-16p">GM DiSH - Barclays Eagle Labs</span><br> 
                   - c/o Your Footprint Ltd<br>
-                  The Landmark,<br>
-                  1 School Lane, <br>
-                  Burnley, <br>
-                  B11 1UF, <br>
-                  United Kingdom.
-                  <br>
-                  Tel:- <a href="tel:004531155327">+45 3115 5327</a> <br>
-                  Email:- <a href="mailto:info@sustainabledevelopmentcrescent.uk">info@sustainabledevelopmentcrescent.uk</a>
+                
+                  47 Lloyd St,<br>
+                  Manchester, <br>
+                  M2 5LE <br>
+                United Kingdom
+                <br>
+                Tel:- <a href="tel:004531155327">+45 3115 5327</a> <br>
+                Email:- <a href="mailto:info@sustainabledevelopmentcrescent.uk">info@sustainabledevelopmentcrescent.uk</a>
                 </p>
                 <div class="group-sm group-middle"><span class="big text-primary">Social media</span>
                   <div>
@@ -735,39 +387,42 @@
                 </div>
               </div>
               <div class="col-md-6 col-lg-4">
-                <h4>Gallery</h4>
+                <h4>Gallary</h4>
                 <div class="row row-10 gutters-10" data-lightgallery="group">
-                  <div class="col-4"><a class="thumbnail-creative" href="images/uganda 1.jpg" data-lightgallery="item" data-sub-html='<h4>Sesame Harvest &mdash; Mbaro Youth Group</h4><p>Angal village, Nyaravur, Nebbi District &mdash; led by MAAIF under the PDM Project.</p>'>
+                  <div class="col-4"><a class="thumbnail-creative" href="images/uganda 1.jpg" data-lightgallery="item">
                             <figure><img src="images/uganda 1box.jpg" alt="" width="114" height="114"/>
                             </figure></a>
                   </div>
-                  <div class="col-4"><a class="thumbnail-creative" href="images/uganda 2.jpg" data-lightgallery="item" data-sub-html='<h4>Sun-Drying Simsim &mdash; Mbaro Youth Group</h4><p>Angal, Nyaravur, Nebbi District &mdash; drying on a raised rack for quality seed production.</p>'>
+                  <div class="col-4"><a class="thumbnail-creative" href="images/uganda 2.jpg" data-lightgallery="item">
                             <figure><img src="images/uganda 2box.jpg" alt="" width="114" height="114"/>
                             </figure></a>
                   </div>
-                  <div class="col-4"><a class="thumbnail-creative" href="images/uganda 3.jpg" data-lightgallery="item" data-sub-html='<h4>Watershed Land Demarcation</h4><p>Padwot Sub-county, Nebbi District &mdash; surveyors demarcating swampy land from community land while implementing a watershed management project, led by the Ministry of Water and Environment.</p>'>
+                  <div class="col-4"><a class="thumbnail-creative" href="images/uganda 3.jpg" data-lightgallery="item">
                             <figure><img src="images/uganda 3box.jpg" alt="" width="114" height="114"/>
                             </figure></a>
                   </div>
-                  <div class="col-4"><a class="thumbnail-creative" href="images/uganda 4.jpg" data-lightgallery="item" data-sub-html='<h4>Watershed and Clean Air Management Project</h4><p>Madi Okolo District &mdash; delivered by VITEX AGROPILOTS. Funded by the Office of the Prime Minister of Uganda.</p>'>
+                  <div class="col-4"><a class="thumbnail-creative" href="images/uganda 4.jpg" data-lightgallery="item">
                             <figure><img src="images/uganda 4box.jpg" alt="" width="114" height="114"/>
                             </figure></a>
                   </div>
-                  <div class="col-4"><a class="thumbnail-creative" href="images/uganda 5.jpg" data-lightgallery="item" data-sub-html='<h4>Small-Scale Irrigation Scheme</h4><p>Pakwach District &mdash; funded by the Ministry of Agriculture, Animal Industry and Fisheries (MAAIF).</p>'>
+                  <div class="col-4"><a class="thumbnail-creative" href="images/uganda 5.jpg" data-lightgallery="item">
                             <figure><img src="images/uganda 5box.jpg" alt="" width="114" height="114"/>
                             </figure></a>
                   </div>
-                  <div class="col-4"><a class="thumbnail-creative" href="images/uganda 6.jpg" data-lightgallery="item" data-sub-html='<h4>Agriculture Cluster Development Project (ACDP)</h4><p>Gulu District &mdash; partner VITEX AGROPILOTS, lead supplier of quality maize, rice and groundnut seeds. Funded by the Ministry of Agriculture, Animal Industry and Fisheries (MAAIF).</p>'>
+                  <div class="col-4"><a class="thumbnail-creative" href="images/uganda 6.jpg" data-lightgallery="item">
                             <figure><img src="images/uganda 6box.jpg" alt="" width="114" height="114"/>
                             </figure></a>
                   </div>
                 </div>
+                
+                </div>
               </div>
+              
             </div>
           </div>
         </div>
         <div class="page-footer-default novi-background text-center">
-          <div class="wrap">
+          <div class="container">
             <div class="row row-30">
               <div class="col-lg-8 col-xl-9 text-lg-left">
                 <ul class="list-nav">
@@ -775,13 +430,12 @@
                   <li><a href="#about-us">About us</a></li>
                   <li><a href="#projects">Projects</a></li>
                   <li><a href="#partners">Partners</a></li>
-                  <li><a href="#who-we-are">Who We Are</a></li>
-                  <li><a href="#contact">Contact</a></li>
-                  <li><a href="#executive-statement">Executive Statement</a></li>
+                  <li><a href="https://www.sustainabledevelopmentcrescent.uk/who%20we%20are.html">Who We Are</a></li>
+                  <!--<li><a href="#news">News</a></li>-->
                 </ul>
               </div>
               <div class="col-lg-4 col-xl-3 text-lg-right">
-                <p class="rights">Groove Inc&nbsp;&copy;&nbsp;<span class="copyright-year"></span>.&nbsp;<br class="d-md-none"><a class="link-underline" href="https://www.grooveinc.uk">Privacy Policy</a>
+                <p class="rights">Groove Inc&nbsp;&copy;&nbsp;<span class="copyright-year"></span>.&nbsp;<br class="d-md-none"><a class="link-underline" href="htpps://www.grooveinc.uk">Privacy Policy</a>
                 </p>
               </div>
             </div>
@@ -789,263 +443,10 @@
         </div>
       </footer>
     </div>
-
-    <!-- "More info" modal — shared by every .info-trigger button on the page.
-         Content is filled in by JS from the PROJECT_INFO data below. -->
-    <div class="info-modal-overlay" id="infoModalOverlay" aria-hidden="true">
-      <div class="info-modal" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle">
-        <button type="button" class="info-modal-close" id="infoModalClose" aria-label="Close">&times;</button>
-        <span class="section-label">Project</span>
-        <h3 id="infoModalTitle"></h3>
-        <dl id="infoModalBody"></dl>
-      </div>
-    </div>
-
     <!-- Global Mailform Output-->
     <div class="snackbars" id="form-output-global"></div>
     <!-- Javascript-->
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
-    <script>
-/**
- * Smooth scroll to anchor with easing
- * Optimized for heavy pages and long sections
- * No overshoot/bounce
- */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const targetId = this.getAttribute('href');
-    const target = document.querySelector(targetId);
-    if (!target) return;
-
-    e.preventDefault();
-
-    const headerOffset = 160; // adjust for fixed header
-    const startPos = window.pageYOffset;
-    let targetPos = target.getBoundingClientRect().top + startPos - headerOffset;
-
-    // Clamp target position so we never scroll past document bottom
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    targetPos = Math.min(targetPos, maxScroll);
-
-    const distance = targetPos - startPos;
-    const duration = 600; // scroll duration in ms
-    let startTime = null;
-
-    function easeInOutCubic(t) {
-      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    }
-    function animate(currentTime) {
-      if (startTime === null) startTime = currentTime;
-      const timeElapsed = currentTime - startTime;
-      const progress = Math.min(timeElapsed / duration, 1);
-      const ease = easeInOutCubic(progress);
-      window.scrollTo(0, startPos + distance * ease);
-      if (timeElapsed < duration) requestAnimationFrame(animate);
-    }
-    requestAnimationFrame(animate);
-  });
-});
-</script>
-    <script>
-/**
- * "More info" modal for project photos.
- * Each .info-trigger button carries data-info="<key>" pointing into
- * PROJECT_INFO below; the one shared modal dialog gets filled in and shown.
- */
-(function () {
-  var PROJECT_INFO = {
-    'project-1': {
-      title: 'Postharvest Handling and Value Addition on Cassava',
-      fields: [
-        ['Location', 'Awindri Market, Arua District'],
-        ['Collaboration', 'Federation of Small and Medium Enterprises (FSMEs); VITEX AGROPILOTS Co. Ltd'],
-        ['Funded by', 'PostBank Uganda']
-      ]
-    },
-    'project-2': {
-      title: 'Agriculture Cluster Development Project (ACDP)',
-      fields: [
-        ['Location', 'Gulu District'],
-        ['Partner', 'VITEX AGROPILOTS — lead supplier of quality maize, rice and groundnut seeds'],
-        ['Funded by', 'Ministry of Agriculture, Animal Industry and Fisheries (MAAIF)']
-      ]
-    },
-    'project-3': {
-      title: 'Watershed and Clean Air Management Project',
-      fields: [
-        ['Location', 'Madi Okolo District'],
-        ['Delivered by', 'VITEX AGROPILOTS'],
-        ['Funded by', 'Office of the Prime Minister of Uganda']
-      ]
-    },
-    'project-4': {
-      title: 'Small-Scale Irrigation Scheme',
-      fields: [
-        ['Location', 'Pakwach District'],
-        ['Funded by', 'Ministry of Agriculture, Animal Industry and Fisheries (MAAIF)']
-      ]
-    },
-    'project-5': {
-      title: 'Pakistan Carbon Market Evolution',
-      fields: [
-        ['Location', 'SDPI, Islamabad'],
-        ['Collaboration', "SDPI, Denmark's Embassy in Pakistan, Your Footprint Ltd."],
-        ['Topic of meeting', 'Benjamin James Matthew Williamson-Westerman was invited to speak about how the Carbon Markets in Denmark evolved, and how Carbon Taxation can be used to derive sustainable change.']
-      ]
-    },
-    'project-6': {
-      title: 'LONG 5 Maize Variety Performance Trial',
-      fields: [
-        ['Location', 'Ofaaka Sub-county, Madi Okolo District'],
-        ['Delivered by', 'VITEX AGROPILOTS'],
-        ['Details', 'A testing plot on the performance of the LONG 5 maize variety.']
-      ]
-    },
-    'project-7': {
-      title: 'Landowners Meeting',
-      fields: [
-        ['Location', 'Nebbi Municipality'],
-        ['Organised by', 'YFP Uganda Ltd.']
-      ]
-    }
-  };
-
-  var overlay = document.getElementById('infoModalOverlay');
-  var titleEl = document.getElementById('infoModalTitle');
-  var bodyEl = document.getElementById('infoModalBody');
-  var closeBtn = document.getElementById('infoModalClose');
-  var lastFocused = null;
-
-  function escapeHtml(str) {
-    var div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
-
-  function openModal(key) {
-    var data = PROJECT_INFO[key];
-    if (!data || !overlay) return;
-    titleEl.textContent = data.title;
-    bodyEl.innerHTML = data.fields.map(function (pair) {
-      return '<dt>' + escapeHtml(pair[0]) + '</dt><dd>' + escapeHtml(pair[1]) + '</dd>';
-    }).join('');
-    lastFocused = document.activeElement;
-    overlay.classList.add('open');
-    overlay.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    closeBtn.focus();
-  }
-
-  function closeModal() {
-    if (!overlay) return;
-    overlay.classList.remove('open');
-    overlay.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
-  }
-
-  document.querySelectorAll('.info-trigger').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      openModal(btn.getAttribute('data-info'));
-    });
-  });
-
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
-  if (overlay) {
-    overlay.addEventListener('click', function (e) {
-      if (e.target === overlay) closeModal();
-    });
-  }
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && overlay && overlay.classList.contains('open')) closeModal();
-  });
-})();
-</script>
-
-<script>
-// Live Projects section — fetches /api/projects, then the full detail
-// (including milestones/updates) for each, and renders cards into
-// #liveProjectsRoot. Degrades to a "coming soon" note on any failure,
-// including a fresh deploy where db/migration-001-admin-cms.sql hasn't
-// been run yet — see MIGRATION.md.
-(function () {
-  var root = document.getElementById('liveProjectsRoot');
-  if (!root) return;
-
-  function esc(s) {
-    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
-  }
-  function fmtDate(d) {
-    if (!d) return '';
-    var dt = new Date(d);
-    if (isNaN(dt)) return esc(d);
-    return dt.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-  }
-
-  function renderProject(p) {
-    var milestones = (p.milestones || []).map(function (m) {
-      var meta = esc((m.status || 'planned').replace('_', ' '));
-      if (m.target_date) meta += ' &middot; target ' + fmtDate(m.target_date);
-      if (m.completed_date) meta += ' &middot; done ' + fmtDate(m.completed_date);
-      return '<div class="milestone">' +
-        '<span class="milestone-dot ' + esc(m.status || 'planned') + '"></span>' +
-        '<div>' +
-          '<p class="milestone-title">' + esc(m.title) + '</p>' +
-          '<p class="milestone-meta">' + meta + '</p>' +
-          (m.description ? '<p class="milestone-desc">' + esc(m.description) + '</p>' : '') +
-        '</div></div>';
-    }).join('') || '<p class="live-projects-empty">No milestones yet.</p>';
-
-    var updates = (p.updates || []).map(function (u) {
-      return '<div class="update-entry">' +
-        '<div class="update-meta">' +
-          '<span class="update-kind">' + esc(u.kind) + '</span>' +
-          '<span class="update-date">' + fmtDate(u.update_date) + '</span>' +
-        '</div>' +
-        (u.title ? '<p class="update-title">' + esc(u.title) + '</p>' : '') +
-        '<p class="update-content">' + esc(u.content) + '</p>' +
-      '</div>';
-    }).join('') || '<p class="live-projects-empty">No updates yet.</p>';
-
-    return '<div class="live-project-card">' +
-      '<div class="live-project-head">' +
-        '<h3>' + esc(p.name) + (p.country ? ' &mdash; ' + esc(p.country) : '') + '</h3>' +
-        '<span class="status-pill ' + esc(p.status || '') + '">' + esc((p.status || '').replace('_', ' ')) + '</span>' +
-      '</div>' +
-      '<div class="live-project-body">' +
-        '<div class="live-project-col"><h4>Milestones</h4>' + milestones + '</div>' +
-        '<div class="live-project-col"><h4>Latest Updates</h4>' + updates + '</div>' +
-      '</div>' +
-    '</div>';
-  }
-
-  fetch('/api/projects')
-    .then(function (r) { if (!r.ok) throw new Error('list failed'); return r.json(); })
-    .then(function (list) {
-      if (!Array.isArray(list) || !list.length) {
-        root.innerHTML = '<p class="live-projects-empty">Live project tracking is coming soon.</p>';
-        return Promise.reject(new Error('__handled__'));
-      }
-      return Promise.all(list.map(function (p) {
-        return fetch('/api/projects/' + encodeURIComponent(p.slug)).then(function (r) {
-          return r.ok ? r.json() : null;
-        });
-      }));
-    })
-    .then(function (details) {
-      var cards = details.filter(Boolean).map(renderProject).join('');
-      root.innerHTML = cards || '<p class="live-projects-empty">Live project tracking is coming soon.</p>';
-    })
-    .catch(function (err) {
-      if (err.message === '__handled__') return;
-      console.error('Live projects: failed to load', err);
-      root.innerHTML = '<p class="live-projects-empty">Live project tracking is coming soon.</p>';
-    });
-})();
-</script>
   </body>
 </html>

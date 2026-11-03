@@ -12,15 +12,85 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
+    <!--
+      Design system copied verbatim from index.html's own inline <style>
+      block (same as trustees.html), so this page stays pixel-consistent
+      with the live homepage. A .ref-table block is added at the end for
+      this page's reference tables, in the same palette and type.
+    -->
+    <style>
+      :root{
+        --navy:#001d2c;
+        --teal:#2ea4bb;
+        --green:#2f755b;
+        --clay:#8c4a20;
+        --paper:#f2efe8;
+        --ink:#14181a;
+        --muted:#565f5c;
+        --max:1180px;
+      }
+      .wrap{max-width:var(--max);margin:auto;padding:0 32px}
+      .home-redesign h1,.home-redesign h2,.home-redesign h3{font-family:"Lato",Arial,sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-.01em}
+
+      .home-redesign .content-section{padding:70px 0}
+      .home-redesign .section-label{font-family:"Lato",sans-serif; font-weight:700; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--clay); margin-bottom:14px; display:block}
+      .home-redesign .content-section h2{font-size:clamp(26px,3.2vw,40px); margin-bottom:14px}
+      .home-redesign .content-section .lede{color:var(--muted); font-size:1.05rem; max-width:64ch; font-family:"Lato",sans-serif}
+
+      .home-redesign .on-navy{background:var(--navy); color:#fff}
+      .home-redesign .on-navy .lede,.home-redesign .on-navy p{color:rgba(255,255,255,.85)}
+      .home-redesign .on-navy h2{color:#fff}
+      .home-redesign .on-navy .section-label{color:var(--teal)}
+
+      .home-redesign .qlist{margin-top:36px; max-width:780px}
+      .home-redesign .qitem{display:flex; gap:24px; padding:22px 0; border-bottom:1px solid rgba(255,255,255,.18)}
+      .home-redesign .qitem:first-child{border-top:1px solid rgba(255,255,255,.18)}
+      .home-redesign .qnum{font-family:"Lato",sans-serif; font-weight:900; font-size:1.3rem; color:var(--teal); flex-shrink:0; width:64px}
+      .home-redesign .qtext{padding-top:4px; color:rgba(255,255,255,.9); font-family:"Lato",sans-serif}
+      .home-redesign .updated-note{margin-top:30px; font-size:.9rem; color:rgba(255,255,255,.5); font-style:italic; font-family:"Lato",sans-serif}
+      /* Light-background variant for .qlist used outside .on-navy sections */
+      .home-redesign .content-section:not(.on-navy) .qitem{border-bottom:1px solid #e4dfd2}
+      .home-redesign .content-section:not(.on-navy) .qitem:first-child{border-top:1px solid #e4dfd2}
+      .home-redesign .content-section:not(.on-navy) .qtext{color:var(--ink)}
+      .home-redesign .content-section:not(.on-navy) .qnum{color:var(--clay)}
+      .home-redesign .content-section:not(.on-navy) .updated-note{color:var(--muted)}
+
+      .home-redesign footer.site-footer-redesign{background:var(--ink); color:rgba(255,255,255,.75); padding-top:50px}
+      .home-redesign footer.site-footer-redesign h4,.home-redesign footer.site-footer-redesign .brand-sm{color:#fff}
+      .home-redesign footer.site-footer-redesign a{color:rgba(255,255,255,.85)}
+      .home-redesign footer.site-footer-redesign .page-footer-default{background:rgba(255,255,255,.04); margin-top:40px}
+
+      /* Mobile/tablet nav panel (same narrowing as index.html) */
+      .home-redesign .rd-navbar-fixed .rd-navbar-nav-wrap{width:189px}
+
+      /* Page-specific: a subpage has no hero, so the fixed navbar needs
+         top padding on the first section instead of a hero to clear it. */
+      .home-redesign .page-top-space{padding-top:160px}
+      .home-redesign .page-intro .lede a{color:var(--clay); font-weight:700}
+
+      /* Reference tables: this page's only genuinely tabular content
+         (fields, registers). Styled in the same palette/type as the rest
+         of the redesign rather than a default Bootstrap table look. */
+      .home-redesign table.ref-table{width:100%; border-collapse:collapse; margin:26px 0 6px; font-family:"Lato",sans-serif}
+      .home-redesign table.ref-table th,.home-redesign table.ref-table td{border:1px solid rgba(20,24,26,.15); padding:12px 16px; text-align:left; vertical-align:top; font-size:.92rem; color:var(--ink); line-height:1.4}
+      .home-redesign table.ref-table thead th{background:var(--ink); color:#fff; font-weight:700; text-transform:uppercase; font-size:.68rem; letter-spacing:.06em; border-color:var(--ink)}
+      .home-redesign table.ref-table tbody tr:nth-child(even){background:#f7f5ef}
+      .home-redesign table.ref-table code{background:rgba(20,24,26,.06); padding:1px 6px; border-radius:3px; font-size:.85em}
+      .home-redesign .on-navy table.ref-table th,.home-redesign .on-navy table.ref-table td{border-color:rgba(255,255,255,.25); color:rgba(255,255,255,.92)}
+      .home-redesign .on-navy table.ref-table tbody tr:nth-child(even){background:rgba(255,255,255,.05)}
+      .home-redesign .on-navy table.ref-table thead th{background:rgba(255,255,255,.12); color:#fff; border-color:rgba(255,255,255,.25)}
+      .home-redesign .on-navy table.ref-table code{background:rgba(255,255,255,.12); color:#fff}
+      .home-redesign .table-responsive{overflow-x:auto}
+    </style>
 		<!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <script src="js/html5shiv.min.js"></script>
 		<![endif]-->
   </head>
-  <body>
+  <body class="home-redesign">
     <!-- Page-->
     <div class="page">
-      <!-- Page Header-->
+      <!-- Page Header (unchanged from index.html, anchors repointed to index.html#... since this is a subpage) -->
       <header class="section page-header">
         <!-- RD Navbar-->
         <div class="rd-navbar-wrap">
@@ -33,7 +103,7 @@
                       <li><a class="icon novi-icon icon-xs icon-white fa fa-linkedin" href="https://www.linkedin.com/company/sustainable-development-crescent/"></a></li>
                       <li><a class="link link-sm link-white" href="trustees.html">Trustees</a></li>
                   </ul>
-                  <address class="contact-info">GM DiSH - Barclays Eagle Labs - c/o Your Footprint Ltd, 47 Lloyd St, Manchester M2 5LE, United Kingdom</address>
+                  <address class="contact-info"> SDC C/O Your Footprint Ltd. </address>
                 </div>
                 <div class="object-inline"><span class="icon novi-icon icon-sm icon-gray material-icons-phone"></span><a class="link link-sm link-white" href="tel:004531155325">+45 3115 5327</a></div>
               </div>
@@ -46,7 +116,7 @@
                 </div>
                 <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                 <!-- RD Navbar Brand-->
-                <div class="rd-navbar-brand"><a class="brand-name" href="index.html"><img src="images/sdc-logo.png" alt="" width="200" height="100"/></a></div>
+                <div class="rd-navbar-brand"><a class="brand-name" href="index.html"><img src="images/sdc-logo.png" alt="" width="200" height="67"/></a></div>
               </div>
               <!-- RD Navbar Nav-->
               <div class="rd-navbar-nav-wrap">
@@ -55,10 +125,7 @@
                 </div>
                 <div class="rd-navbar-nav-wrap-inner">
                   <ul class="rd-navbar-items-list rd-navbar-search_collapsable">
-                    <li>
-                      <button class="rd-navbar-search__toggle rd-navbar-fixed--hidden" data-rd-navbar-toggle=".rd-navbar-search_toggled"></button>
-                    </li>
-
+                    <li></li>
                   </ul>
                   <!-- RD Search-->
                   <div class="rd-navbar-search rd-navbar-search_toggled rd-navbar-search_not-collapsable">
@@ -73,10 +140,23 @@
                   </div>
                 </div>
                 <ul class="rd-navbar-nav">
-                  <li><a href="index.html#about-us">About Us</a></li>
-                  <li><a href="index.html#projects">Projects</a></li>
+                  <li>
+                    <a href="index.html#about-us">About Us</a>
+                    <ul class="rd-navbar-dropdown">
+                      <li><a href="index.html#about-us">Overview</a></li>
+                      <li><a href="index.html#who-we-are">Who We Are</a></li>
+                      <li><a href="index.html#executive-statement">Executive Statement</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="index.html#projects">Projects</a>
+                    <ul class="rd-navbar-dropdown">
+                      <li><a href="index.html#confirmed-partners">West Nile, Uganda</a></li>
+                      <li><a href="index.html#live-projects">Live Updates</a></li>
+                    </ul>
+                  </li>
                   <li><a href="index.html#partners">Partners</a></li>
-                  <li><a href="https://www.sustainabledevelopmentcrescent.uk/who%20we%20are.html">Who We Are</a></li>
+                  <li><a href="index.html#contact">Contact</a></li>
                 </ul>
               </div>
             </div>
@@ -84,227 +164,231 @@
         </div>
       </header>
 
-      <!-- Page content-->
-      <section class="section novi-background bg-cover bg-image section-lg bg-default" id="minutes-content" data-type="anchor" style="padding-top: 220px;">
-        <div class="container">
-          <div class="row row-55">
-            <div class="col-md-12">
-              <h3>SDC Trustee Appointment Minutes Template</h3>
-              <p class="subtitle-variant-2">For the SDC formation committee — reference template, published 1 Nov 2026</p>
-              <p>Back to <a href="trustees.html">SDC Trustees</a>.</p>
-            </div>
-          </div>
-
-          <div class="row row-55">
-            <div class="col-md-12">
-              <hr class="divider-sm divider-success">
-              <h4>Purpose</h4>
-              <p>Each minuted decision to appoint a Trustee gets a unique minute reference. The issuer enters that reference before a one-time Trustee invite can be issued — an invite is refused without a valid reference, so these minutes are the start of the audit trail. The trail runs: minute → invite → event record.</p>
-              <ul>
-                <li><strong>One minute item per nominee.</strong> One appointment decision produces one reference, which authorises one invite.</li>
-                <li><strong>Decision date plus minute reference.</strong> These are the two parts of the committee approval reference in the YFPCloud Cutover Plan. The minute reference has the decision date built in, so the two are checked against each other.</li>
-                <li><strong>The approving body is the SDC formation committee</strong> (decision Q1): Staalbaek Ltd advisory board members plus external advisors. Benjamin Williamson-Westerman issues invites only after the committee has agreed and confirmed.</li>
-                <li><strong>No invite is issued before the SDC–YFP data processing agreement exists</strong> (decision Q3). Every appointment minute records the agreement reference.</li>
-              </ul>
-              <p>This template records decisions. It is not legal advice. SDC's constitution as a charitable incorporated organisation decides who may appoint Trustees and how. Check it with SDC's adviser before first use.</p>
-            </div>
-          </div>
-
-          <div class="row row-55">
-            <div class="col-md-12">
-              <hr class="divider-sm divider-success">
-              <h4>Reference format</h4>
-              <p>A minute reference has the form <code>SDC-FC-YYYYMMDD-Mnn</code>, for example <code>SDC-FC-20261105-M04</code>. That example is item 4 of the formation committee meeting on 5 Nov 2026.</p>
-              <div class="table-responsive">
-                <table class="table table-bordered">
-                  <thead><tr><th>Part</th><th>Meaning</th><th>Rule</th></tr></thead>
-                  <tbody>
-                    <tr><td><code>SDC</code></td><td>Organisation</td><td>Always SDC</td></tr>
-                    <tr><td><code>FC</code></td><td>Approving body: SDC formation committee</td><td>Fixed code; a new body needs a new code (see Open questions)</td></tr>
-                    <tr><td><code>YYYYMMDD</code></td><td>Meeting date, which is the decision date</td><td>Must equal the decision date entered at issuance</td></tr>
-                    <tr><td><code>Mnn</code></td><td>Minute item number, two digits</td><td>Unique within the meeting; numbered in agenda order</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <p>The <strong>meeting reference</strong> is the same string without the item number: <code>SDC-FC-20261105</code>.</p>
-              <p>The <strong>committee approval reference</strong> has two parts:</p>
-              <ul>
-                <li>decision date <code>2026-11-05</code></li>
-                <li>minute reference <code>SDC-FC-20261105-M04</code></li>
-              </ul>
-              <p>The issue form checks that:</p>
-              <ul>
-                <li>the reference matches the pattern <code>SDC-FC-&lt;8 digits&gt;-M&lt;2 digits&gt;</code>;</li>
-                <li>its date equals the decision date;</li>
-                <li>the decision date is not in the future;</li>
-                <li>the reference has not already been used by another invite, unless that invite was revoked or expired unused.</li>
-              </ul>
-              <p>A reference is never reused for a different person, even after a failed invite. A re-issue for the same person cites the original minute.</p>
-            </div>
-          </div>
-
-          <div class="row row-55">
-            <div class="col-md-12">
-              <hr class="divider-sm divider-success">
-              <h4>Meeting minutes</h4>
-              <p>Fill this in for each meeting. Replace text in [brackets]. Items 1–4 and 6–7 are standing items; item 5 repeats once per nominee or removal.</p>
-              <p><strong>SDC Formation Committee — Minutes</strong></p>
-              <div class="table-responsive">
-                <table class="table table-bordered">
-                  <thead><tr><th>Field</th><th>Entry</th></tr></thead>
-                  <tbody>
-                    <tr><td>Meeting reference</td><td>SDC-FC-[YYYYMMDD]</td></tr>
-                    <tr><td>Date and time</td><td>[date], [start]–[end] [time zone]</td></tr>
-                    <tr><td>Format</td><td>[in person at … / video call on …]</td></tr>
-                    <tr><td>Chair</td><td>[name]</td></tr>
-                    <tr><td>Minute-taker</td><td>[name]</td></tr>
-                    <tr><td>Members present</td><td>[name, role — Staalbaek Ltd advisory board / external advisor]</td></tr>
-                    <tr><td>Apologies</td><td>[names]</td></tr>
-                    <tr><td>In attendance (non-voting)</td><td>[names, reason]</td></tr>
-                    <tr><td>Quorum</td><td>[Quorate / Not quorate]: [n] of [n] voting members present; quorum rule [cite rule]</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <ol>
-                <li><strong>M01 Opening and quorum.</strong> The chair opened the meeting at [time] and confirmed the meeting was [quorate].</li>
-                <li><strong>M02 Declarations of interest.</strong> [None declared / name: interest, item affected, action taken].</li>
-                <li><strong>M03 Minutes of the previous meeting.</strong> Minutes of SDC-FC-[YYYYMMDD] were [approved as a true record / approved with amendments: …].</li>
-                <li><strong>M04 Matters arising.</strong> [Updates on earlier actions, citing their minute references].</li>
-                <li><strong>M05 onwards: Trustee appointments and removals.</strong> One item per person, using the blocks below.</li>
-                <li><strong>Other business.</strong> [Item, decision, action owner].</li>
-                <li><strong>Next meeting.</strong> [Date, time, format]. The chair closed the meeting at [time].</li>
-              </ol>
-              <p><strong>Approval of these minutes.</strong> Approved as a true record at meeting SDC-FC-[YYYYMMDD], minute [Mnn]. Signed [chair], [date].</p>
-              <p>Numbering note: if a meeting has no item 4, renumber so items stay consecutive. The reference must match the item as minuted, not the template's numbers.</p>
-            </div>
-          </div>
-
-          <div class="row row-55">
-            <div class="col-md-12">
-              <hr class="divider-sm divider-success">
-              <h4>Appointment item (one per nominee)</h4>
-              <p>Copy this block for each nominee. Each copy becomes its own minute item and gets its own reference.</p>
-              <p><strong>[Mnn] Appointment of trustee: [nominee full name]</strong></p>
-              <div class="table-responsive">
-                <table class="table table-bordered">
-                  <thead><tr><th>Field</th><th>Entry</th></tr></thead>
-                  <tbody>
-                    <tr><td>Minute reference</td><td>SDC-FC-[YYYYMMDD]-[Mnn]</td></tr>
-                    <tr><td>Decision date</td><td>[YYYY-MM-DD] (the meeting date)</td></tr>
-                    <tr><td>Nominee</td><td>[full name]</td></tr>
-                    <tr><td>Email the invite will be sent to</td><td>[address] — the trustee account must use this address</td></tr>
-                    <tr><td>Basis for appointment</td><td>[constitution clause / reason for nomination]</td></tr>
-                    <tr><td>Eligibility confirmed</td><td>[Yes / No]: [declaration of eligibility to act as a charity trustee received on date]</td></tr>
-                    <tr><td>Conflicts declared by nominee</td><td>[None / details]</td></tr>
-                    <tr><td>Proposed by</td><td>[name]</td></tr>
-                    <tr><td>Seconded by</td><td>[name]</td></tr>
-                    <tr><td>Vote</td><td>For [n] · Against [n] · Abstain [n]</td></tr>
-                    <tr><td>Decision</td><td>[Approved / Not approved / Deferred to SDC-FC-YYYYMMDD]</td></tr>
-                    <tr><td>SDC–YFP data processing agreement</td><td>[agreement reference] — if none is in force, record "Not in force; invite to wait"</td></tr>
-                    <tr><td>Issuer instructed</td><td>Benjamin Williamson-Westerman, to issue a trustee invite citing this minute reference</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <p><strong>Resolution.</strong> It was resolved that [nominee full name] be appointed a trustee of SDC, and that a one-time trustee invite to [address] be issued citing minute SDC-FC-[YYYYMMDD]-[Mnn].</p>
-              <p>Only an item recorded as Approved authorises an invite. Not approved and Deferred items keep their reference, but it can never be used to issue an invite.</p>
-            </div>
-          </div>
-
-          <div class="row row-55">
-            <div class="col-md-12">
-              <hr class="divider-sm divider-success">
-              <h4>Removal item</h4>
-              <p>Use this block when a trustee leaves or is removed, or when an unused invite is withdrawn. Each removal is recorded as its own event. Citing a minute reference links that record back to the decision.</p>
-              <p><strong>[Mnn] Removal of trustee / withdrawal of invite: [full name]</strong></p>
-              <div class="table-responsive">
-                <table class="table table-bordered">
-                  <thead><tr><th>Field</th><th>Entry</th></tr></thead>
-                  <tbody>
-                    <tr><td>Minute reference</td><td>SDC-FC-[YYYYMMDD]-[Mnn]</td></tr>
-                    <tr><td>Decision date</td><td>[YYYY-MM-DD]</td></tr>
-                    <tr><td>Person</td><td>[full name], [account email]</td></tr>
-                    <tr><td>Original appointment minute</td><td>SDC-FC-[YYYYMMDD]-[Mnn]</td></tr>
-                    <tr><td>Type</td><td>[Resignation received on date / Removal / Withdrawal of unused invite]</td></tr>
-                    <tr><td>Reason</td><td>[short reason]</td></tr>
-                    <tr><td>Vote (if a removal)</td><td>For [n] · Against [n] · Abstain [n]</td></tr>
-                    <tr><td>Decision</td><td>[Approved / Not approved]</td></tr>
-                    <tr><td>Issuer instructed</td><td>Benjamin Williamson-Westerman, to revoke citing this minute reference</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <p>Revocation takes effect at the person's next sign-in.</p>
-            </div>
-          </div>
-
-          <div class="row row-55">
-            <div class="col-md-12">
-              <hr class="divider-sm divider-success">
-              <h4>Approval register</h4>
-              <p>The minute-taker adds a row for each appointment or removal item. The issuer copies the first three columns into the identity system's invite form, then fills in the invite ID it returns. Newest rows go first.</p>
-              <div class="table-responsive">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr><th>Minute reference</th><th>Decision date</th><th>Type</th><th>Person</th><th>Invite email</th><th>Decision</th><th>DPA reference</th><th>Invite ID</th><th>Issued / revoked on</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>SDC-FC-20261105-M05 <em>(example)</em></td><td>2026-11-05</td><td>Appointment</td><td>[name]</td><td>[address]</td><td>Approved</td><td>[reference]</td><td>[ID]</td><td>[date]</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <p>This register sits with the SDC minutes. It does not copy the full audit trail kept in the identity system — this register is how a person matches an invite to its minute.</p>
-            </div>
-          </div>
-
-          <div class="row row-55">
-            <div class="col-md-12">
-              <hr class="divider-sm divider-success">
-              <h4>Open questions</h4>
-              <ul>
-                <li><strong>Which meetings approve appointments?</strong> This is a wording question left open for the SDC formation committee to decide (noted 1 Nov 2026). The request asked for a "trustees meeting" template; decision Q1 names the formation committee. If SDC's trustee board later approves appointments, it needs its own code, such as <code>SDC-TB</code>. Until the committee decides, Q1 stands and only <code>SDC-FC</code> is accepted.</li>
-                <li><strong>Where this template will live.</strong> It is to be a template inside SDC's shared workspace, in an area the Trustees and SDC groups can see. The exact location will be decided later.</li>
-                <li><strong>Data processing agreement reference format.</strong> Not yet defined; treated as free text until a format is agreed.</li>
-                <li><strong>Does a removal also need a minute reference?</strong> A reference is required only for issuing an invite. This template supplies one for removals too.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="row row-55">
-            <div class="col-md-12">
-              <hr class="divider-sm divider-success">
-              <h4>Revision history</h4>
-              <div class="table-responsive">
-                <table class="table table-bordered">
-                  <thead><tr><th>Rev</th><th>Date</th><th>Change</th></tr></thead>
-                  <tbody>
-                    <tr><td>1</td><td>1 Nov 2026</td><td>First version: reference format, meeting minutes, appointment and removal items, approval register, open questions.</td></tr>
-                    <tr><td>2</td><td>1 Nov 2026</td><td>Approving-body wording left open for the formation committee. Planned location added: an SDC area of the shared workspace, visible to Trustees and SDC, exact location to be decided.</td></tr>
-                    <tr><td>3</td><td>3 Nov 2026</td><td>Published to the SDC website for Trustees.</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
+      <!-- Intro -->
+      <section class="content-section page-top-space page-intro">
+        <div class="wrap">
+          <span class="section-label">SDC Trustees — Reference Template</span>
+          <h2>SDC Trustee Appointment Minutes Template</h2>
+          <p class="lede">For the SDC formation committee — reference template, published 1 Nov 2026.</p>
+          <p class="lede">Back to <a href="trustees.html">SDC Trustees</a>.</p>
         </div>
       </section>
 
-      <!-- Page Footer-->
-      <footer class="section novi-background bg-cover bg-default">
+      <!-- Purpose -->
+      <section class="content-section" id="purpose" data-type="anchor">
+        <div class="wrap">
+          <span class="section-label">Purpose</span>
+          <h2>Why this template exists.</h2>
+          <p class="lede">Each minuted decision to appoint a Trustee gets a unique minute reference. The issuer enters that reference before a one-time Trustee invite can be issued — an invite is refused without a valid reference, so these minutes are the start of the audit trail. The trail runs: minute → invite → event record.</p>
+          <div class="qlist">
+            <div class="qitem"><span class="qnum">01</span><span class="qtext"><strong>One minute item per nominee.</strong> One appointment decision produces one reference, which authorises one invite.</span></div>
+            <div class="qitem"><span class="qnum">02</span><span class="qtext"><strong>Decision date plus minute reference.</strong> These are the two parts of the committee approval reference in the YFPCloud Cutover Plan. The minute reference has the decision date built in, so the two are checked against each other.</span></div>
+            <div class="qitem"><span class="qnum">03</span><span class="qtext"><strong>The approving body is the SDC formation committee</strong> (decision Q1): Staalbaek Ltd advisory board members plus external advisors. Benjamin Williamson-Westerman issues invites only after the committee has agreed and confirmed.</span></div>
+            <div class="qitem"><span class="qnum">04</span><span class="qtext"><strong>No invite is issued before the SDC–YFP data processing agreement exists</strong> (decision Q3). Every appointment minute records the agreement reference.</span></div>
+          </div>
+          <p class="lede" style="margin-top:28px;">This template records decisions. It is not legal advice. SDC's constitution as a charitable incorporated organisation decides who may appoint Trustees and how. Check it with SDC's adviser before first use.</p>
+        </div>
+      </section>
+
+      <!-- Reference format -->
+      <section class="content-section on-navy" id="reference-format" data-type="anchor">
+        <div class="wrap">
+          <span class="section-label">Reference Format</span>
+          <h2>How a minute reference is built.</h2>
+          <p class="lede">A minute reference has the form <code>SDC-FC-YYYYMMDD-Mnn</code>, for example <code>SDC-FC-20261105-M04</code>. That example is item 4 of the formation committee meeting on 5 Nov 2026.</p>
+          <div class="table-responsive">
+            <table class="ref-table">
+              <thead><tr><th>Part</th><th>Meaning</th><th>Rule</th></tr></thead>
+              <tbody>
+                <tr><td><code>SDC</code></td><td>Organisation</td><td>Always SDC</td></tr>
+                <tr><td><code>FC</code></td><td>Approving body: SDC formation committee</td><td>Fixed code; a new body needs a new code (see Open questions)</td></tr>
+                <tr><td><code>YYYYMMDD</code></td><td>Meeting date, which is the decision date</td><td>Must equal the decision date entered at issuance</td></tr>
+                <tr><td><code>Mnn</code></td><td>Minute item number, two digits</td><td>Unique within the meeting; numbered in agenda order</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="lede" style="margin-top:22px;">The <strong>meeting reference</strong> is the same string without the item number: <code>SDC-FC-20261105</code>.</p>
+          <p class="lede" style="margin-top:10px;">The <strong>committee approval reference</strong> has two parts:</p>
+          <div class="qlist">
+            <div class="qitem"><span class="qnum">01</span><span class="qtext">decision date <code>2026-11-05</code></span></div>
+            <div class="qitem"><span class="qnum">02</span><span class="qtext">minute reference <code>SDC-FC-20261105-M04</code></span></div>
+          </div>
+          <p class="lede" style="margin-top:28px;">The issue form checks that:</p>
+          <div class="qlist">
+            <div class="qitem"><span class="qnum">01</span><span class="qtext">the reference matches the pattern <code>SDC-FC-&lt;8 digits&gt;-M&lt;2 digits&gt;</code>;</span></div>
+            <div class="qitem"><span class="qnum">02</span><span class="qtext">its date equals the decision date;</span></div>
+            <div class="qitem"><span class="qnum">03</span><span class="qtext">the decision date is not in the future;</span></div>
+            <div class="qitem"><span class="qnum">04</span><span class="qtext">the reference has not already been used by another invite, unless that invite was revoked or expired unused.</span></div>
+          </div>
+          <p class="updated-note">A reference is never reused for a different person, even after a failed invite. A re-issue for the same person cites the original minute.</p>
+        </div>
+      </section>
+
+      <!-- Meeting minutes -->
+      <section class="content-section" id="meeting-minutes" data-type="anchor">
+        <div class="wrap">
+          <span class="section-label">Meeting Minutes</span>
+          <h2>Fill this in for each meeting.</h2>
+          <p class="lede">Replace text in [brackets]. Items 1–4 and 6–7 are standing items; item 5 repeats once per nominee or removal.</p>
+          <p class="lede" style="margin-top:22px; font-weight:700; color:var(--ink);">SDC Formation Committee — Minutes</p>
+          <div class="table-responsive">
+            <table class="ref-table">
+              <thead><tr><th>Field</th><th>Entry</th></tr></thead>
+              <tbody>
+                <tr><td>Meeting reference</td><td>SDC-FC-[YYYYMMDD]</td></tr>
+                <tr><td>Date and time</td><td>[date], [start]–[end] [time zone]</td></tr>
+                <tr><td>Format</td><td>[in person at … / video call on …]</td></tr>
+                <tr><td>Chair</td><td>[name]</td></tr>
+                <tr><td>Minute-taker</td><td>[name]</td></tr>
+                <tr><td>Members present</td><td>[name, role — Staalbaek Ltd advisory board / external advisor]</td></tr>
+                <tr><td>Apologies</td><td>[names]</td></tr>
+                <tr><td>In attendance (non-voting)</td><td>[names, reason]</td></tr>
+                <tr><td>Quorum</td><td>[Quorate / Not quorate]: [n] of [n] voting members present; quorum rule [cite rule]</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="qlist">
+            <div class="qitem"><span class="qnum">M01</span><span class="qtext"><strong>Opening and quorum.</strong> The chair opened the meeting at [time] and confirmed the meeting was [quorate].</span></div>
+            <div class="qitem"><span class="qnum">M02</span><span class="qtext"><strong>Declarations of interest.</strong> [None declared / name: interest, item affected, action taken].</span></div>
+            <div class="qitem"><span class="qnum">M03</span><span class="qtext"><strong>Minutes of the previous meeting.</strong> Minutes of SDC-FC-[YYYYMMDD] were [approved as a true record / approved with amendments: …].</span></div>
+            <div class="qitem"><span class="qnum">M04</span><span class="qtext"><strong>Matters arising.</strong> [Updates on earlier actions, citing their minute references].</span></div>
+            <div class="qitem"><span class="qnum">M05</span><span class="qtext"><strong>Trustee appointments and removals (onwards).</strong> One item per person, using the blocks below.</span></div>
+            <div class="qitem"><span class="qnum">M06</span><span class="qtext"><strong>Other business.</strong> [Item, decision, action owner].</span></div>
+            <div class="qitem"><span class="qnum">M07</span><span class="qtext"><strong>Next meeting.</strong> [Date, time, format]. The chair closed the meeting at [time].</span></div>
+          </div>
+          <p class="lede" style="margin-top:28px;"><strong>Approval of these minutes.</strong> Approved as a true record at meeting SDC-FC-[YYYYMMDD], minute [Mnn]. Signed [chair], [date].</p>
+          <p class="lede" style="margin-top:10px;">Numbering note: if a meeting has no item 4, renumber so items stay consecutive. The reference must match the item as minuted, not the template's numbers.</p>
+        </div>
+      </section>
+
+      <!-- Appointment item -->
+      <section class="content-section on-navy" id="appointment-item" data-type="anchor">
+        <div class="wrap">
+          <span class="section-label">Appointment Item</span>
+          <h2>One per nominee.</h2>
+          <p class="lede">Copy this block for each nominee. Each copy becomes its own minute item and gets its own reference.</p>
+          <p class="lede" style="margin-top:22px; font-weight:700; color:#fff;">[Mnn] Appointment of trustee: [nominee full name]</p>
+          <div class="table-responsive">
+            <table class="ref-table">
+              <thead><tr><th>Field</th><th>Entry</th></tr></thead>
+              <tbody>
+                <tr><td>Minute reference</td><td>SDC-FC-[YYYYMMDD]-[Mnn]</td></tr>
+                <tr><td>Decision date</td><td>[YYYY-MM-DD] (the meeting date)</td></tr>
+                <tr><td>Nominee</td><td>[full name]</td></tr>
+                <tr><td>Email the invite will be sent to</td><td>[address] — the trustee account must use this address</td></tr>
+                <tr><td>Basis for appointment</td><td>[constitution clause / reason for nomination]</td></tr>
+                <tr><td>Eligibility confirmed</td><td>[Yes / No]: [declaration of eligibility to act as a charity trustee received on date]</td></tr>
+                <tr><td>Conflicts declared by nominee</td><td>[None / details]</td></tr>
+                <tr><td>Proposed by</td><td>[name]</td></tr>
+                <tr><td>Seconded by</td><td>[name]</td></tr>
+                <tr><td>Vote</td><td>For [n] · Against [n] · Abstain [n]</td></tr>
+                <tr><td>Decision</td><td>[Approved / Not approved / Deferred to SDC-FC-YYYYMMDD]</td></tr>
+                <tr><td>SDC–YFP data processing agreement</td><td>[agreement reference] — if none is in force, record "Not in force; invite to wait"</td></tr>
+                <tr><td>Issuer instructed</td><td>Benjamin Williamson-Westerman, to issue a trustee invite citing this minute reference</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="lede" style="margin-top:22px;"><strong>Resolution.</strong> It was resolved that [nominee full name] be appointed a trustee of SDC, and that a one-time trustee invite to [address] be issued citing minute SDC-FC-[YYYYMMDD]-[Mnn].</p>
+          <p class="updated-note">Only an item recorded as Approved authorises an invite. Not approved and Deferred items keep their reference, but it can never be used to issue an invite.</p>
+        </div>
+      </section>
+
+      <!-- Removal item -->
+      <section class="content-section" id="removal-item" data-type="anchor">
+        <div class="wrap">
+          <span class="section-label">Removal Item</span>
+          <h2>Leaving, removal, or withdrawing an invite.</h2>
+          <p class="lede">Use this block when a trustee leaves or is removed, or when an unused invite is withdrawn. Each removal is recorded as its own event. Citing a minute reference links that record back to the decision.</p>
+          <p class="lede" style="margin-top:22px; font-weight:700; color:var(--ink);">[Mnn] Removal of trustee / withdrawal of invite: [full name]</p>
+          <div class="table-responsive">
+            <table class="ref-table">
+              <thead><tr><th>Field</th><th>Entry</th></tr></thead>
+              <tbody>
+                <tr><td>Minute reference</td><td>SDC-FC-[YYYYMMDD]-[Mnn]</td></tr>
+                <tr><td>Decision date</td><td>[YYYY-MM-DD]</td></tr>
+                <tr><td>Person</td><td>[full name], [account email]</td></tr>
+                <tr><td>Original appointment minute</td><td>SDC-FC-[YYYYMMDD]-[Mnn]</td></tr>
+                <tr><td>Type</td><td>[Resignation received on date / Removal / Withdrawal of unused invite]</td></tr>
+                <tr><td>Reason</td><td>[short reason]</td></tr>
+                <tr><td>Vote (if a removal)</td><td>For [n] · Against [n] · Abstain [n]</td></tr>
+                <tr><td>Decision</td><td>[Approved / Not approved]</td></tr>
+                <tr><td>Issuer instructed</td><td>Benjamin Williamson-Westerman, to revoke citing this minute reference</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="lede" style="margin-top:22px;">Revocation takes effect at the person's next sign-in.</p>
+        </div>
+      </section>
+
+      <!-- Approval register -->
+      <section class="content-section on-navy" id="approval-register" data-type="anchor">
+        <div class="wrap">
+          <span class="section-label">Approval Register</span>
+          <h2>One row per decision.</h2>
+          <p class="lede">The minute-taker adds a row for each appointment or removal item. The issuer copies the first three columns into the identity system's invite form, then fills in the invite ID it returns. Newest rows go first.</p>
+          <div class="table-responsive">
+            <table class="ref-table">
+              <thead>
+                <tr><th>Minute reference</th><th>Decision date</th><th>Type</th><th>Person</th><th>Invite email</th><th>Decision</th><th>DPA reference</th><th>Invite ID</th><th>Issued / revoked on</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>SDC-FC-20261105-M05 <em>(example)</em></td><td>2026-11-05</td><td>Appointment</td><td>[name]</td><td>[address]</td><td>Approved</td><td>[reference]</td><td>[ID]</td><td>[date]</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="updated-note">This register sits with the SDC minutes. It does not copy the full audit trail kept in the identity system — this register is how a person matches an invite to its minute.</p>
+        </div>
+      </section>
+
+      <!-- Open questions -->
+      <section class="content-section" id="open-questions" data-type="anchor">
+        <div class="wrap">
+          <span class="section-label">Open Questions</span>
+          <h2>What's still being decided.</h2>
+          <div class="qlist">
+            <div class="qitem"><span class="qnum">01</span><span class="qtext"><strong>Which meetings approve appointments?</strong> This is a wording question left open for the SDC formation committee to decide (noted 1 Nov 2026). The request asked for a "trustees meeting" template; decision Q1 names the formation committee. If SDC's trustee board later approves appointments, it needs its own code, such as <code>SDC-TB</code>. Until the committee decides, Q1 stands and only <code>SDC-FC</code> is accepted.</span></div>
+            <div class="qitem"><span class="qnum">02</span><span class="qtext"><strong>Where this template will live.</strong> It is to be a template inside SDC's shared workspace, in an area the Trustees and SDC groups can see. The exact location will be decided later.</span></div>
+            <div class="qitem"><span class="qnum">03</span><span class="qtext"><strong>Data processing agreement reference format.</strong> Not yet defined; treated as free text until a format is agreed.</span></div>
+            <div class="qitem"><span class="qnum">04</span><span class="qtext"><strong>Does a removal also need a minute reference?</strong> A reference is required only for issuing an invite. This template supplies one for removals too.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Revision history -->
+      <section class="content-section" id="revision-history" data-type="anchor">
+        <div class="wrap">
+          <span class="section-label">Revision History</span>
+          <h2>Kept here, never silently overwritten.</h2>
+          <div class="table-responsive">
+            <table class="ref-table">
+              <thead><tr><th>Rev</th><th>Date</th><th>Change</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>1 Nov 2026</td><td>First version: reference format, meeting minutes, appointment and removal items, approval register, open questions.</td></tr>
+                <tr><td>2</td><td>1 Nov 2026</td><td>Approving-body wording left open for the formation committee. Planned location added: an SDC area of the shared workspace, visible to Trustees and SDC, exact location to be decided.</td></tr>
+                <tr><td>3</td><td>3 Nov 2026</td><td>Published to the SDC website for Trustees.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Footer (unchanged from index.html; anchors repointed to index.html#...) -->
+      <footer class="site-footer-redesign">
         <div class="pre-footer-default text-center text-md-left">
-          <div class="container">
+          <div class="wrap">
             <div class="row justify-content-md-center row-55">
               <div class="col-md-6 col-lg-4">
-                <div class="brand-sm"><a href="index.html"><img src="images/sdc-logo.png" alt="" width="133" height="39"/></a></div>
-                <p><span class="bold-16p">GM DiSH - Barclays Eagle Labs</span><br>
+                <div class="brand-sm"><a href="index.html"><img src="images/sdc-logo.png" alt="" width="133" height="44"/></a></div>
+                <p><span class="bold-16p"><br>
                   - c/o Your Footprint Ltd<br>
-
-                  47 Lloyd St,<br>
-                  Manchester, <br>
-                  M2 5LE <br>
-                United Kingdom
-                <br>
-                Tel:- <a href="tel:004531155327">+45 3115 5327</a> <br>
-                Email:- <a href="mailto:info@sustainabledevelopmentcrescent.uk">info@sustainabledevelopmentcrescent.uk</a>
+                  The Landmark,<br>
+                  1 School Lane, <br>
+                  Burnley, <br>
+                  B11 1UF, <br>
+                  United Kingdom.
+                  <br>
+                  Tel:- <a href="tel:004531155327">+45 3115 5327</a> <br>
+                  Email:- <a href="mailto:info@sustainabledevelopmentcrescent.uk">info@sustainabledevelopmentcrescent.uk</a>
                 </p>
                 <div class="group-sm group-middle"><span class="big text-primary">Social media</span>
                   <div>
@@ -318,7 +402,7 @@
           </div>
         </div>
         <div class="page-footer-default novi-background text-center">
-          <div class="container">
+          <div class="wrap">
             <div class="row row-30">
               <div class="col-lg-8 col-xl-9 text-lg-left">
                 <ul class="list-nav">
@@ -326,12 +410,13 @@
                   <li><a href="index.html#about-us">About us</a></li>
                   <li><a href="index.html#projects">Projects</a></li>
                   <li><a href="index.html#partners">Partners</a></li>
-                  <li><a href="https://www.sustainabledevelopmentcrescent.uk/who%20we%20are.html">Who We Are</a></li>
-                  <li><a href="trustees.html">Trustees</a></li>
+                  <li><a href="index.html#who-we-are">Who We Are</a></li>
+                  <li><a href="index.html#contact">Contact</a></li>
+                  <li><a href="index.html#executive-statement">Executive Statement</a></li>
                 </ul>
               </div>
               <div class="col-lg-4 col-xl-3 text-lg-right">
-                <p class="rights">Groove Inc&nbsp;&copy;&nbsp;<span class="copyright-year"></span>.&nbsp;<br class="d-md-none"><a class="link-underline" href="htpps://www.grooveinc.uk">Privacy Policy</a>
+                <p class="rights">Groove Inc&nbsp;&copy;&nbsp;<span class="copyright-year"></span>.&nbsp;<br class="d-md-none"><a class="link-underline" href="https://www.grooveinc.uk">Privacy Policy</a>
                 </p>
               </div>
             </div>
@@ -339,6 +424,7 @@
         </div>
       </footer>
     </div>
+
     <!-- Global Mailform Output-->
     <div class="snackbars" id="form-output-global"></div>
     <!-- Javascript-->

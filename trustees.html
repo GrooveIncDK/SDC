@@ -193,9 +193,9 @@
 
       <!-- Status, at a glance -->
       <div class="fact-strip">
-        <div><span class="fact-label">Phase 0</span><span class="fact-value">Complete — 31 Oct 2026</span></div>
-        <div><span class="fact-label">Phase 1</span><span class="fact-value">Complete — 31 Oct 2026</span></div>
-        <div><span class="fact-label">Phases 2–5</span><span class="fact-value">Not yet started</span></div>
+        <div><span class="fact-label">Phases 0, 1 and 3</span><span class="fact-value">Complete</span></div>
+        <div><span class="fact-label">Phase 2</span><span class="fact-value">Built, awaiting testing</span></div>
+        <div><span class="fact-label">Phase 4</span><span class="fact-value">Under way (Phases 5 and 6 not started)</span></div>
       </div>
 
       <!-- Target outcome -->
@@ -206,7 +206,7 @@
           <p class="lede">When this plan is complete, every YFPCloud user signs in through SDC's single shared identity system, at its permanent address, and the old legacy environment is retired. YFPCloud becomes a shared governance space for Groove Inc, SDC, YFP UK, YFP Uganda and other organisations — Trustees use it to oversee SDC's delivery of services to farmers registered on YFP.</p>
           <div class="qlist">
             <div class="qitem"><span class="qnum">01</span><span class="qtext">The old legacy environment is decommissioned.</span></div>
-            <div class="qitem"><span class="qnum">02</span><span class="qtext">The current staging environment is promoted to permanent, production use.</span></div>
+            <div class="qitem"><span class="qnum">02</span><span class="qtext">A separate permanent environment is built from the same blueprint as staging. Staging stays as the place where changes are tested first.</span></div>
             <div class="qitem"><span class="qnum">03</span><span class="qtext">All logins go through the shared identity system. One recovery-only administrator account is kept for emergencies.</span></div>
             <div class="qitem"><span class="qnum">04</span><span class="qtext">The identity system holds a <strong>Trustees</strong> group and organisation groups (Groove Inc, SDC, YFP UK, YFP Uganda), used to control who can see what.</span></div>
             <div class="qitem"><span class="qnum">05</span><span class="qtext">Trustee registration is a separate, invite-only path, distinct from ordinary user signup.</span></div>
@@ -218,7 +218,7 @@
       <section class="content-section on-navy" id="governance-decisions" data-type="anchor">
         <div class="wrap">
           <span class="section-label">Governance Decisions</span>
-          <h2>Nine decisions, recorded 31 Oct 2026.</h2>
+          <h2>Ten decisions, recorded 31 Oct to 4 Nov 2026.</h2>
           <p class="lede">Final unless changed in so many words.</p>
           <div class="qlist">
             <div class="qitem"><span class="qnum">D1</span><span class="qtext"><strong>Where Trustee membership is recorded:</strong> in the shared identity system directly, as part of a Trustee's account.</span></div>
@@ -226,6 +226,7 @@
             <div class="qitem"><span class="qnum">D3</span><span class="qtext"><strong>Local logins:</strong> all users log in through the shared identity system. One recovery-only administrator account is kept.</span></div>
             <div class="qitem"><span class="qnum">D4</span><span class="qtext"><strong>What a Trustee is:</strong> the governance layer of SDC, a charitable incorporated organisation that uses YFPCloud to deliver services to farmers registered on YFP. SDC is outside the governance and control of Your Footprint Ltd and Staalbaek Ltd.</span></div>
             <div class="qitem"><span class="qnum">D5</span><span class="qtext"><strong>The development backlog:</strong> YFPCloud is a shared governance space. The Groove Inc development backlog is being migrated into it.</span></div>
+            <div class="qitem"><span class="qnum">D6</span><span class="qtext"><strong>Shape of the permanent environment:</strong> it is a separate environment built from the same code as staging. Staging remains the testing place.</span></div>
             <div class="qitem"><span class="qnum">Q1</span><span class="qtext"><strong>Who issues Trustee invites:</strong> Benjamin Williamson-Westerman, after the SDC formation committee has agreed and confirmed. The committee is Staalbaek Ltd advisory board members plus external advisors. No separate SDC admin role is needed.</span></div>
             <div class="qitem"><span class="qnum">Q2</span><span class="qtext"><strong>Organisation groups:</strong> added alongside Trustees: Groove Inc, SDC, YFP UK, YFP Uganda.</span></div>
             <div class="qitem"><span class="qnum">Q3</span><span class="qtext"><strong>YFP holding SDC Trustee identities:</strong> a data processing agreement between SDC and YFP must be in place before any Trustee is onboarded. It blocks onboarding, not the build.</span></div>
@@ -238,7 +239,7 @@
       <section class="content-section" id="phases" data-type="anchor">
         <div class="wrap">
           <span class="section-label">Phases</span>
-          <h2>Six phases, run in order.</h2>
+          <h2>Seven phases, run in order.</h2>
           <p class="lede">Each needs explicit sign-off before it begins.</p>
           <div class="milestones-wrap">
             <div class="milestone"><span class="milestone-dot done"></span>
@@ -258,29 +259,36 @@
             <div class="milestone"><span class="milestone-dot"></span>
               <div>
                 <p class="milestone-title">Phase 2 — Trustee invite and signup path</p>
-                <p class="milestone-meta">Not started</p>
+                <p class="milestone-meta">Built · awaiting testing</p>
                 <p class="milestone-desc">Build invite issuance, the invite-only Trustee signup page and the appointment audit trail described below.</p>
               </div>
             </div>
-            <div class="milestone"><span class="milestone-dot"></span>
+            <div class="milestone"><span class="milestone-dot done"></span>
               <div>
-                <p class="milestone-title">Phase 3 — Domain cutover</p>
-                <p class="milestone-meta">Not started</p>
-                <p class="milestone-desc">Point the platform's permanent address to the new environment and update internal configuration accordingly.</p>
+                <p class="milestone-title">Phase 3 — Prepare the build</p>
+                <p class="milestone-meta">Complete · 4 Nov 2026</p>
+                <p class="milestone-desc">Make the infrastructure code reusable, so the permanent environment can be built from the same blueprint as staging.</p>
+              </div>
+            </div>
+            <div class="milestone"><span class="milestone-dot in_progress"></span>
+              <div>
+                <p class="milestone-title">Phase 4 — Build the permanent environment</p>
+                <p class="milestone-meta">Under way</p>
+                <p class="milestone-desc">Build the permanent environment alongside staging, connect it to the shared identity system, and check it before anyone moves across.</p>
               </div>
             </div>
             <div class="milestone"><span class="milestone-dot"></span>
               <div>
-                <p class="milestone-title">Phase 4 — Login and group mapping</p>
+                <p class="milestone-title">Phase 5 — Login and group mapping</p>
                 <p class="milestone-meta">Not started</p>
                 <p class="milestone-desc">Enforce sign-in through the shared identity system, with one recovery-only administrator account. Restrict the development backlog to the Groove Inc group.</p>
               </div>
             </div>
             <div class="milestone"><span class="milestone-dot"></span>
               <div>
-                <p class="milestone-title">Phase 5 — Migrate, parallel-run, decommission</p>
+                <p class="milestone-title">Phase 6 — Migrate, parallel-run, decommission</p>
                 <p class="milestone-meta">Not started</p>
-                <p class="milestone-desc">Migrate data and the backlog, run both environments side by side for an agreed window, then decommission the old environment.</p>
+                <p class="milestone-desc">Migrate data and the backlog, run the old and new environments side by side for an agreed window, then decommission the legacy environment.</p>
               </div>
             </div>
           </div>
@@ -313,7 +321,7 @@
           <h2>What's still being decided.</h2>
           <p class="lede">Unanswered, and need a decision before the phase that depends on them.</p>
           <div class="qlist">
-            <div class="qitem"><span class="qnum">01</span><span class="qtext">How long is the parallel-run window in Phase 5?</span></div>
+            <div class="qitem"><span class="qnum">01</span><span class="qtext">How long is the parallel-run window in Phase 6?</span></div>
             <div class="qitem"><span class="qnum">02</span><span class="qtext">Are more organisation groups needed now (other YFP regional subsidiaries), or only the four named?</span></div>
           </div>
         </div>
@@ -325,6 +333,10 @@
           <span class="section-label">Revision History</span>
           <h2>Kept here, never silently overwritten.</h2>
           <div class="updates-wrap">
+            <div class="update-entry">
+              <div class="update-meta"><span class="update-kind">Update</span><span class="update-date">24 Nov 2026</span></div>
+              <p class="update-content">Status brought up to date for the permanent environment build; phases renumbered from six to seven to match the working plan.</p>
+            </div>
             <div class="update-entry">
               <div class="update-meta"><span class="update-kind">Published</span><span class="update-date">3 Nov 2026</span></div>
               <p class="update-content">This summary page published for Trustees.</p>
